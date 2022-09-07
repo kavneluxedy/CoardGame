@@ -1,0 +1,22 @@
+.hp {
+  background-color: red;
+}
+
+.go-wrapper {
+  margin: inherit;
+  text-align: center;
+}
+
+.king-customize {
+  height: 250px;
+  width: 250px;
+  margin: 2% auto 0 auto;
+  background-color: yellowgreen;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: min-content;
+}
+
