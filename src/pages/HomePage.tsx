@@ -1,9 +1,14 @@
-function HomePage() {
-    return (
-        <div className="hp">HomePage</div>
-    )
-}
+import React from 'react';
+import Home from '../components/Home';
 
-HomePage.propTypes = {}
+// type Props = {}
+
+const HomePage = () => {
+	return (
+		<>
+			<Home />
+		</>
+	)
+}
 
 export default HomePage
