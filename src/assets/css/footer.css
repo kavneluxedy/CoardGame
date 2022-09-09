@@ -1,4 +1,17 @@
+.footer-wrapper {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  background-color: yellowgreen;
+}
+
 .footer {
-  background: black;
+  width: 25%;
+  margin: auto;
+  text-align: center;
+  background-color: orange;
   color: white;
 }

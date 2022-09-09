@@ -1,0 +1,6 @@
+[data-theme="light"] {
+  --background: yellowgreen;
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --accent: purple;
+}
