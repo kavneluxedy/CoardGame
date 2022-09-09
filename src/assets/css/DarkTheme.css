@@ -1,0 +1,6 @@
+[data-theme="dark"] {
+  --background: black;
+  --text-primary: white;
+  --text-secondary: grey;
+  --accent: darkred;
+}

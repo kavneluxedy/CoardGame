@@ -1,4 +1,24 @@
+@import "./LightTheme.css";
+@import "./DarkTheme.css";
 @import "./header.css";
-@import "./footer.css";
 @import "./homepage.css";
 @import "./modal.css";
+@import "./footer.css";
+
+:root {
+  --background: red;
+  --text-primary: white;
+  --text-secondary: royalblue;
+  --accent: yellowgreen;
+}
+
+.app {
+  background-color: var(--background);
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}

@@ -1,12 +1,10 @@
-import React from 'react';
-
-import Header from './Header'
-import Footer from './Footer'
+import React, { useEffect } from 'react';
+import Header from '../components/Main/Header'
+import Footer from '../components/Main/Footer'
 import { Outlet } from 'react-router-dom'
 
-// type Props = {}
-
 const Layout = () => {
+
 	return (
 		<>
 			<Header />
