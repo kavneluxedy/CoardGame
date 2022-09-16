@@ -3,7 +3,7 @@ import Header from '../components/Main/Header'
 import Footer from '../components/Main/Footer'
 import { Outlet } from 'react-router-dom'
 
-const Layout = () => {
+const Layout = (): JSX.Element => {
 
 	return (
 		<>

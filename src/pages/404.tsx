@@ -1,11 +1,7 @@
 import React from 'react';
 
-type Props = {}
-
-const NotFound404 = (props: Props) => {
-    return (
-        <div><b>='(</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 404 Not Found</div>
-    )
+const NotFound404 = () => {
+    return <div>404 Not Found</div>
 }
 
 export default NotFound404

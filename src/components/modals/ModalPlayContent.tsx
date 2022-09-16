@@ -2,7 +2,7 @@ import React from 'react'
 import ModalPlayDeck from './ModalPlayDeck'
 
 
-const ModalPlayContent = () => {
+const ModalPlayContent = (): JSX.Element => {
 	return (
 		<>
 			<ModalPlayDeck />

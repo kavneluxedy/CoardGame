@@ -1,28 +1,30 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import "./assets/css/App.css";
 import SwitchThemeButton from "./components/Main/SwitchThemeButton";
 import { Router } from "./utils/Router";
 
-export interface themeContextInterface {
+interface themeContextInterface {
 	theme: string
 }
 
-export const AppCtx: any = createContext<themeContextInterface | null>(null);
+const ThemeContext: any = createContext<themeContextInterface | null>(null);
 
 const exempleTheme: themeContextInterface = {
 	theme: "light",
 };
 
-export const App = () => {
+const App = (): JSX.Element => {
 
 	const [theme, setTheme] = useState(localStorage.getItem('theme') || "light");
 
 	return (
 		<div className="app" data-theme={theme}>
-			<AppCtx.Provider value={{ exempleTheme, theme, setTheme }}>
-				<Router />
+			<ThemeContext.Provider value={{ exempleTheme, theme, setTheme }}>
 				<SwitchThemeButton />
-			</AppCtx.Provider>
+				<Router />
+			</ThemeContext.Provider>
 		</div>
 	);
 }
+
+export { App, ThemeContext, themeContextInterface }
