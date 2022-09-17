@@ -1,4 +1,3 @@
-import { LobbyAPI } from 'boardgame.io';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ModalPrivateRoom from '../Modals/ModalPrivateRoom';
@@ -11,8 +10,6 @@ const CreatePrivateRoom = (): JSX.Element => {
     useEffect(() => {
         console.log(privateMatchID)
     }, [privateMatchID])
-
-    const openBtn = document.getElementById("openBtn");
 
     function open() {
         const modalPlay = document.getElementById("modalPrivateRoom");
@@ -30,9 +27,7 @@ const CreatePrivateRoom = (): JSX.Element => {
         }
     }
 
-
     function Validate() {
-        close();
         navigate("match" + "-" + privateMatchID);
     }
 

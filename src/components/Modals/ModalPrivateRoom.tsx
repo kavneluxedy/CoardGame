@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-const ModalPrivateRoom = ({ state }: any) => {
+const ModalPrivateRoom = ({ state }: any): JSX.Element => {
 
     const { privateMatchID, setPrivateMatchID } = state;
     

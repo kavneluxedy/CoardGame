@@ -1,8 +1,7 @@
 import React from 'react';
 import ModalPlayContent from './ModalPlayContent';
 
-const ModalPlay = (): any => {
-	const openBtn = document.getElementById("openBtn");
+const ModalPlay = (): JSX.Element => {
 
 	function open() {
 		const modalPlay = document.getElementById("modalPlay");

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from '../components/Main/Header'
 import Footer from '../components/Main/Footer'
 import { Outlet } from 'react-router-dom'

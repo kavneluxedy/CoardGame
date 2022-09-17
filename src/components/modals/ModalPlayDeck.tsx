@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ModalPlayDeck = () => {
+const ModalPlayDeck = (): JSX.Element => {
 	return (
 		<>
 			<div><h1><b>Nom du deck</b></h1></div>
