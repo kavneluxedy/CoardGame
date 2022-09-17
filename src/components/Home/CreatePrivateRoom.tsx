@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ModalPrivateRoom from '../Modals/ModalPrivateRoom';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import ModalPrivateRoom from '../Modals/ModalPrivateRoom'
 
 const CreatePrivateRoom = (): JSX.Element => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    const [privateMatchID, setPrivateMatchID] = useState("custom01");
+    const [privateMatchID, setPrivateMatchID] = useState("custom01")
 
     useEffect(() => {
         console.log(privateMatchID)
     }, [privateMatchID])
 
     function open() {
-        const modalPlay = document.getElementById("modalPrivateRoom");
-        const openBtn = document.getElementById("openBtn");
+        const modalPlay = document.getElementById("modalPrivateRoom")
+        const openBtn = document.getElementById("openBtn")
         if (modalPlay !== null && openBtn !== null) {
-            modalPlay.style.display = "block";
+            modalPlay.style.display = "block"
         }
     }
 
     function close() {
-        const modalPlay = document.getElementById("modalPrivateRoom");
-        const openBtn = document.getElementById("openBtn");
+        const modalPlay = document.getElementById("modalPrivateRoom")
+        const openBtn = document.getElementById("openBtn")
         if (modalPlay !== null && openBtn !== null) {
-            modalPlay.style.display = "none";
+            modalPlay.style.display = "none"
         }
     }
 
     function Validate() {
-        navigate("match" + "-" + privateMatchID);
+        navigate("match" + "-" + privateMatchID)
     }
 
     return (

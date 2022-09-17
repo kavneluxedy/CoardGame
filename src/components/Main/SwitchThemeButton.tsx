@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react"
-import { ThemeContext } from "../../App"
+import { AppContext } from "../../App"
 
 const SwitchThemeButton = () => {
 
-    const { exempleTheme, theme, setTheme }: any = useContext(ThemeContext);
+    const { theme, setTheme }: any = useContext(AppContext);
 
     const toggleTheme = () => {
         if (theme === "light") {
@@ -24,7 +24,6 @@ const SwitchThemeButton = () => {
             <label className="switch">
                 <input type="checkbox" onClick={toggleTheme} />
                 <span className="slider round"></span>
-                {exempleTheme.theme}
             </label>
 
         </>

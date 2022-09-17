@@ -1,7 +1,7 @@
-import React from 'react';
-import CreatePrivateRoom from '../Home/CreatePrivateRoom';
-import CustomKing from './CustomKing';
-import ModalPlay from '../Modals/ModalPlay';
+import React from 'react'
+import CreatePrivateRoom from '../Home/CreatePrivateRoom'
+import CustomKing from './CustomKing'
+import ModalPlay from '../Modals/ModalPlay'
 
 const Home = () => {
 
