@@ -1,6 +1,6 @@
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -19,6 +19,7 @@
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+  overflow: hidden;
 }
 
 /* The Close Button */
@@ -27,6 +28,7 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  z-index: 2;
 }
 
 .close:hover,
@@ -34,4 +36,43 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#go-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  width: 50%;
+  height: max-content;
+  margin: auto;
+}
+
+#go-playerName {
+  width: 25%;
+}
+
+#go-playerImage {
+  width: max-content;
+  height: max-content;
+  box-shadow: 2px 2px 15px black;
+}
+
+#go-deck {
+  padding: 3%;
+  background-color: gray;
+}
+
+#go-deckChoice {
+  margin: 0 5%;
+  display: inline-flex;
+  background-color: pink;
+}
+#go-deckChoice:hover {
+  background-color: plum;
+}
+
+#go-deckDetails {
+  margin: 0 5%;
+  background-color: orange;
 }

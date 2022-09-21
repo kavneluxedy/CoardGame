@@ -5,7 +5,6 @@ import Client from './Game/Client'
 
 const PrivateClient = (): JSX.Element => {
     const { matchID } = useParams()
-
     const { nickname }: any = useContext(AppContext)
 
     return (

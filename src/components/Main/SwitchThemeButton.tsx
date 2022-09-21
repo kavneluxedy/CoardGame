@@ -25,7 +25,6 @@ const SwitchThemeButton = () => {
                 <input type="checkbox" onClick={toggleTheme} />
                 <span className="slider round"></span>
             </label>
-
         </>
     )
 }
