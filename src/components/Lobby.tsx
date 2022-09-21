@@ -1,10 +1,10 @@
-import React, { ComponentType } from 'react'
+import React, { Dispatch, SetStateAction, ComponentType, useEffect } from 'react'
 import { Client, Lobby as ReactLobby } from "boardgame.io/react"
 import { CardGame } from '../components/Game/Game'
 import { Board } from '../components/Game/Board'
 import { Game, LobbyAPI, Server } from 'boardgame.io'
 import RunningMatchView from "./RunningMatchView"
-import EnterLobbyView from "./EnterLobbyView"
+import { EnterLobbyView } from "./EnterLobbyView"
 import ListGamesView from "./ListGamesView"
 
 enum LobbyPhases {
@@ -56,11 +56,12 @@ export interface LobbyRendererProps {
 
 const port = process.env.REACT_APP_PORT;
 
-const CardGameLobby: React.FC<CardGameLobbyProps> = () => {
-	let serverAddr = `${window.location.protocol}//${window.location.hostname}`;
+const CardGameLobby: React.FC = () => {
+	let serverAddr = `${window.location.protocol}//${window.location.hostname}`
 	if (port) {
 		serverAddr += ":" + port;
 	}
+
 	return (
 		<ReactLobby
 			gameServer={"http://localhost:8000"}
@@ -68,20 +69,20 @@ const CardGameLobby: React.FC<CardGameLobbyProps> = () => {
 			gameComponents={[{ game: CardGame, board: Board }]}
 			renderer={(L) => {
 				return (
-					<div className="absolute w-full h-full bg-green-900">
+					<div className="">
 						{L.phase === LobbyPhases.ENTER && <EnterLobbyView L={L} />}
 						{L.phase === LobbyPhases.LIST && <ListGamesView L={L} />}
 						{L.phase === LobbyPhases.PLAY && <RunningMatchView L={L} />}
 					</div>
-				);
+				)
 			}}
 		/>
-	);
-};
+	)
+}
 
 export type Match = Omit<Server.MatchData, "players"> & {
-	matchID: string;
-	players: Omit<Server.PlayerMetadata, "credentials">[];
+	matchID: string
+	players: Omit<Server.PlayerMetadata, "credentials">[]
 }
 
 export default CardGameLobby

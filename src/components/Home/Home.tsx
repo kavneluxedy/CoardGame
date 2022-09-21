@@ -1,29 +1,21 @@
-import React, { Dispatch, useState } from 'react'
+import React, { useContext } from 'react'
 import CardGameLobby from '../Lobby'
+import GameOptionModal from '../GameOptionModal'
+import { AppContext, IAppContext } from '../../App'
 import Modal from '../Modal'
-
-interface IState {
-	gameOptionsModal?: boolean
-	showGameOptionsModal: Dispatch<React.SetStateAction<boolean>>
-}
+import Button from '../Button'
 
 const Home = () => {
-	const [gameOptionsModal, showGameOptionsModal] = useState<boolean>(false)
-	const [lobbyModal, showLobbyModal] = useState<boolean>(false)
 
-	const showLobby = (): void => {
-		showGameOptionsModal(false)
-	}
+	const { modalVisible, setModalVisibility } = useContext<IAppContext>(AppContext)
 
 	return (
 		<>
-			<button className="home-button" onClick={() => showGameOptionsModal(true)} >PLAY</button>
-			{gameOptionsModal && <Modal showGameOptionsModal={showGameOptionsModal} />}
-
-			<button className="home-button" onClick={() => showLobbyModal(true)} >LOBBY</button>
-			{lobbyModal && <CardGameLobby />}
-
+			<Button className="open" onClick={() => setModalVisibility(true)}>MATCH PUBLIC</Button>
+			<Modal title={"Personnaliser votre partie"} modalVisible={modalVisible} setModalVisibility={setModalVisibility}>
+				<CardGameLobby />
+			</Modal>
 		</>
 	)
 }
-export { Home, IState }	
+export { Home }

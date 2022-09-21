@@ -1,78 +1,111 @@
 /* The Modal (background) */
 .modal {
-  display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	display: block;
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  overflow: hidden;
+	background-color: #fefefe;
+	margin: 15% auto;
+	/* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	/* Could be more or less, depending on screen size */
+	overflow: hidden;
 }
 
 /* The Close Button */
+.close-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  z-index: 2;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	z-index: 2;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.open {
+	min-width: max-content;
+	width: 20%;
+	height: 40px;
+	margin: auto;
 }
 
 #go-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-
-  width: 50%;
-  height: max-content;
-  margin: auto;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	height: max-content;
+	margin: auto;
 }
 
 #go-playerName {
-  width: 25%;
+	text-align: center;
+	width: 90%;
+	margin: auto;
 }
 
 #go-playerImage {
-  width: max-content;
-  height: max-content;
-  box-shadow: 2px 2px 15px black;
+	max-width: 20%;
+	width: max-content;
+	height: max-content;
+	box-shadow: 2px 2px 15px black;
+	margin: auto
 }
 
 #go-deck {
-  padding: 3%;
-  background-color: gray;
+	padding: 3%;
+	background-color: gray;
 }
 
 #go-deckChoice {
-  margin: 0 5%;
-  display: inline-flex;
-  background-color: pink;
+	margin: 0 5%;
+	display: inline-flex;
+	background-color: pink;
 }
+
 #go-deckChoice:hover {
-  background-color: plum;
+	background-color: plum;
 }
 
 #go-deckDetails {
-  margin: 0 5%;
-  background-color: orange;
+	margin: 0 5%;
+	background-color: orange;
+}
+
+#go-play {
+	min-width: max-content;
+	width: 25%;
+	height: 40px;
 }

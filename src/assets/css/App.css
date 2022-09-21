@@ -27,10 +27,3 @@ body {
   padding: 0%;
   background-color: var(--background);
 }
-
-.home-button {
-  min-width: max-content;
-  width: 10%;
-  height: 40px;
-  margin: auto;
-}
