@@ -19,6 +19,12 @@ const EnterLobbyView: FC<{ L: LobbyRendererProps }> = ({ L }) => {
         localStorage.setItem("player_avatar", AllPictures[i])
     }
 
+    const enterLobby = () => {
+        if (playerName !== "") {
+            L.handleEnterLobby(playerName)
+        }
+    }
+
     return (
         <>
             <h1>{L.gameComponents[0].game.name?.toUpperCase()}</h1>
@@ -32,8 +38,8 @@ const EnterLobbyView: FC<{ L: LobbyRendererProps }> = ({ L }) => {
                         setPlayerName(e.target.value)
                     }}
                     onKeyPress={(e) => {
-                        if (e.key === "Enter" && playerName !== "") {
-                            L.handleEnterLobby(playerName)
+                        if (e.key === "Enter") {
+                            enterLobby()
                         }
                     }}
                 />
@@ -46,7 +52,7 @@ const EnterLobbyView: FC<{ L: LobbyRendererProps }> = ({ L }) => {
                 <div id="go-deckDetails">Deck Details</div>
             </div>
 
-            <button id="go-play">JOUER !</button>
+            <button id="go-play" onClick={() => enterLobby()}>JOUER !</button>
         </>
     )
 }

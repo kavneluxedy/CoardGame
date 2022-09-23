@@ -3,7 +3,7 @@ import { Server, Origins } from "boardgame.io/server";
 
 const server = Server({
     games: [CardGame],
-    origins: [Origins.LOCALHOST, "http://localhost:8080/"],
+    origins: [Origins.LOCALHOST],
 });
 
 const lobbyConfig = {

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, PropsWithChildren } from 'react'
+import React, { Dispatch, SetStateAction, PropsWithChildren, ReactNode, ReactPropTypes, cloneElement, isValidElement, FunctionComponent, FC, ElementType } from 'react'
 
 interface IModal {
     title?: string,
@@ -6,8 +6,28 @@ interface IModal {
     modalVisible: boolean
     setModalVisibility: Dispatch<SetStateAction<boolean>>
 }
+function addPropsToReactElement(element:ReactNode, props:any) {
+    if (isValidElement(element)) {
+        return cloneElement(element, props)
+    }
+    return element
+}
 
-const Modal = ({ modalVisible, title, children, setModalVisibility }: IModal): JSX.Element => {
+function addPropsToChildren(children:ReactNode, props:any) {
+    if (!Array.isArray(children)) {
+        return addPropsToReactElement(children, props)
+    }
+    return children.map(childElement =>
+        addPropsToReactElement(childElement, props)
+        )
+    }
+    
+    const Modal = ({ modalVisible, title, children, setModalVisibility }: IModal): JSX.Element => {
+        
+    // TODO correct type of closeModal
+    const closeModal = ():any => {
+        setModalVisibility(false)
+    }
 
     return (
         <>
@@ -17,9 +37,11 @@ const Modal = ({ modalVisible, title, children, setModalVisibility }: IModal): J
 
                         <div id="go-wrapper">
                             <div className="close-wrapper">
-                                <button className="close" onClick={() => setModalVisibility(false)}>&times;</button>
+                                <button className="close" onClick={closeModal}>&times;</button>
                             </div>
-                            {children}
+                            <div>
+                                {addPropsToChildren(children, { closeModal })}
+                            </div>
                         </div>
 
                     </div>

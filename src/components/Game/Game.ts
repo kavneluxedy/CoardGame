@@ -9,7 +9,7 @@ interface GameState {
 const move: Move<GameState> = (G, ctx) => { };
 
 const CardGame: Game<GameState> = {
-  name: "cardgame", // * Changer le nom nécessite le redémarrage du server
+  name: "cardgame", // * Changer le nom nécessite le redémarrage du serveur
 
   setup: () => ({ cells: Array(9).fill(null) }),
 
@@ -48,8 +48,8 @@ const CardGame: Game<GameState> = {
     },
   },
 
-  minPlayers: 2, // ??? ( Changer les paramètres ne nécessitent pas le redémarrage du server ??? )
-  maxPlayers: 2, // ??? ( Changer les paramètres ne nécessitent pas le redémarrage du server ??? )
+  minPlayers: 2, // ??? ( Changer les paramètres ne nécessitent pas le redémarrage du serveur ??? )
+  maxPlayers: 2, // ??? ( Changer les paramètres ne nécessitent pas le redémarrage du serveur ??? )
 };
 
 /** Return true if `cells` is in a winning configuration. */
