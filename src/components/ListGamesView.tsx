@@ -6,7 +6,8 @@ import { LobbyRendererProps } from "./Lobby";
 function createMatchButtons(
 	L: LobbyRendererProps,
 	m: LobbyAPI.Match,
-	numPlayers: number
+	numPlayers: number,
+	closeModal
 ): JSX.Element {
 	const playerSeat = m.players.find((p) => p.name === L.playerName);
 	const freeSeat = m.players.find((p) => !p.name);
@@ -40,6 +41,7 @@ function createMatchButtons(
 			<>
 				<Button
 					onClick={() => {
+						closeModal();
 						L.handleStartMatch(m.gameName, {
 							numPlayers,
 							playerID: "" + playerSeat.id,
@@ -63,8 +65,8 @@ function createMatchButtons(
 	return <div>TODO add spectate button</div>;
 }
 
-const ListGamesView: React.FC<{ L: LobbyRendererProps }> = ({ L }) => {
-	const [numPlayers, setNumPlayers] = useState(2);
+const ListGamesView: React.FC<{ L: LobbyRendererProps, closeModal?:any }> = ({ L, closeModal }) => {
+	// const [numPlayers, setNumPlayers] = useState(2);
 	const matches: LobbyRendererProps["matches"] = []
 	const seen = new Set<string>()
 	for (const m of L.matches) {
@@ -82,7 +84,7 @@ const ListGamesView: React.FC<{ L: LobbyRendererProps }> = ({ L }) => {
 						<div className="text-center">Salut {L.playerName} !</div> {/* //! Sauvegarder en local et/ou sur le serveur, empêche de joueur avec 2 onglets pour tester le 1V1 en local, conseil => Utiliser plusieurs navigateurs */}
 						<br />
 						<div className="flex justify-evenly gap-1 items-center">
-							<label htmlFor="playerCount">Nombre de joueurs: </label>
+							{/* <label htmlFor="playerCount">Nombre de joueurs: </label>
 							<select
 								className="flex-grow"
 								name="playerCount"
@@ -93,10 +95,10 @@ const ListGamesView: React.FC<{ L: LobbyRendererProps }> = ({ L }) => {
 								}}
 							>
 								<option value="2">2</option>
-							</select>
+							</select> */}
 							<Button
 								onClick={() => {
-									L.handleCreateMatch(L.gameComponents[0].game.name!, numPlayers);
+									L.handleCreateMatch(L.gameComponents[0].game.name!, 2);
 								}}
 							>
 								Créer une partie
@@ -112,7 +114,7 @@ const ListGamesView: React.FC<{ L: LobbyRendererProps }> = ({ L }) => {
 								<div><b>Jeu: {m.gameName}</b></div>
 								<div>{m.players.map((p) => p.name ?? "[Place Disponible]").join(", ")}</div>
 								{/* JSON.stringify() => Petit test pour checker toutes les metadatas du joueur, j'ai remarqué qu'à cet endroit, même si le joueur n'a pas encore rejoins, son future slot possède déjà un ID prédéfini, 0 ou 1 // ! REMETTRE p.name */}
-								{createMatchButtons(L, m, numPlayers)}
+								{createMatchButtons(L, m, 2, closeModal)}
 							</div>
 						))}
 					</div>
