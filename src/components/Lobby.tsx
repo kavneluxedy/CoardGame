@@ -1,100 +1,112 @@
-import React, { Dispatch, SetStateAction, ComponentType, useEffect, useContext } from 'react'
-import { Client, Lobby as ReactLobby } from "boardgame.io/react"
-import { CardGame } from '../components/Game/Game'
-import { Board } from '../components/Game/Board'
-import { Game, LobbyAPI, Server } from 'boardgame.io'
-import RunningMatchView from "./RunningMatchView"
-import { EnterLobbyView } from "./EnterLobbyView"
-import ListGamesView from "./ListGamesView"
-import Modal from './Modal'
-import { AppContext, IAppContext } from '../App'
+import React, { ComponentType, useContext } from "react";
+import { Client, Lobby as ReactLobby } from "boardgame.io/react";
+import { CardGame } from "../components/Game/Game";
+import { Board } from "../components/Game/Board";
+import { Game, LobbyAPI, Server } from "boardgame.io";
+import RunningMatchView from "./RunningMatchView";
+import { EnterLobbyView } from "./EnterLobbyView";
+import ListGamesView from "./ListGamesView";
+import Modal from "./Modal";
+import { AppContext, IAppContext } from "../App";
 
 enum LobbyPhases {
-	ENTER = "enter",
-	PLAY = "play",
-	LIST = "list",
+  ENTER = "enter",
+  PLAY = "play",
+  LIST = "list",
 }
 
 interface MatchOpts {
-	numPlayers: number;
-	matchID: string;
-	playerID?: string;
+  numPlayers: number;
+  matchID: string;
+  playerID?: string;
 }
 
 interface RunningMatch {
-	app: ReturnType<typeof Client>;
-	matchID: string;
-	playerID: string;
-	credentials?: string;
+  app: ReturnType<typeof Client>;
+  matchID: string;
+  playerID: string;
+  credentials?: string;
 }
 
 interface GameComponent {
-	game: Game;
-	board: ComponentType<any>;
+  game: Game;
+  board: ComponentType<any>;
 }
 
-interface CardGameLobbyProps { }
+interface CardGameLobbyProps {}
 
 export interface LobbyRendererProps {
-	errorMsg: string;
-	gameComponents: GameComponent[];
-	matches: LobbyAPI.MatchList["matches"];
-	phase: LobbyPhases;
-	playerName: string;
-	runningMatch?: RunningMatch;
-	handleEnterLobby: (playerName: string) => void;
-	handleExitLobby: () => Promise<void>;
-	handleCreateMatch: (gameName: string, numPlayers: number) => Promise<void>;
-	handleJoinMatch: (
-		gameName: string,
-		matchID: string,
-		playerID: string
-	) => Promise<void>;
-	handleLeaveMatch: (gameName: string, matchID: string) => Promise<void>;
-	handleExitMatch: () => void;
-	handleRefreshMatches: () => Promise<void>;
-	handleStartMatch: (gameName: string, matchOpts: MatchOpts) => void;
+  errorMsg: string;
+  gameComponents: GameComponent[];
+  matches: LobbyAPI.MatchList["matches"];
+  phase: LobbyPhases;
+  playerName: string;
+  runningMatch?: RunningMatch;
+  handleEnterLobby: (playerName: string) => void;
+  handleExitLobby: () => Promise<void>;
+  handleCreateMatch: (gameName: string, numPlayers: number) => Promise<void>;
+  handleJoinMatch: (
+    gameName: string,
+    matchID: string,
+    playerID: string
+  ) => Promise<void>;
+  handleLeaveMatch: (gameName: string, matchID: string) => Promise<void>;
+  handleExitMatch: () => void;
+  handleRefreshMatches: () => Promise<void>;
+  handleStartMatch: (gameName: string, matchOpts: MatchOpts) => void;
 }
-
-const port = process.env.REACT_APP_PORT;
-
 
 const CardGameLobby: React.FC = () => {
-	const { modalVisible, setModalVisibility } = useContext<IAppContext>(AppContext)
-	let serverAddr = `${window.location.protocol}//${window.location.hostname}`
-	if (port) {
-		serverAddr += ":" + port;
-	}
+  const { modalVisible, setModalVisibility } =
+    useContext<IAppContext>(AppContext);
+  let serverAddr = `${window.location.protocol}//${
+    window.location.hostname + ":8000"
+  }`;
+  let ApiAddr = `${window.location.protocol}//${
+    window.location.hostname + ":8080"
+  }`;
 
-	return (
-		<ReactLobby
-			gameServer={"http://localhost:8000"}
-			lobbyServer={"http://localhost:8080"}
-			gameComponents={[{ game: CardGame, board: Board }]}
-			renderer={(L) => {
-				return (
-					<div className="">
-						{L.phase === LobbyPhases.ENTER && 
-							<Modal title={"Personnaliser votre partie"} modalVisible={modalVisible} setModalVisibility={setModalVisibility}>
-								<EnterLobbyView L={L} />
-							</Modal>
-						}
-						{L.phase === LobbyPhases.LIST && 
-							<Modal title={"Personnaliser votre partie"} modalVisible={modalVisible} setModalVisibility={setModalVisibility}>
-								<ListGamesView L={L} />
-							</Modal>
-						}
-						{L.phase === LobbyPhases.PLAY && <RunningMatchView L={L} />}
-					</div>
-				)
-			}}
-		/>
-	)
-}
+  console.log(serverAddr, ApiAddr);
+
+  return (
+    <ReactLobby
+      gameServer={serverAddr}
+      lobbyServer={ApiAddr}
+      gameComponents={[{ game: CardGame, board: Board }]}
+      refreshInterval={3000}
+      debug={true}
+      renderer={(L) => {
+        return (
+          <div className="">
+            {L.phase === LobbyPhases.ENTER && (
+              <Modal
+                title={"Personnaliser votre partie"}
+                modalVisible={modalVisible}
+                setModalVisibility={setModalVisibility}
+              >
+                <EnterLobbyView L={L} />
+              </Modal>
+            )}
+            {L.phase === LobbyPhases.LIST && (
+              <Modal
+                title={"Personnaliser votre partie"}
+                modalVisible={modalVisible}
+                setModalVisibility={setModalVisibility}
+              >
+                <ListGamesView L={L} />
+              </Modal>
+            )}
+            {L.phase === LobbyPhases.PLAY && <RunningMatchView L={L} />}
+          </div>
+        );
+      }}
+    />
+  );
+};
 
 export type Match = Omit<Server.MatchData, "players"> & {
-	matchID: string
-	players: Omit<Server.PlayerMetadata, "credentials">[]
-}
+  matchID: string;
+  players: Omit<Server.PlayerMetadata, "credentials">[];
+};
 
-export default CardGameLobby
+export default CardGameLobby;

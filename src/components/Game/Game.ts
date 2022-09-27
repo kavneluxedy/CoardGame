@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { INVALID_MOVE } from "boardgame.io/core"
-import { Game, Move } from "boardgame.io"
+import { Ctx, Game, Move } from "boardgame.io"
+import { Context } from 'vm';
 
 interface GameState {
   cells: (null | string)[];
@@ -27,9 +28,9 @@ const CardGame: Game<GameState> = {
     maxMoves: 1,
   },
 
-  endIf: (G, ctx) => {
+  endIf: (G: GameState, ctx: Ctx) => {
     if (IsVictory(G.cells)) {
-      return { winner: ctx.currentPlayer };
+      // return { winner: ctx.currentPlayer };
     }
     if (IsDraw(G.cells)) {
       return { draw: true };
