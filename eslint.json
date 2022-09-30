@@ -1,0 +1,8 @@
+{
+  "eslintConfig": {
+    "extends": ["react-app", "react-app/jest"],
+    "rules": {
+      "@typescript-eslint/no-unused-expressions": "off"
+    }
+  }
+}

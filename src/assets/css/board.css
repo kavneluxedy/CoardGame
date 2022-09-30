@@ -1,0 +1,19 @@
+main {
+  width: 100%;
+}
+
+div#board-wrapper {
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  padding: 0;
+  margin: auto;
+}
+
+#board {
+  background-color: whitesmoke;
+  border: 1px solid royalblue;
+  padding: 0;
+  margin: 0;
+  z-index: 2;
+}

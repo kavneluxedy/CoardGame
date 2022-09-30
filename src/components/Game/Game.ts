@@ -1,82 +1,22 @@
-import React, { FC } from 'react'
+import React from "react"
 import { INVALID_MOVE } from "boardgame.io/core"
 import { Ctx, Game, Move } from "boardgame.io"
-import { Context } from 'vm';
+import { cells, ICell } from "../../utils/CellsInit"
 
-interface GameState {
-  cells: (null | string)[];
+interface CoardGameState { 
+  cells: ICell[][];
 }
 
-const move: Move<GameState> = (G, ctx) => { };
+const move: Move<CoardGameState> = (G, ctx) => { };
 
-const CardGame: Game<GameState> = {
-  name: "cardgame", // * Changer le nom nécessite le redémarrage du serveur
-
-  setup: () => ({ cells: Array(9).fill(null) }),
-
-  moves: {
-    clickCell: (G, ctx, id) => {
-      if (G.cells[id] !== null) {
-        return INVALID_MOVE;
-      }
-      G.cells[id] = ctx.currentPlayer;
-    },
-  },
-
-  turn: {
-    minMoves: 1,
-    maxMoves: 1,
-  },
-
-  endIf: (G: GameState, ctx: Ctx) => {
-    if (IsVictory(G.cells)) {
-      // return { winner: ctx.currentPlayer };
-    }
-    if (IsDraw(G.cells)) {
-      return { draw: true };
-    }
-  },
-
-  ai: {
-    enumerate: (G, ctx) => {
-      let moves: any[] = [];
-      for (let i = 0; i < 9; i++) {
-        if (G.cells[i] === null) {
-          moves.push({ move: 'clickCell', args: [i] });
-        }
-      }
-      return moves;
-    },
-  },
-
-  minPlayers: 2, // ??? ( Changer les paramètres ne nécessitent pas le redémarrage du serveur ??? )
-  maxPlayers: 2, // ??? ( Changer les paramètres ne nécessitent pas le redémarrage du serveur ??? )
+const CardGame: Game<CoardGameState> = {
+  name: "cardgame",
+  setup: () => ({ cells: cells }),
+  moves: {},
+  turn: { minMoves: 1, maxMoves: 1, },
+  endIf: (G: CoardGameState, ctx: Ctx) => { },
+  minPlayers: 2,
+  maxPlayers: 2,
 };
 
-/** Return true if `cells` is in a winning configuration. */
-function IsVictory(cells: (string | null)[]): boolean {
-  const positions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  const isRowComplete = (row: number[]): boolean => {
-    const symbols = row.map((i) => cells[i]);
-    return symbols.every((i) => i !== null && i === symbols[0]);
-  };
-
-  return positions.map(isRowComplete).some((i) => i === true);
-};
-
-/** Return true if all `cells` are occupied. */
-function IsDraw(cells: (null | string)[]): boolean {
-  return cells.filter((c) => c === null).length === 0;
-}
-
-export { CardGame, GameState }
+export { CardGame, CoardGameState }

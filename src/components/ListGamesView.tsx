@@ -7,7 +7,7 @@ function createMatchButtons(
   L: LobbyRendererProps,
   m: LobbyAPI.Match,
   numPlayers: number,
-  closeModal: () => void
+  closeModal: void
 ): JSX.Element {
   const playerSeat = m.players.find((p) => p.name === L.playerName);
   const freeSeat = m.players.find((p) => !p.name);
@@ -41,7 +41,8 @@ function createMatchButtons(
       <>
         <Button
           onClick={() => {
-            closeModal();
+            // eslint-disable-next-line
+            closeModal;
             L.handleStartMatch(m.gameName, {
               numPlayers,
               playerID: "" + playerSeat.id,
@@ -65,11 +66,9 @@ function createMatchButtons(
   return <div>TODO add spectate button</div>;
 }
 
-const ListGamesView: React.FC<{ L: LobbyRendererProps; closeModal?: any }> = ({
+const ListGamesView: React.FC<{ L: LobbyRendererProps }> = ({
   L,
-  closeModal,
-}) => {
-  // const [numPlayers, setNumPlayers] = useState(2);
+}): JSX.Element => {
   const matches: LobbyRendererProps["matches"] = [];
   const seen = new Set<string>();
   for (const m of L.matches) {
@@ -80,61 +79,42 @@ const ListGamesView: React.FC<{ L: LobbyRendererProps; closeModal?: any }> = ({
   }
 
   return (
-    <div className="go-wrapper">
-      <div className="p-2">
-        <div className="w-full flex justify-center">
-          <div className="flex-grow max-w-lg">
-            <div className="text-center">Salut {L.playerName} !</div>
-            <br />
-            <div className="flex justify-evenly gap-1 items-center">
-              {/* <label htmlFor="playerCount">Nombre de joueurs: </label>
-							<select
-								className="flex-grow"
-								name="playerCount"
-								id="playerCountSelect"
-								defaultValue={"2"}
-								onChange={({ target: { value } }) => {
-									setNumPlayers(parseInt(value));
-								}}
-							>
-								<option value="2">2</option>
-							</select> */}
-              <Button
-                onClick={() => {
-                  L.handleCreateMatch(L.gameComponents[0].game.name!, 2);
-                }}
-              >
-                Créer une partie
-              </Button>
-            </div>
+    <div className="go">
+      <div className="">Salut {L.playerName} !</div>
+      <br />
+      <div className="">
+        <Button
+          onClick={() => {
+            L.handleCreateMatch(L.gameComponents[0].game.name!, 2);
+          }}
+          className={"button-create"}
+        >
+          Créer une partie
+        </Button>
+      </div>
 
-            <div className="text-lg">
-              <b>PARTIES PUBLIQUES</b>
-            </div>
-            {matches.map((m) => (
-              <div
-                className="flex gap-3 justify-between items-center border-b-2 border-black"
-                key={m.matchID}
-              >
-                <div>
-                  <b>Jeu: {m.gameName}</b>
-                </div>
-                <div>
-                  {m.players
-                    .map((p) => p.name ?? "[Place Disponible]")
-                    .join(", ")}
-                </div>
-                {/* JSON.stringify() => Petit test pour checker toutes les metadatas du joueur, j'ai remarqué qu'à cet endroit, même si le joueur n'a pas encore rejoins, son future slot possède déjà un ID prédéfini, 0 ou 1 // ! REMETTRE p.name */}
-                {createMatchButtons(L, m, 2, closeModal)}
-              </div>
-            ))}
-          </div>
+      <div className="text-lg">
+        <div className="underline modal-title">
+          <b>PARTIES PUBLIQUES</b>
         </div>
       </div>
+      {matches.map((m) => (
+        <div className="room-seat" key={m.matchID}>
+          <div>
+            <b>Jeu: {m.gameName}</b>
+          </div>
+          <div>
+            {m.players.map((p) => p.name ?? "[Place Disponible]").join(", ")}
+          </div>
+          {createMatchButtons(L, m, 2)}
+        </div>
+      ))}
+
       <Button
         onClick={() => {
           L.handleExitLobby();
         }}
+        className={"button-exit"}
       >
         Quitter le lobby
       </Button>

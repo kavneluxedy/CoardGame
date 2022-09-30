@@ -1,57 +1,63 @@
-import React, { Dispatch, SetStateAction, PropsWithChildren, ReactNode, ReactPropTypes, cloneElement, isValidElement, FunctionComponent, FC, ElementType } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from "react";
 
-type t = {
-    closeModal: VoidFunction
-}
 interface IModal {
-    title?: string,
-    children: any,
-    modalVisible: boolean
-    setModalVisibility: Dispatch<SetStateAction<boolean>>
+  title?: string;
+  children: any;
+  modalVisible: boolean;
+  setModalVisibility: Dispatch<SetStateAction<boolean>>;
 }
 
-function addPropsToReactElement(element:ReactNode, props:any) {
-    if (isValidElement(element)) {
-        return cloneElement(element, props)
-    }
-    return element
+function addPropsToReactElement(element: ReactNode, props: any) {
+  if (isValidElement(element)) {
+    return cloneElement(element, props);
+  }
+  return element;
 }
 
-function addPropsToChildren(children:ReactNode, props:any) {
-    if (!Array.isArray(children)) {
-        return addPropsToReactElement(children, props)
-    }
-    return children.map(childElement =>
-        addPropsToReactElement(childElement, props)
-        )
-    }
-    
-    const Modal = ({ modalVisible, title, children, setModalVisibility }: IModal): JSX.Element => {
-        
-    // TODO correct type of closeModal
-    const closeModal = ():any => {
-        setModalVisibility(false);
-    }
-
-    return (
-        <>
-            {modalVisible &&
-                <div className="modal">
-                    <div className="modal-content">
-
-                        <div id="go-wrapper">
-                            <div className="close-wrapper">
-                                <button className="close" onClick={closeModal}>&times;</button>
-                            </div>
-                            <div>
-                                {addPropsToChildren(children, { closeModal })}
-                            </div>
-                        </div>
-
-                    </div>
-                </div>}
-        </>
-    )
+function addPropsToChildren(children: ReactNode, props: any) {
+  if (!Array.isArray(children)) {
+    return addPropsToReactElement(children, props);
+  }
+  return children.map((childElement) =>
+    addPropsToReactElement(childElement, props)
+  );
 }
 
-export default Modal
+const Modal = ({
+  modalVisible,
+  title,
+  children,
+  setModalVisibility,
+}: IModal): JSX.Element => {
+  const closeModal = (): void => {
+    setModalVisibility(false);
+  };
+
+  return (
+    <>
+      {modalVisible && (
+        <div className="modal">
+          <div className="modal-content">
+            <div className="go-wrapper">
+              <div className="close-wrapper">
+                <button className="close" onClick={closeModal}>
+                  &times;
+                </button>
+                <h1 className="modal-title">{title}</h1>
+              </div>
+              <div>{addPropsToChildren(children, { closeModal })}</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Modal;

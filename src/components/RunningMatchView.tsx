@@ -12,7 +12,7 @@ const RunningMatchView: React.FC<{ L: LobbyRendererProps }> = ({ L }) => {
                     credentials={L.runningMatch.credentials}
                 />
             )}
-            <div className="absolute">
+            <div className="">
                 <Button
                     onClick={() => {
                         L.handleExitMatch();

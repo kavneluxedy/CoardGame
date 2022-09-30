@@ -2,11 +2,6 @@
   background-color: red;
 }
 
-.go-wrapper {
-  margin: inherit;
-  text-align: center;
-}
-
 .king-customize {
   height: 250px;
   width: 250px;
@@ -19,4 +14,3 @@
   justify-content: center;
   min-width: min-content;
 }
-

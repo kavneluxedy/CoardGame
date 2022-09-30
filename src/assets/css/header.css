@@ -1,18 +1,9 @@
-.header-wrapper {
-  background: yellowgreen;
-  color: red;
-}
-
-.header {
-  background: yellowgreen;
-  color: red;
-}
-
 /* The switch - the box around the slider */
 .switch {
   position: relative;
-  display: inline-block;
+  min-width: max-content;
   width: 60px;
+  min-height: max-content;
   height: 34px;
 }
 

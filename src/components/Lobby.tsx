@@ -1,13 +1,13 @@
 import React, { ComponentType, useContext } from "react";
 import { Client, Lobby as ReactLobby } from "boardgame.io/react";
 import { CardGame } from "../components/Game/Game";
-import { Board } from "../components/Game/Board";
 import { Game, LobbyAPI, Server } from "boardgame.io";
 import RunningMatchView from "./RunningMatchView";
 import { EnterLobbyView } from "./EnterLobbyView";
 import ListGamesView from "./ListGamesView";
 import Modal from "./Modal";
 import { AppContext, IAppContext } from "../App";
+import CoardGameBoard from "./Game/Board";
 
 enum LobbyPhases {
   ENTER = "enter",
@@ -15,20 +15,20 @@ enum LobbyPhases {
   LIST = "list",
 }
 
-interface MatchOpts {
+interface IMatchOpts {
   numPlayers: number;
   matchID: string;
   playerID?: string;
 }
 
-interface RunningMatch {
+interface IRunningMatch {
   app: ReturnType<typeof Client>;
   matchID: string;
   playerID: string;
   credentials?: string;
 }
 
-interface GameComponent {
+interface IGameComponent {
   game: Game;
   board: ComponentType<any>;
 }
@@ -37,11 +37,11 @@ interface CardGameLobbyProps {}
 
 export interface LobbyRendererProps {
   errorMsg: string;
-  gameComponents: GameComponent[];
+  gameComponents: IGameComponent[];
   matches: LobbyAPI.MatchList["matches"];
   phase: LobbyPhases;
   playerName: string;
-  runningMatch?: RunningMatch;
+  runningMatch?: IRunningMatch;
   handleEnterLobby: (playerName: string) => void;
   handleExitLobby: () => Promise<void>;
   handleCreateMatch: (gameName: string, numPlayers: number) => Promise<void>;
@@ -53,7 +53,7 @@ export interface LobbyRendererProps {
   handleLeaveMatch: (gameName: string, matchID: string) => Promise<void>;
   handleExitMatch: () => void;
   handleRefreshMatches: () => Promise<void>;
-  handleStartMatch: (gameName: string, matchOpts: MatchOpts) => void;
+  handleStartMatch: (gameName: string, matchOpts: IMatchOpts) => void;
 }
 
 const CardGameLobby: React.FC = () => {
@@ -66,18 +66,16 @@ const CardGameLobby: React.FC = () => {
     window.location.hostname + ":8080"
   }`;
 
-  console.log(serverAddr, ApiAddr);
-
   return (
     <ReactLobby
       gameServer={serverAddr}
       lobbyServer={ApiAddr}
-      gameComponents={[{ game: CardGame, board: Board }]}
-      refreshInterval={3000}
-      debug={true}
+      gameComponents={[{ game: CardGame, board: CoardGameBoard }]}
+      refreshInterval={4000}
+      // debug={true}
       renderer={(L) => {
         return (
-          <div className="">
+          <div className="lobby-buttons-wrapper">
             {L.phase === LobbyPhases.ENTER && (
               <Modal
                 title={"Personnaliser votre partie"}
