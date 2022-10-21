@@ -1,5 +1,6 @@
 import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import { ICell } from "../utils/CellsInit";
+import Animation from "./Canvas/Animation";
 
 type TCanvasProps = {
   id: string;
@@ -20,7 +21,7 @@ const Canvas = (props: TCanvasProps) => {
    * @endY `required` `number` the end destination coordonates on vertical canvas axis.
    * @startX `optional` `number` the start coordonates on horizontal canvas axis. Set to 0 by default.
    * @startY `optional` `number` the start coordonates on vertical canvas axis. Set to 0 by default.
-   * @color `optional` `string` the color of the line, must be a hexa, rgb, rgba but in string.
+   * @color `optional` `string` the color of the line, must be a hexadecimal, rgb, or rgba format.
    * Set to black ("#000") by default.
    * */
 
@@ -100,7 +101,9 @@ const Canvas = (props: TCanvasProps) => {
   };
 
   return (
-    <>
+    <>ANIM
+      <Animation />
+
       <span style={{ position: "fixed", zIndex: 0 }}>
         {/* DEBUG */}
         X: {locateMouse.x} Y: {locateMouse.y}

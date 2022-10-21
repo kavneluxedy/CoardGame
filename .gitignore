@@ -28,3 +28,4 @@ yarn-error.log*
 /*.(jpg|jpeg|png)
 /*.odt
 /regle.md
+/Docs
