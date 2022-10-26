@@ -15,12 +15,19 @@ const Canvas = (props: TCanvasProps) => {
 
   /**
    * The `drawLine` function is used for drawing lines on canvas.
-   * @context `required` `canvas.getContext()` the canvas context.
-   * @endX `required` `number` the end destination coordonates on horizontal canvas axis.
-   * @endY `required` `number` the end destination coordonates on vertical canvas axis.
-   * @startX `optional` `number` the start coordonates on horizontal canvas axis. Set to 0 by default.
-   * @startY `optional` `number` the start coordonates on vertical canvas axis. Set to 0 by default.
-   * @color `optional` `string` the color of the line, must be a hexa, rgb, rgba but in string.
+   * 
+   * `@context` `required` the canvas context.
+   * 
+   * `@endX` `required` `type number` the end destination coordonates on horizontal canvas axis.
+   * 
+   * `@endY` `required` `type number` the end destination coordonates on vertical canvas axis.
+   * 
+   * `@startX` `optional` `type number` the start coordonates on horizontal canvas axis. Set to 0 by default.
+   * 
+   * `@startY` `optional` `type number` the start coordonates on vertical canvas axis. Set to 0 by default.
+   * 
+   * `@color` `optional` `type string` the color of the line, must be a hexa, rgb, rgba but in string.
+   * 
    * Set to black ("#000") by default.
    * */
 
@@ -31,7 +38,7 @@ const Canvas = (props: TCanvasProps) => {
     text = "hello",
     color = "#000000",
     font = "30px cambria"
-  ) {
+  ): void {
     ctx.font = font;
     ctx.fillStyle = color;
     ctx.textAlign = "center";

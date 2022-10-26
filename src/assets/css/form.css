@@ -1,0 +1,36 @@
+input {
+  margin-bottom: 10px;
+  transition: 0.5s;
+  border-radius: 5%/50%;
+  text-align: center;
+}
+
+input:focus-visible {
+  outline: none;
+  scale: 1.2;
+}
+
+.register-form input:invalid {
+  border: #ff0000 solid 3px;
+  background-color: #ffcccc;
+}
+
+.register-form input:valid {
+  border: #00ff00 solid 3px;
+  background-color: #ccffcc;
+}
+
+.login-form input {
+  border: 2px solid royalblue;
+  background-color: #fff9d2;
+}
+
+.form-error {
+  font-size: smaller;
+  font-family: "Fira Code Retina", sans-serif;
+  color: rgb(129, 0, 0);  
+  background-color: orange;
+  box-shadow: 0px 0px 0.5rem 0.01em orangered;
+  border: 1px solid red;
+  border-radius: 15%/100%;
+}

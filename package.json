@@ -1,8 +1,9 @@
 {
-  "name": "strategy-card-game",
+  "name": "coardgame",
   "version": "0.1.0",
   "private": true,
   "main": "dist/server/server.js",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",

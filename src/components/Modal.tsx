@@ -29,12 +29,8 @@ function addPropsToChildren(children: ReactNode, props: any) {
   );
 }
 
-const Modal = ({
-  modalVisible,
-  title,
-  children,
-  setModalVisibility,
-}: IModal): JSX.Element => {
+const Modal = ({modalVisible, title, children, setModalVisibility}: IModal): JSX.Element => {
+  
   const closeModal = (): void => {
     setModalVisibility(false);
   };

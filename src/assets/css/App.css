@@ -6,6 +6,7 @@
 @import "./modal.css";
 @import "./footer.css";
 @import "./board.css";
+@import "./form.css";
 
 :root {
   --color-background: lightblue;

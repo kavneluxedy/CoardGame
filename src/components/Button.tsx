@@ -7,6 +7,7 @@ interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = ({ children, disabled, onClick }) => {
   return (
     <button
+      type="button"
       className={`${disabled ? "d-none" : "button"}`}
       onClick={onClick}
       disabled={disabled}
