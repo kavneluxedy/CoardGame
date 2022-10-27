@@ -5,7 +5,7 @@ import { Comm } from "../Comm/comm";
 const Login = ({ closeModal }: any) => {
 
 	const AppCtx = useContext(AppContext);
-	if (AppCtx === null) { return }
+	if (AppCtx === null) { return<></>; }
 	const {user, setUser, formError, setFormError} = {...AppCtx};
 	
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {

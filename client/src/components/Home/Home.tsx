@@ -1,20 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import CardGameLobby from "../Lobby";
-import { AppContext, IAppContext } from "../../App";
+import { AppContext } from "../../utils/ContextProvider";
 import Button from "../Button";
 import Modal from "../Modal";
 import Register from "../Auth/Register";
 import Login from "../Auth/Login";
-import { userInfo } from "os";
 
 const Home = () => {
-	const { userSession, setUserSession, modalVisible, setModalVisibility, modalName, setModalName } =
-		useContext<IAppContext>(AppContext);
-
+	const AppCtx = useContext(AppContext);
+	if (AppCtx === null) { return<></>; }
+	const { user, setUser, modalName, setModalName, setModalVisibility } = {...AppCtx}
 
 
 	const handleLogout = () => {
-		(window.confirm("SE DÉCONNECTER ?")) ? setUserSession({}) : console.log("Vous êtes rester connecté !")
+		(window.confirm("SE DÉCONNECTER ?")) ? setUser({}) : console.log("Vous êtes rester connecté !")
 	}
 
 
@@ -32,7 +31,7 @@ const Home = () => {
 			</Button>
 
 
-			{!userSession.isConnected &&
+			{!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -45,7 +44,7 @@ const Home = () => {
 			}
 
 
-			{!userSession.isConnected &&
+			{!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -58,7 +57,7 @@ const Home = () => {
 			}
 
 
-			{userSession.isConnected &&
+			{user.isConnected &&
 				<Button className="open" onClick={() => handleLogout()}>
 					SE DÉCONNECTER
 				</Button>
@@ -73,19 +72,15 @@ const Home = () => {
 						return <CardGameLobby />;
 
 					case "register":
-						return <Modal
+						return (<Modal
 							title={"Créer un compte"}
-							modalVisible={modalVisible}
-							setModalVisibility={setModalVisibility}
 						>
 							<Register />
-						</Modal>;
+						</Modal>);
 
 					case "login":
 						return <Modal
 							title={"Authentification"}
-							modalVisible={modalVisible}
-							setModalVisibility={setModalVisibility}
 						>
 							<Login />
 						</Modal>;

@@ -4,13 +4,13 @@ import React, {
   ReactNode,
   cloneElement,
   isValidElement,
+  useContext,
 } from "react";
+import { AppContext } from "../utils/ContextProvider";
 
 interface IModal {
   title?: string;
-  children?: ReactNode;
-  modalVisible: {};
-  setModalVisibility: Dispatch<SetStateAction<boolean>>;
+  children: ReactNode;
 }
 
 function addPropsToReactElement(element: ReactNode, props: any) {
@@ -29,8 +29,10 @@ function addPropsToChildren(children: ReactNode, props: any) {
   );
 }
 
-const Modal = ({modalVisible, title, children, setModalVisibility}: IModal): JSX.Element => {
-  
+const Modal = ({ title, children }: IModal): JSX.Element => {
+  const AppCtx = useContext(AppContext);
+	if (AppCtx === null) { return<></>; }
+	const {modalVisible, setModalVisibility } = {...AppCtx};
   const closeModal = (): void => {
     setModalVisibility(false);
   };

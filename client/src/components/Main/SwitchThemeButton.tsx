@@ -3,7 +3,7 @@ import { AppContext } from "../../utils/ContextProvider";
 
 const SwitchThemeButton = () => {
   const AppCtx = useContext(AppContext);
-  if (AppCtx === null) { return; }
+  if (AppCtx === null) { return<></>; }
   const { theme, setTheme } = {...AppCtx}
   
   const toggleTheme = () => {

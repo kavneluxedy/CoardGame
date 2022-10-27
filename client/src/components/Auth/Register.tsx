@@ -5,8 +5,8 @@ import { Comm } from "../Comm/comm";
 const Register = ({ closeModal }: any) => {
 
   const AppCtx = useContext(AppContext);
-  if (AppCtx === null) { return; }
-  const { user, setUser, modalVisible, setModalVisibility, modalName, setModalName, formError, setFormError } = {...AppCtx}
+  if (AppCtx === null) { return<></>; }
+  const { formError, setFormError } = {...AppCtx}
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let user = {
