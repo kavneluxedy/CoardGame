@@ -3,8 +3,16 @@ import { IAppContext, AppContext } from "../../App";
 import { Comm } from "../Comm/comm";
 
 const Login = ({ closeModal }: any) => {
-
-	const { userSession, setUserSession, modalVisible, setModalVisibility, modalName, setModalName, formError, setFormError } = useContext<IAppContext>(AppContext);
+	const {
+		user,
+		setUser,
+		modalVisible,
+		setModalVisibility,
+		modalName,
+		setModalName,
+		formError,
+		setFormError,
+	} = useContext<IAppContext>(AppContext);
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -15,23 +23,22 @@ const Login = ({ closeModal }: any) => {
 
 		let result = await Comm("COARD", "User", { user: user }, "/api/auth");
 
-		(result.error)
-			? setFormError({ ...result })
-			: closeModal() && sessionStorage.setItem("userSession", JSON.stringify(formError?.result, null, '\t'));
-
-		const session = localStorage.getItem('userSession')
-		setUserSession({ isConnected: true, session: session! });
+		if (result.error) {
+			setFormError({ ...result });
+		} else {
+			let user = result.result;
+			console.log(user);
+			closeModal();
+			setFormError(undefined);
+			setUser({ isConnected: true, nickname: user.nickname, role: user.role });
+		}
 	};
-
-	useEffect(() => {
-		console.log(userSession)
-	}, [userSession])
-
 
 	const printError = (flag: string) => {
 		if (!formError) return;
 		if (formError.error) {
-			var error: { errorMessage: string; errorFlag?: string; result?: string; } = { errorMessage: "" };
+			var error: { errorMessage: string; errorFlag?: string; result?: string } =
+				{ errorMessage: "" };
 
 			formError.result.map((err) => {
 				if (err.errorFlag === flag) {
@@ -39,16 +46,16 @@ const Login = ({ closeModal }: any) => {
 				}
 			});
 			if (error.errorMessage === "") {
-				return
+				return;
 			}
 
 			return (
 				<>
 					<div className="form-error">{error.errorMessage}</div>
 				</>
-			)
+			);
 		}
-	}
+	};
 
 	return (
 		<>
@@ -60,7 +67,7 @@ const Login = ({ closeModal }: any) => {
 						id="nickname"
 						required
 					/>
-					{printError("Name")}
+					{printError("Pwd")}
 				</label>
 				<br />
 				<label htmlFor="pwd">

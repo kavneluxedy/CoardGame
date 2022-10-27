@@ -5,22 +5,20 @@ import Button from "../Button";
 import Modal from "../Modal";
 import Register from "../Auth/Register";
 import Login from "../Auth/Login";
-import { userInfo } from "os";
+import { Logout } from "../Auth/Logout";
+import Svg from "../Svg";
 
 const Home = () => {
-	const { userSession, setUserSession, modalVisible, setModalVisibility, modalName, setModalName } =
-		useContext<IAppContext>(AppContext);
+	const { user, setUser, modalVisible, setModalVisibility, modalName, setModalName } = useContext<IAppContext>(AppContext);
 
-
-
-	const handleLogout = () => {
-		(window.confirm("SE DÉCONNECTER ?")) ? setUserSession({}) : console.log("Vous êtes rester connecté !")
+	const HandleLogout = () => {
+		Logout(setUser);
 	}
-
-
 
 	return (
 		<>
+			<Svg width={64} height={64} />
+
 			<Button
 				className="open"
 				onClick={() => {
@@ -32,7 +30,7 @@ const Home = () => {
 			</Button>
 
 
-			{!userSession.isConnected &&
+			{!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -45,7 +43,7 @@ const Home = () => {
 			}
 
 
-			{!userSession.isConnected &&
+			{!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -58,8 +56,8 @@ const Home = () => {
 			}
 
 
-			{userSession.isConnected &&
-				<Button className="open" onClick={() => handleLogout()}>
+			{user.isConnected &&
+				<Button className="open" onClick={HandleLogout}>
 					SE DÉCONNECTER
 				</Button>
 			}
