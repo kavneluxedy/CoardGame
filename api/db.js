@@ -64,44 +64,38 @@ module.exports = {
 		const coll = database.collection(collName);
 
 		try {
-			isUserExists = await coll.findOne({ nickname: user.nickname });
+			let isUserExists = await coll.findOne({ nickname: user.nickname });
 
 			// ? If user exists in Database
-			if (isUserExists !== null && isUserExists !== undefined) {
+			if (isUserExists === null) {
+				// ? ////////////////////////////////////////////////////
+				// ? Manage error if desired user nickname doesn't exist
+				// ? ////////////////////////////////////////////////////
+				error.push({
+					errorFlag: "User Not Found",
+					errorMessage: "User Not Found",
+					result: "User not found",
+				});
+				// ? ////////////////////////////////////////////////////
+			} else {
+				// * User exists
 				dbUser = isUserExists;
-
 				// ? Check if password is correct
-
-				// !!!!!!!!!!!!!!!!!!!!!!!
-				// ! If password is wrong
-				// !!!!!!!!!!!!!!!!!!!!!!!
-				// !!!!!!!!!!!!!!!!!!!!!!!
-
 				if (!crypt.compare(user.password, dbUser.password)) {
-					console.error("Pwd don't match");
+					// !!!!!!!!!!!!!!!!!!!!!!!
+					// ! If password is wrong
+					// !!!!!!!!!!!!!!!!!!!!!!!
+
 					error.push({
-						errorFlag: "Name",
+						errorFlag: "Pwd",
 						errorMessage: "Id/mdp incorrecte",
 						result: "incorrect Id/pwd",
 					});
 
-					return {
-						error: true,
-						result: error
-					}
-
-					// !!!!!!!!!!!!!!!!!!!!!!!
-					// !!!!!!!!!!!!!!!!!!!!!!!
-					// !!!!!!!!!!!!!!!!!!!!!!!
-
 				} else {
-
 					// *************************
 					// * If password is correct
 					// *************************
-					// *************************
-
-
 					console.log(
 						`\n↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔\n` +
 						new Date().toUTCString() +
@@ -110,45 +104,20 @@ module.exports = {
 						" is now online\n" +
 						`↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔\n`
 					);
+					// *************************
+				}
 
-
+				if (!!error.length) {
 					return {
-						error: false,
-						result: dbUser,
+						error: true,
+						result: error,
 					};
-
-					// TODO: TROUVER LE MOYEN DE CLEAR LE TABLEAU D'ERREUR
-					// error.length = 0; OR error.slice(0, error.length); // Clear error array
-
-					// *************************
-					// *************************
-					// *************************
 				}
-
-			} else if (isUserExists === null || !isUserExists) {
-
-
-				// ? ////////////////////////////////////////////////////
-				// ? Manage error if desired user nickname doesn't exist
-				// ? ////////////////////////////////////////////////////
-				// ? ////////////////////////////////////////////////////
-
-				error.push({
-					errorFlag: "Name",
-					errorMessage: "User Not Found",
-					result: "User not found",
-				});
-
 				return {
-					error: true,
-					result: error
-				}
-
-				// ? ////////////////////////////////////////////////////
-				// ? ////////////////////////////////////////////////////
-				// ? ////////////////////////////////////////////////////
+					error: false,
+					result: dbUser,
+				};
 			}
-
 		} finally {
 			await client.close();
 		}
