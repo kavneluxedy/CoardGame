@@ -1,0 +1,45 @@
+@import "./LightTheme.css";
+@import "./button.css";
+@import "./DarkTheme.css";
+@import "./header.css";
+@import "./homepage.css";
+@import "./modal.css";
+@import "./footer.css";
+@import "./board.css";
+@import "./form.css";
+
+:root {
+  --color-background: lightblue;
+  --text-primary: royalblue;
+  --text-secondary: black;
+  --accent: yellowgreen;
+}
+
+html,
+body {
+  width: 100% !important;
+  height: 100vh !important;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: var(--color-background);
+  color: var(--text-primary);
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.underline {
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+}
