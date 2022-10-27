@@ -8,7 +8,7 @@ import React, {
 
 interface IModal {
   title?: string;
-  children: any;
+  children: ReactNode;
   modalVisible: {};
   setModalVisibility: Dispatch<SetStateAction<boolean>>;
 }

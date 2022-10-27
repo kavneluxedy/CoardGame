@@ -1,10 +1,15 @@
 import React, {
   createContext,
   Dispatch,
+  ReactNode,
   SetStateAction,
   useState,
 } from "react";
-import { Router } from "./utils/Router";
+
+interface IUser {
+  isConnected?: boolean,
+  session?: string
+}
 
 interface IFormError {
   error: boolean,
@@ -15,21 +20,6 @@ interface IFormError {
       result: string,
     }
   ]
-}
-
-/**
- * Different informations about the final user like as: 
- * 
- * {
- * 
- * isConnected: boolean 
- * 
- * }
- * */
-
-interface IUser {
-  isConnected?: boolean,
-  session?: string
 }
 
 interface IAppContext {
@@ -46,34 +36,36 @@ interface IAppContext {
 }
 const AppContext = createContext<IAppContext | null>(null);
 
+interface IContextProvider {
+  children: ReactNode,
+}
+const ContexProvider = ({children}: IContextProvider) => {
 
-const App = (): JSX.Element => {
   const [userSession, setUserSession] = useState<{}>({});
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [modalName, setModalName] = useState("lobby");
   const [modalVisible, setModalVisibility] = useState<boolean>(false);
   const [formError, setFormError] = useState<IFormError>();
   
+  const AppContextContent: IAppContext = {
+    userSession,
+    setUserSession,
+    theme,
+    setTheme,
+    modalName,
+    setModalName,
+    modalVisible,
+    setModalVisibility,
+    formError,
+    setFormError,
+  };
+
   return (
-    <div id="container" data-theme={theme}>
-      <AppContext.Provider
-        value={{
-          userSession,
-          setUserSession,
-          theme,
-          setTheme,
-          modalName,
-          setModalName,
-          modalVisible,
-          setModalVisibility,
-          formError,
-          setFormError,
-        }}
-      >
-        <Router />
-      </AppContext.Provider>
-    </div>
+    <AppContext.Provider value={AppContextContent}>
+      {children}
+    </AppContext.Provider>
   );
 };
 
-export { App, AppContext, IAppContext };
+export  {AppContext};
+export default ContexProvider;
