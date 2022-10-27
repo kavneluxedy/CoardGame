@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { AppContext, IAppContext } from "../../App";
+import { AppContext } from "../../utils/ContextProvider";
 
 const SwitchThemeButton = () => {
-  const { theme, setTheme }: IAppContext = useContext(AppContext)!;
+  const AppCtx = useContext(AppContext);
+  if (AppCtx === null) { return; }
+  const { theme, setTheme } = {...AppCtx}
   
   const toggleTheme = () => {
     if (theme === "light") {

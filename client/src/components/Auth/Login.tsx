@@ -1,11 +1,13 @@
 import React, { FormEvent, useContext, useEffect } from "react";
-import { IAppContext, AppContext } from "../../App";
+import { AppContext } from "../../utils/ContextProvider";
 import { Comm } from "../Comm/comm";
 
 const Login = ({ closeModal }: any) => {
 
-	const { userSession, setUserSession, modalVisible, setModalVisibility, modalName, setModalName, formError, setFormError } = useContext<IAppContext>(AppContext);
-
+	const AppCtx = useContext(AppContext);
+	if (AppCtx === null) { return }
+	const {user, setUser, formError, setFormError} = {...AppCtx};
+	
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		let user: Object = {
@@ -20,12 +22,12 @@ const Login = ({ closeModal }: any) => {
 			: closeModal() && sessionStorage.setItem("userSession", JSON.stringify(formError?.result, null, '\t'));
 
 		const session = localStorage.getItem('userSession')
-		setUserSession({ isConnected: true, session: session! });
+		setUser({ isConnected: true, session: session! });
 	};
 
 	useEffect(() => {
-		console.log(userSession)
-	}, [userSession])
+		console.log(user)
+	}, [user])
 
 
 	const printError = (flag: string) => {

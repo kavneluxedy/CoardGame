@@ -1,12 +1,12 @@
 import React, { FormEvent, useContext, useEffect, useState } from "react";
-import { IAppContext, AppContext } from "../../App";
+import { AppContext } from "../../utils/ContextProvider";
 import { Comm } from "../Comm/comm";
 
 const Register = ({ closeModal }: any) => {
 
-  const { user, setUser, modalVisible, setModalVisibility, modalName, setModalName, formError, setFormError } =
-    useContext<IAppContext>(AppContext);
-
+  const AppCtx = useContext(AppContext);
+  if (AppCtx === null) { return; }
+  const { user, setUser, modalVisible, setModalVisibility, modalName, setModalName, formError, setFormError } = {...AppCtx}
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let user = {
