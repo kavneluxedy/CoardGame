@@ -14,6 +14,7 @@ module.exports = {
 				result: "User Format (Id, pwd, ...) is not valid",
 			});
 		}
+
 		const uri = data.uri;
 		const client = new MongoClient(uri);
 		const database = client.db(dbName);
@@ -23,14 +24,22 @@ module.exports = {
 		try {
 			let isAlreadyExists = await coll.findOne({ nickname: user.nickname });
 			if (isAlreadyExists !== null) {
-				error.push({
-					errorFlag: "Name",
-					errorMessage: "Pseudo déjà utilisé",
-					result: "Nickname is already taken",
-				});
+				let isUserExists = await coll.findOne({ nickname: user.nickname });
+				if (isUserExists !== null) {
+					error.push({
+						errorFlag: "Name",
+						errorMessage: "Nickname already in use",
+						result: "Pseudo déjà utilisé",
+					});
+				}
 			}
-		} finally {
+		} catch (err) {
+			console.error(err);
 		}
+		finally {
+		}
+
+		// !!! UN SEUL TRY/CATCH SERAIT BON ???
 
 		try {
 			if (!!error.length) {
@@ -47,6 +56,7 @@ module.exports = {
 			console.log("NEW USER ==> ");
 			console.table(user);
 			return response;
+
 		} finally {
 			await client.close();
 		}
@@ -148,4 +158,61 @@ module.exports = {
 			await client.close();
 		}
 	},
+
+	createCard: async (dbName, collName, wantedCard) => {
+		let error = [];
+
+		const uri = data.uri;
+		const client = new MongoClient(uri);
+		const database = client.db(dbName);
+		const coll = database.collection(collName);
+
+		try {
+			let isCardExists = await coll.findOne({ name: wantedCard.name });
+
+			if (isCardExists !== null) {
+				console.error("\n\n=========================> Cette carte existe déjà <=========================");
+				console.warn("CARTE EXISTANTE ==> " + wantedCard.name);
+				console.table([isCardExists]);
+				console.error("=============================================================================\n\n");
+				error.push({
+					errorFlag: "card",
+					errorMessage: "Card already existing",
+					result: "Carte déjà existante",
+				})
+				const response = {
+					error: true,
+					result: error
+				}
+				return response;
+
+			} else {
+				console.log("Cette carte n'existe pas encore, \ncréation en cours ... \n");
+
+				// for (let i = 0; i < 3; i++) { setTimeout(() => { console.log(" ... ") }, 1000) };
+
+				const response = {
+					error: false,
+					result: await coll.insertOne(wantedCard)
+				}
+
+				if (response.result.length !== 0) {
+					console.log("Carte créée: ");
+					console.table([wantedCard]);
+					console.log("\n");
+				};
+
+				return response;
+			}
+		} catch (err) {
+			error.push({
+				error: true,
+				result: err
+			})
+			console.error(err); // FONCTIONNE TRES BIEN ET NE FAIS PAS SAUTER LE PROCESSUS
+		}
+		finally {
+			await client.close();
+		}
+	}
 };

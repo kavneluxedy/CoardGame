@@ -17,11 +17,8 @@ const Home = () => {
 		(window.confirm("SE DÉCONNECTER ?")) ? setUser({}) : console.log("Vous êtes rester connecté !")
 	}
 
-
-
 	return (
 		<>
-
 			{user.isConnected && user.role === "admin" &&
 				<Button
 					className="open"
@@ -32,6 +29,12 @@ const Home = () => {
 				>
 					ADMINISTRATEUR
 				</Button>
+			}
+
+
+			{user.isConnected && user.role === "admin" && <Button className="open" onClick={() => handleLogout()}>
+				SE DÉCONNECTER
+			</Button>
 			}
 
 			<Button
@@ -101,6 +104,9 @@ const Home = () => {
 						>
 							<Login />
 						</Modal>;
+
+					case "admin":
+						return <Admin />
 
 					default:
 						return null;

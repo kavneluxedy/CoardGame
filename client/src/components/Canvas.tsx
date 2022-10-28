@@ -1,6 +1,5 @@
 import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import { ICell } from "../utils/CellsInit";
-// import Animation from "./Canvas/Animation";
 
 type TCanvasProps = {
   id: string;
@@ -100,9 +99,7 @@ const Canvas = (props: TCanvasProps) => {
   };
 
   return (
-    <>ANIM
-      {/* <Animation /> */}
-
+    <>
       <span style={{ position: "fixed", zIndex: 0 }}>
         {/* DEBUG */}
         X: {locateMouse.x} Y: {locateMouse.y}
