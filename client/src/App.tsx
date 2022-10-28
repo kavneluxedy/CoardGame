@@ -6,7 +6,6 @@ const App = (): JSX.Element => {
   return (
     <div id="container">
       <ContexProvider>
-
         <Router />
       </ContexProvider>
     </div>

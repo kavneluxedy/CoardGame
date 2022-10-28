@@ -21,7 +21,7 @@ module.exports = {
 
 		user.password = crypt.hash(user.password);
 		try {
-			isAlreadyExists = await coll.findOne({ nickname: user.nickname });
+			let isAlreadyExists = await coll.findOne({ nickname: user.nickname });
 			if (isAlreadyExists !== null) {
 				error.push({
 					errorFlag: "Name",
@@ -39,8 +39,6 @@ module.exports = {
 					result: error,
 				};
 			}
-
-			// error.splice(0, error.length); // Clear error array
 
 			const response = {
 				error: false,
@@ -64,10 +62,10 @@ module.exports = {
 		const coll = database.collection(collName);
 
 		try {
-			isUserExists = await coll.findOne({ nickname: user.nickname });
+			let isUserExists = await coll.findOne({ nickname: user.nickname });
 
 			// ? If user exists in Database
-			if (isUserExists !== null && isUserExists !== undefined) {
+			if (isUserExists !== null) {
 				dbUser = isUserExists;
 
 				// ? Check if password is correct
@@ -104,7 +102,7 @@ module.exports = {
 
 					console.log(
 						`\n↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔\n` +
-						new Date().toUTCString() +
+						new Date().toLocaleString() +
 						"\n" +
 						user.nickname +
 						" is now online\n" +
@@ -116,9 +114,6 @@ module.exports = {
 						error: false,
 						result: dbUser,
 					};
-
-					// TODO: TROUVER LE MOYEN DE CLEAR LE TABLEAU D'ERREUR
-					// error.length = 0; OR error.slice(0, error.length); // Clear error array
 
 					// *************************
 					// *************************

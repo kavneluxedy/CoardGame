@@ -5,30 +5,41 @@ import { Comm } from "../Comm/comm";
 const Login = ({ closeModal }: any) => {
 
 	const AppCtx = useContext(AppContext);
-	if (AppCtx === null) { return<></>; }
-	const {user, setUser, formError, setFormError} = {...AppCtx};
-	
+	// if (AppCtx === null) { return <></>; }
+	const { user, setUser, formError, setFormError } = { ...AppCtx! };
+
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		let user: Object = {
+		let userAuth: Object = {
 			nickname: e.target[0].value,
 			password: e.target[1].value,
 		};
 
-		let result = await Comm("COARD", "User", { user: user }, "/api/auth");
+		let response = await Comm("COARD", "User", { user: userAuth }, "/api/auth");
 
-		(result.error)
-			? setFormError({ ...result })
-			: closeModal() && sessionStorage.setItem("userSession", JSON.stringify(formError?.result, null, '\t'));
+		if (response.error) {
+			setFormError({ ...response })
+			console.log(formError)
+		} else {
+			let { nickname, mail, birthday, phone } = response.result;
+			let obj = { nickname: nickname, mail: mail, birthday: birthday, phone: phone };
+			let userSess = JSON.stringify(obj, null, "\t");
 
-		const session = localStorage.getItem('userSession')
-		setUser({ isConnected: true, session: session! });
-	};
+			setUser({ isConnected: true, session: userSess, role: response.result.role });
+			closeModal();
+		};
+	}
+
+	const save = (userSession: string) => {
+		sessionStorage.setItem("user", userSession)
+	}
 
 	useEffect(() => {
-		console.log(user)
+		if (user.session !== undefined) {
+			save(user.session);
+		}
+		console.table(user.session)
 	}, [user])
-
 
 	const printError = (flag: string) => {
 		if (!formError) return;

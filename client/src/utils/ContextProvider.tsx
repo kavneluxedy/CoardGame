@@ -1,26 +1,25 @@
 import React, {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useState,
 } from "react";
-import IAppContext from "./Type/Interface/IAppContext";
-import IFormError from "./Type/Interface/IFormError";
+import IAppContext from "./Types/Interfaces/IAppContext";
+import IFormError from "./Types/Interfaces/IFormError";
+import IUser from "./Types/Interfaces/IUser";
 
 const AppContext = createContext<IAppContext | null>(null);
 
 interface IContextProvider {
-  children: ReactNode,
+  children: ReactNode
 }
-const ContexProvider = ({children}: IContextProvider) => {
+const ContexProvider = ({ children }: IContextProvider) => {
 
-  const [user, setUser] = useState<{}>({});
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [user, setUser] = useState<IUser>(Object);
   const [modalName, setModalName] = useState("lobby");
   const [modalVisible, setModalVisibility] = useState<boolean>(false);
   const [formError, setFormError] = useState<IFormError>();
-  
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
   const AppContextContent: IAppContext = {
     user,
     setUser,
@@ -41,5 +40,5 @@ const ContexProvider = ({children}: IContextProvider) => {
   );
 };
 
-export  {AppContext};
+export { AppContext };
 export default ContexProvider;

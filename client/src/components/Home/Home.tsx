@@ -5,11 +5,12 @@ import Button from "../Button";
 import Modal from "../Modal";
 import Register from "../Auth/Register";
 import Login from "../Auth/Login";
+import Admin from "../Admin/Admin";
 
 const Home = () => {
 	const AppCtx = useContext(AppContext);
-	if (AppCtx === null) { return<></>; }
-	const { user, setUser, modalName, setModalName, setModalVisibility } = {...AppCtx}
+	if (AppCtx === null) { return <></>; }
+	const { user, setUser, modalName, setModalName, setModalVisibility } = { ...AppCtx }
 
 
 	const handleLogout = () => {
@@ -20,6 +21,19 @@ const Home = () => {
 
 	return (
 		<>
+
+			{user.isConnected && user.role === "admin" &&
+				<Button
+					className="open"
+					onClick={() => {
+						setModalVisibility(true);
+						setModalName("admin");
+					}}
+				>
+					ADMINISTRATEUR
+				</Button>
+			}
+
 			<Button
 				className="open"
 				onClick={() => {
@@ -67,6 +81,9 @@ const Home = () => {
 			{(() => {
 
 				switch (modalName) {
+
+					case "admin":
+						return <Admin />
 
 					case "lobby":
 						return <CardGameLobby />;
