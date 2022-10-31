@@ -7,7 +7,8 @@ const hash = (str: string) => {
     return hash;
 }
 
-const compare = (str, hash) => {
+const compare = (str: string, hash: string): boolean => {
+    console.log(typeof str, typeof hash, "crypt");
     return bcrypt.compareSync(str, hash);
 }
 

@@ -5,6 +5,7 @@ module.exports = {
     email?: string;
     birthday?: string;
     phone?: string;
+    token: string;
   }) => {
     const regexNickname = /^\w[^\d]{2}[\w\d&_@#~\\\\-]{0,14}$/u;
     const regexPassword = /^\S*(?=\S{8,})(?=\S*\w)(?=\S*[\d])(?=\S*[&'\-_$\\%!@?])\S*$/u;

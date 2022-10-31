@@ -1,12 +1,34 @@
 import React, { FormEvent, useContext, useEffect } from "react";
 import { AppContext } from "../../utils/ContextProvider";
-import { Comm } from "../Comm/comm";
+import Loading from "../Loading";
+import useDb from "../../utils/Hook/useDb";
 
 const Login = ({ closeModal }: any) => {
-
+	const { loading, data, error, dbComm } = useDb("", "", {}, "/init");
 	const AppCtx = useContext(AppContext);
-	// if (AppCtx === null) { return <></>; }
+	useEffect(() => {
+    if (!loading) {
+      handleDBResponse(data)
+    }
+  }, [data, loading])
+	if (AppCtx === null) { return <></>; }
 	const { user, setUser, formError, setFormError } = { ...AppCtx! };
+	
+	if (loading) { return <Loading /> }
+
+	const handleDBResponse = (data) => {
+		console.log(data);
+		if (data.error) {
+			setFormError({ ...data });
+		} else {
+			setFormError(undefined);
+			if (data.result){
+				let { nickname, token, role  } = data.result;
+				setUser({ isConnected: true, nickname: nickname, role: role, token: token });
+				closeModal();
+			}
+		}
+}
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -15,31 +37,8 @@ const Login = ({ closeModal }: any) => {
 			password: e.target[1].value,
 		};
 
-		let response = await Comm("COARD", "User", { user: userAuth }, "/api/auth");
-
-		if (response.error) {
-			setFormError({ ...response })
-			console.log(formError)
-		} else {
-			let { nickname, mail, birthday, phone } = response.result;
-			let obj = { nickname: nickname, mail: mail, birthday: birthday, phone: phone };
-			let userSess = JSON.stringify(obj, null, "\t");
-
-			setUser({ isConnected: true, session: userSess, role: response.result.role });
-			closeModal();
-		};
+		dbComm("COARD", "User", { user: userAuth }, "/api/auth");
 	}
-
-	const save = (userSession: string) => {
-		sessionStorage.setItem("user", userSession)
-	}
-
-	useEffect(() => {
-		if (user.session !== undefined) {
-			save(user.session);
-		}
-		console.table(user.session)
-	}, [user])
 
 	const printError = (flag: string) => {
 		if (!formError) return;

@@ -14,7 +14,7 @@ const Home = () => {
 
 
 	const handleLogout = () => {
-		(window.confirm("SE DÉCONNECTER ?")) ? setUser({}) : console.log("Vous êtes rester connecté !")
+		(window.confirm("SE DÉCONNECTER ?")) ? setUser({isConnected: false}) : console.log("Vous êtes rester connecté !")
 	}
 
 	return (
@@ -29,12 +29,6 @@ const Home = () => {
 				>
 					ADMINISTRATEUR
 				</Button>
-			}
-
-
-			{user.isConnected && user.role === "admin" && <Button className="open" onClick={() => handleLogout()}>
-				SE DÉCONNECTER
-			</Button>
 			}
 
 			<Button

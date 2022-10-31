@@ -48,14 +48,84 @@ module.exports = {
 					result: error,
 				};
 			}
+			let result = await coll.insertOne(user);
+			if(result.acknowledged === true){
+				const response = {
+					error: false,
+					result: await coll.findOne({ _id: result.insertedId })
+				};
+				console.log("NEW USER ==> ");
+				console.table(user);
+				return response;
+			} else {
+				error.push({
+					errorFlag: "Error",
+					errorMessage: "Insertion failed try again",
+					result: "Mongo Failed",
+				});
+			}
 
-			const response = {
-				error: false,
-				result: await coll.insertOne(user),
-			};
-			console.log("NEW USER ==> ");
-			console.table(user);
-			return response;
+
+		} finally {
+			await client.close();
+		}
+	},
+
+	tokenAuth: async(dbName, collName, user) => {
+		let error = [];
+		let dbUser = {};
+
+		const uri = data.uri;
+		const client = new MongoClient(uri);
+		const database = client.db(dbName);
+		const coll = database.collection(collName);
+
+		try {
+			let isUserExists = await coll.findOne({ nickname: user.nickname });
+
+			if (isUserExists !== null) {
+				let dbUser = isUserExists;
+				if (user.token !== dbUser.token) {
+					error.push({
+						errorFlag: "Name",
+						errorMessage: "Id/mdp incorrecte",
+						result: "incorrect Id/pwd",
+					});
+
+					return {
+						error: true,
+						result: error
+					}
+
+				} else {
+
+					console.log(
+						`\n↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔\n` +
+						new Date().toLocaleString() +
+						"\n" +
+						user.nickname +
+						" is now online and had forget to disconnect\n" +
+						`↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔\n`
+					);
+					return {
+						error: false,
+						result: dbUser,
+					};
+				}
+
+			} else if (isUserExists === null || !isUserExists) {
+
+				error.push({
+					errorFlag: "Name",
+					errorMessage: "User Not Found",
+					result: "User not found",
+				});
+
+				return {
+					error: true,
+					result: error
+				}
+			}
 
 		} finally {
 			await client.close();
@@ -84,7 +154,7 @@ module.exports = {
 				// ! If password is wrong
 				// !!!!!!!!!!!!!!!!!!!!!!!
 				// !!!!!!!!!!!!!!!!!!!!!!!
-
+				console.log(user, "auth");
 				if (!crypt.compare(user.password, dbUser.password)) {
 					console.error("Pwd don't match");
 					error.push({

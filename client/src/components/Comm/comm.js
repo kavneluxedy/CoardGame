@@ -4,7 +4,7 @@ const post = async (url, option) => {
 	});
 };
 
-const Comm = async (dbName, collName, filter, uri) => {
+const Comm = async (dbName, collName, query, uri) => {
 	try {
 		let option = {
 			method: "POST",
@@ -14,7 +14,7 @@ const Comm = async (dbName, collName, filter, uri) => {
 			body: JSON.stringify({
 				dbName: dbName,
 				collName: collName,
-				query: filter,
+				query: query,
 			}),
 		};
 		let result = await post(uri, option);

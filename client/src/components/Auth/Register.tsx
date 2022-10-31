@@ -1,14 +1,40 @@
 import React, { FormEvent, useContext, useEffect, useState } from "react";
+import { CoardToken } from "../../utils/CoardToken";
 import { AppContext } from "../../utils/ContextProvider";
+import useDb from "../../utils/Hook/useDb";
+import IUser from "../../utils/Types/Interfaces/IUser";
 import { Comm } from "../Comm/comm";
+import Loading from "../Loading";
 
 const Register = ({ closeModal }: any) => {
-
+  const { loading, data, error, dbComm } = useDb("", "", {}, "/init");
   const AppCtx = useContext(AppContext);
-  if (AppCtx === null) { return <></>; }
-  const { formError, setFormError } = { ...AppCtx }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (!loading) {
+      handleDBResponse(data)
+    }
+  }, [data, loading])
+  if (AppCtx === null) { return <></>; }
+  
+  const { formError, setFormError, setUser } = { ...AppCtx }
+
+  if (loading) { return <Loading /> }
+
+  const handleDBResponse = (data) => {
+      console.log(data);
+      if (data.error) {
+        setFormError({ ...data });
+      } else {
+        setFormError(undefined);
+        if (data.result){
+          let { nickname, token, role  } = data.result;
+          setUser({ isConnected: true, nickname: nickname, role: role, token: token });
+          closeModal();
+        }
+      }
+  }
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let user = {
       nickname: e.target[0].value,
@@ -16,15 +42,12 @@ const Register = ({ closeModal }: any) => {
       mail: e?.target[2].value,
       birthday: e?.target[3].value,
       phone: e?.target[4].value,
+      role: "user",
+      token: CoardToken.gen(32),
+      // createdAt: Date.now(),
     };
+    dbComm("COARD", "User", { user: user }, "/api/addUser");
 
-    let result = await Comm("COARD", "User", { user: user }, "/api/addUser");
-
-    (result.error)
-      ? setFormError({ ...result })
-      : closeModal() && sessionStorage.setItem("userSession", JSON.stringify(formError, null, '\t'));
-
-    console.log(sessionStorage.getItem("userSession"));
   };
 
   const printError = (flag: string) => {
