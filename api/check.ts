@@ -1,4 +1,4 @@
-module.exports = {
+const check =  {
   isValidUser: (user: {
     nickname: string;
     password: string;
@@ -54,3 +54,5 @@ module.exports = {
     return isValid;
   },
 };
+
+export default check

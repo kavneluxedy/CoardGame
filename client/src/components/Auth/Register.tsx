@@ -44,7 +44,6 @@ const Register = ({ closeModal }: any) => {
       phone: e?.target[4].value,
       role: "user",
       token: CoardToken.gen(32),
-      // createdAt: Date.now(),
     };
     dbComm("COARD", "User", { user: user }, "/api/addUser");
 

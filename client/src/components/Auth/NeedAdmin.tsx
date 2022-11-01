@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../utils/ContextProvider";
 
-const NeedAuth = ({ children }) => {
+const NeedAdmin = ({ children }) => {
 
 	const appCtx = useContext(AppContext);
 	if (appCtx === null) { return; }
@@ -14,4 +14,4 @@ const NeedAuth = ({ children }) => {
 	}
 }
 
-export default NeedAuth
+export default NeedAdmin

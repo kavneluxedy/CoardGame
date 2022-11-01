@@ -1,5 +1,5 @@
 import React, { FormEvent, FormEventHandler, MouseEvent, useEffect, useState } from 'react'
-import NeedAuth from '../Auth/NeedAdmin'
+import NeedAdmin from '../Auth/NeedAdmin'
 import CreateCard from './CreateCard'
 import { Comm } from "../Comm/comm";
 
@@ -20,14 +20,14 @@ const Admin = () => {
     }
 
     return (
-        <NeedAuth>
+        <NeedAdmin>
             <h1>Bienvenue Administrateur</h1>
             <h1>INSERT CARD</h1>
             <form onSubmit={(e) => { handleSubmit(e) }} method="post" className='login-form'>
                 <CreateCard />
                 <input type="submit" value='Créer' />
             </form>
-        </NeedAuth>
+        </NeedAdmin>
     )
 }
 
