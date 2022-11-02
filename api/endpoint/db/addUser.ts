@@ -64,7 +64,6 @@ const addUser = async (dbName: string, collName: string, user: any) => {
 			});
 		}
 
-
 	} finally {
 		await client.close();
 	}

@@ -1,0 +1,12 @@
+/node_modules
+
+# production
+/dist
+
+#misc
+.vscode
+
+*.drawio
+*.odt
+regle.md
+/doc
