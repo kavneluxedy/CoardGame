@@ -7,6 +7,7 @@
 @import "./footer.css";
 @import "./board.css";
 @import "./form.css";
+@import "./admin-panel.css";
 
 :root {
   --color-background: lightblue;
@@ -15,28 +16,24 @@
   --accent: yellowgreen;
 }
 
-html,
 body {
-  width: 100% !important;
-  height: 100vh !important;
-  margin: 0;
-  padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: auto;
 }
 
 #app {
-  width: 100% !important;
-  height: 100% !important;
   background-color: var(--color-background);
   color: var(--text-primary);
 }
 
 #container {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  /* align-items: center; */
+  flex-wrap: wrap;
 }
 
 .underline {

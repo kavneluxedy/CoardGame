@@ -1,33 +1,18 @@
-import React, { FormEvent, FormEventHandler, MouseEvent, useEffect, useState } from 'react'
-import NeedAdmin from '../Auth/NeedAdmin'
+
+import React from 'react'
 import CreateCard from './CreateCard'
-import { Comm } from "../Comm/comm";
+import ReadCard from './ReadCard'
 
 const Admin = () => {
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        let card = {
-            name: e.target[0].value,
-            cost: e.target[1].value,
-            atk: e.target[2].value,
-            def: e.target[3].value,
-            hp: e.target[4].value,
-            mp: e.target[5].value,
-            effects: e.target[6].value,
-        };
-        const result = await Comm("COARD", "cards", { card: card }, "/api/createCard");
-        console.table([result]);
-    }
+
+    // ! AFFICHAGE CONDITIONNEL
 
     return (
-        <NeedAdmin>
+        <>
             <h1>Bienvenue Administrateur</h1>
-            <h1>INSERT CARD</h1>
-            <form onSubmit={(e) => { handleSubmit(e) }} method="post" className='login-form'>
-                <CreateCard />
-                <input type="submit" value='Créer' />
-            </form>
-        </NeedAdmin>
+            <ReadCard />
+            <CreateCard />
+        </>
     )
 }
 

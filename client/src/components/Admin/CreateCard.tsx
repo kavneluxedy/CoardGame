@@ -1,86 +1,45 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
+import useDb from '../../utils/Hooks/useDb';
+import Input from '../Input';
+import ICard from '../../utils/Interfaces/ICard';
+// import { ObjectId } from 'mongodb';
 
 const CreateCard = () => {
-    return (
-        <>
-            <label htmlFor="name">
+	const { loading, error, data, dbComm } = useDb("COARD", "cards", {}, "/init");
 
-                <div>NAME</div>
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		let BoardImg = e.target["BOARD_IMG"].value;
+		let HandImg = e.target["HAND_IMG"].value;
+		let effects = String(e.target[6].value).split('//');
+		let card: ICard = {
+			name: String(e.target[0].value),
+			cost: Number(e.target[1].value),
+			atk: Number(e.target[2].value),
+			def: Number(e.target[3].value),
+			hp: Number(e.target[4].value),
+			mp: Number(e.target[5].value),
+			effects: effects,
+		};
 
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Name"
-                />
-            </label>
+		dbComm("COARD", "cards", { card: card }, "/api/cards/create");
+	}
 
-            <label htmlFor="cost">
-
-                <div>COST</div>
-
-                <input
-                    type="number"
-                    id="cost"
-                    name="cost"
-                    placeholder="Mana Cost"
-                />
-            </label>
-            <label htmlFor="atk">
-
-                <div>ATK</div>
-
-                <input
-                    type="number"
-                    id="atk"
-                    name="atk"
-                    placeholder="ATK"
-                />
-            </label>
-            <label htmlFor="def">
-
-                <div>DEF</div>
-
-                <input
-                    type="number"
-                    id="def"
-                    name="def"
-                    placeholder="DEF"
-                />
-            </label>
-            <label htmlFor="hp">
-
-                <div>HP</div>
-
-                <input
-                    type="number"
-                    id="hp"
-                    name="hp"
-                    placeholder="HP"
-                />
-            </label>
-
-            <label htmlFor="mp">
-                <div>MP</div>
-                <input
-                    type="number"
-                    id="mp"
-                    name="mp"
-                    placeholder="MOVE"
-                />
-            </label>
-
-            <label htmlFor="effects">
-                <div>EFFECTS</div>
-                <input
-                    type="text"
-                    id="effects"
-                    name="effects"
-                    placeholder="EFFECTS"
-                />
-            </label>
-        </>
-    )
+	return (
+		<form onSubmit={(e) => { handleSubmit(e) }} method="post" id="create-card-form" className='panel-container'>
+			<h2>CREATE CARD</h2>
+			<Input type="text" id="NAME" />
+			<Input type="number" id="COST" />
+			<Input type="number" id="ATK" />
+			<Input type="number" id="DEF" />
+			<Input type="number" id="HP" />
+			<Input type="number" id="MP" />
+			<Input type="text" id="EFFECTS" />
+			<Input type="file" id="BOARD_IMG" />
+			<Input type="file" id="HAND_IMG" />
+			<Input type="submit" id="submit" className="panel-btn create-card-btn" defaultValue='✅' />
+		</form>
+	)
 }
 
 export default CreateCard

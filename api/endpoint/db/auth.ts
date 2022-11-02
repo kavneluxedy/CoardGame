@@ -23,7 +23,6 @@ const auth = async (dbName: string, collName: string, user: any) => {
       // ! If password is wrong
       // !!!!!!!!!!!!!!!!!!!!!!!
       // !!!!!!!!!!!!!!!!!!!!!!!
-      console.log(user, "auth");
       if (!crypt.compare(user.password, dbUser.password)) {
         console.error("Pwd don't match");
         error.push({

@@ -1,7 +1,7 @@
 import React, { FormEvent, useContext, useEffect } from "react";
 import { AppContext } from "../../utils/ContextProvider";
 import Loading from "../Loading";
-import useDb from "../../utils/Hook/useDb";
+import useDb from "../../utils/Hooks/useDb";
 
 const Login = ({ closeModal }: any) => {
 	const { loading, data, error, dbComm } = useDb("", "", {}, "/init");

@@ -4,11 +4,11 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import IAppContext from "./Types/Interfaces/IAppContext";
-import IFormError from "./Types/Interfaces/IFormError";
-import IUser from "./Types/Interfaces/IUser";
+import IAppContext from "./Interfaces/IAppContext";
+import IFormError from "./Interfaces/IFormError";
+import IUser from "./Interfaces/IUser";
 import Loading from "../components/Loading";
-import useDb from "./Hook/useDb";
+import useDb from "./Hooks/useDb";
 
 const AppContext = createContext<IAppContext | null>(null);
 
@@ -53,7 +53,6 @@ const ContexProvider = ({ children }: IContextProvider) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
-    console.log(user);
     user.isConnected
       ? localStorage.setItem("user", JSON.stringify(user))
       : localStorage.removeItem("user");

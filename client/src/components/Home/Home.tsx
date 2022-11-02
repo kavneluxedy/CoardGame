@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import CardGameLobby from "../Lobby";
 import { AppContext } from "../../utils/ContextProvider";
 import Button from "../Button";
@@ -14,7 +14,9 @@ const Home = () => {
 
 
 	const handleLogout = () => {
-		(window.confirm("SE DÉCONNECTER ?")) ? setUser({isConnected: false}) : console.log("Vous êtes rester connecté !")
+		(window.confirm("SE DÉCONNECTER ?"))
+			? setUser({ isConnected: false })
+			: console.log("Vous êtes rester connecté !")
 	}
 
 	return (
@@ -41,8 +43,8 @@ const Home = () => {
 				PARTIE PUBLIC
 			</Button>
 
-
-			{!user.isConnected &&
+			{
+				!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -54,8 +56,8 @@ const Home = () => {
 				</Button>
 			}
 
-
-			{!user.isConnected &&
+			{
+				!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -67,45 +69,46 @@ const Home = () => {
 				</Button>
 			}
 
-
-			{user.isConnected &&
+			{
+				user.isConnected &&
 				<Button className="open" onClick={() => handleLogout()}>
 					SE DÉCONNECTER
 				</Button>
 			}
 
+			{
+				(() => {
 
-			{(() => {
+					switch (modalName) {
 
-				switch (modalName) {
+						case "admin":
+							return <Admin />
 
-					case "admin":
-						return <Admin />
+						case "lobby":
+							return <CardGameLobby />;
 
-					case "lobby":
-						return <CardGameLobby />;
+						case "register":
+							return (<Modal
+								title={"Créer un compte"}
+							>
+								<Register />
+							</Modal>);
 
-					case "register":
-						return (<Modal
-							title={"Créer un compte"}
-						>
-							<Register />
-						</Modal>);
+						case "login":
+							return <Modal
+								title={"Authentification"}
+							>
+								<Login />
+							</Modal>;
 
-					case "login":
-						return <Modal
-							title={"Authentification"}
-						>
-							<Login />
-						</Modal>;
+						case "admin":
+							return <Admin />
 
-					case "admin":
-						return <Admin />
-
-					default:
-						return null;
-				}
-			})()}
+						default:
+							return null;
+					}
+				})()
+			}
 		</>
 	);
 };
