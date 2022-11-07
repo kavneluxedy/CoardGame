@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
 const data_1 = __importDefault(require("../../data"));
+const toSave_1 = __importDefault(require("../other/toSave"));
 const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, void 0, function* () {
     let error = [];
     const uri = data_1.default.uri;
@@ -21,7 +22,7 @@ const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, v
     const database = client.db(dbName);
     const coll = database.collection(collName);
     try {
-        let isCardExists = coll.findOne({ name: wantedCard.name });
+        let isCardExists = yield coll.findOne({ name: wantedCard.name });
         if (isCardExists !== null) {
             console.error("\n\n=========================> Cette carte existe déjà <=========================");
             console.warn("CARTE EXISTANTE ==> " + wantedCard.name);
@@ -36,17 +37,29 @@ const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, v
                 error: true,
                 result: error
             };
+            console.log(wantedCard.handImg);
             return response;
         }
         else {
             console.log("Cette carte n'existe pas encore, \ncréation en cours ... \n");
+            let card = {
+                name: wantedCard.name,
+                cost: wantedCard.cost,
+                atk: wantedCard.atk,
+                def: wantedCard.def,
+                hp: wantedCard.hp,
+                mp: wantedCard.mp,
+                effects: wantedCard.effects,
+                handImg: yield (0, toSave_1.default)(wantedCard.handImg, "hand", wantedCard.name),
+                boardImg: yield (0, toSave_1.default)(wantedCard.boardImg, "board", wantedCard.name),
+            };
             const response = {
                 error: false,
-                result: coll.insertOne(wantedCard)
+                result: yield coll.insertOne(card),
             };
-            console.log("Carte créée: ");
-            console.table([wantedCard]);
-            console.log("\n");
+            console.log("Carte créée");
+            console.table([card]);
+            console.log("\n\n");
             return response;
         }
     }
@@ -58,7 +71,7 @@ const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, v
         console.error(err);
     }
     finally {
-        client.close();
+        yield client.close();
     }
 });
 exports.default = createCard;

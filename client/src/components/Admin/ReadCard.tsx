@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import useDb from '../../utils/Hooks/useDb'
-import Card from '../Game/Card';
+import useDb from '../../utils/hooks/useDb'
+import Card from '../game/Card';
 import Loading from "../Loading";
 import UpdateCard from "./UpdateCard";
 import DeleteCard from './DeleteCard';
@@ -12,14 +12,13 @@ const ReadCard = () => {
     const [editToggler, setEditToggler] = useState<boolean>(true);
 
     const refresh = () => {
-        console.log("refresh");
         dbComm("COARD", "cards", {}, "/api/cards/find");
         // setTimeout(refresh, 10000); // AUTOMATION
     }
 
-    useEffect(() => {
-        refresh();
-    }, [])
+    // useEffect(() => {
+    //     refresh();
+    // }, [])
 
     useEffect(() => {
         // ? Si le chargement de la data est terminé
@@ -47,12 +46,9 @@ const ReadCard = () => {
             {cards && <div className="admin-panel-container">
                 {cards.map((card: any, key) => {
                     return (
-                        <Card _id={card._id} name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} effects={card.effects} key={key} >
-
+                        <Card name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} effects={card.effects} handImg={card.handImg} _id={card._id} key={key} >
                             <DeleteCard _id={card._id} />
-
                             <UpdateCard card={card} />
-
                         </Card>
                     )
                 })}

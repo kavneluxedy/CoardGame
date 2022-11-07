@@ -1,19 +1,19 @@
 import React, { FormEvent, useContext, useEffect } from "react";
 import { AppContext } from "../../utils/ContextProvider";
 import Loading from "../Loading";
-import useDb from "../../utils/Hooks/useDb";
+import useDb from "../../utils/hooks/useDb";
 
 const Login = ({ closeModal }: any) => {
-	const { loading, data, error, dbComm } = useDb("", "", {}, "/init");
+	const { loading, data, dbComm } = useDb("", "", {}, "/init");
 	const AppCtx = useContext(AppContext);
 	useEffect(() => {
-    if (!loading) {
-      handleDBResponse(data)
-    }
-  }, [data, loading])
+		if (!loading) {
+			handleDBResponse(data)
+		}
+	}, [data, loading])
 	if (AppCtx === null) { return <></>; }
 	const { user, setUser, formError, setFormError } = { ...AppCtx! };
-	
+
 	if (loading) { return <Loading /> }
 
 	const handleDBResponse = (data) => {
@@ -22,13 +22,13 @@ const Login = ({ closeModal }: any) => {
 			setFormError({ ...data });
 		} else {
 			setFormError(undefined);
-			if (data.result){
-				let { nickname, token, role  } = data.result;
+			if (data.result) {
+				let { nickname, token, role } = data.result;
 				setUser({ isConnected: true, nickname: nickname, role: role, token: token });
 				closeModal();
 			}
 		}
-}
+	}
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

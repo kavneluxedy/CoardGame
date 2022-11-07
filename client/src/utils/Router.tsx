@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFound404 from "../pages/404"
 import Layout from "../pages/Layout"
-import Home from "../components/Home/Home"
-import Admin from "../components/Admin/Admin";
+import Home from "../components/home/Home"
+import Admin from "../components/admin/Admin";
 import Embed from "../pages/Embed";
 
 const Router = (): JSX.Element => {

@@ -3,15 +3,14 @@ import CardGameLobby from "../Lobby";
 import { AppContext } from "../../utils/ContextProvider";
 import Button from "../Button";
 import Modal from "../Modal";
-import Register from "../Auth/Register";
-import Login from "../Auth/Login";
-import Admin from "../Admin/Admin";
+import Register from "../auth/Register";
+import Login from "../auth/Login";
+import Admin from "../admin/Admin";
 
 const Home = () => {
 	const AppCtx = useContext(AppContext);
 	if (AppCtx === null) { return <></>; }
 	const { user, setUser, modalName, setModalName, setModalVisibility } = { ...AppCtx }
-
 
 	const handleLogout = () => {
 		(window.confirm("SE DÉCONNECTER ?"))
@@ -101,11 +100,8 @@ const Home = () => {
 								<Login />
 							</Modal>;
 
-						case "admin":
-							return <Admin />
-
 						default:
-							return null;
+							break;
 					}
 				})()
 			}

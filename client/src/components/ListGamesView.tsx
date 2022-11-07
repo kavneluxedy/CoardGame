@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { LobbyAPI } from "boardgame.io";
 import Button from "./Button";
 import { LobbyRendererProps } from "./Lobby";

@@ -4,7 +4,6 @@ import ICard from '../../utils/Interfaces/ICard';
 
 interface Props extends ICard {
     children: ReactNode
-    _id: string
 }
 
 const Card = (props: Props) => {
@@ -17,12 +16,12 @@ const Card = (props: Props) => {
                 <div id='card-title'><h2 id='cards-panel'>{name}</h2></div>
                 <div id='card-content'>
                     {children}
-                    COST: {cost} &nbsp;<strong>|</strong>&nbsp;
-                    ATK: {atk} &nbsp;<strong>|</strong>&nbsp;
-                    DEF: {def} &nbsp;<strong>|</strong>&nbsp;
-                    HP: {hp} &nbsp;<strong>|</strong>&nbsp;
-                    MP: {mp} &nbsp;<strong>|</strong>&nbsp;
-                    EFFECTS: {effects}
+                    <span>COST: {cost} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>ATK: {atk} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>DEF: {def} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>HP: {hp} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>MP: {mp} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>EFFECTS: {effects}</span>
                 </div>
             </div>
         </>

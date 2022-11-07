@@ -4,11 +4,10 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import IAppContext from "./Interfaces/IAppContext";
-import IFormError from "./Interfaces/IFormError";
-import IUser from "./Interfaces/IUser";
-import Loading from "../components/Loading";
-import useDb from "./Hooks/useDb";
+import IAppContext from "./interfaces/IAppContext";
+import IFormError from "./interfaces/IFormError";
+import IUser from "./interfaces/IUser";
+import useDb from "./hooks/useDb";
 
 const AppContext = createContext<IAppContext | null>(null);
 

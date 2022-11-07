@@ -1,7 +1,7 @@
 import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { CoardToken } from "../../utils/CoardToken";
 import { AppContext } from "../../utils/ContextProvider";
-import useDb from "../../utils/Hooks/useDb";
+import useDb from "../../utils/hooks/useDb";
 import Loading from "../Loading";
 
 const Register = ({ closeModal }: any): JSX.Element => {

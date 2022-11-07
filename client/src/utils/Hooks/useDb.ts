@@ -11,20 +11,22 @@ export default function useDb(dbName: string, collName: string, query: object, u
 	useEffect(() => { console.log("-----------------") }, [loading, data, error]);
 
 	const dbComm = (dbName: string, collName: string, query: object, uri: string) => {
+
 		var Params = {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
 				dbName: dbName,
 				collName: collName,
 				query: query,
-			}),
+			})
 		};
 		if (uri !== "/init") {
 			let Url = uri;
 			setLoading(true);
+			console.log(Params.body);
 			fetch(Url, Params)
 				.then((res) => res.json())
 				.then((res: object) => setData(res))

@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "concurrently -k -n \"API,React\" -c \"#00FF00,#0000FF\" -p \"[{name}|{time}]\" -t \"MM-dd|HH:mm:ss\" \"npm:api\" \"npm:client\"",
+    "api": "cd api && npm run start",
+    "client": "cd client && npm run dev"
+  },
+  "dependencies": {
+    "concurrently": "^7.5.0"
+  }
+}

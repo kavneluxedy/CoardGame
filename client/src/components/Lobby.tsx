@@ -1,12 +1,12 @@
 import React, { ComponentType } from "react";
 import { Client, Lobby as ReactLobby } from "boardgame.io/react";
-import { CardGame } from "../components/Game/Game";
+import { CardGame } from "../components/game/Game";
 import { Game, LobbyAPI, Server } from "boardgame.io";
 import RunningMatchView from "./RunningMatchView";
 import { EnterLobbyView } from "./EnterLobbyView";
 import ListGamesView from "./ListGamesView";
 import Modal from "./Modal";
-import CoardGameBoard from "./Game/Board";
+import CoardGameBoard from "./game/Board";
 
 enum LobbyPhases {
   ENTER = "enter",

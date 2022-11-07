@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react'
-import useDb from '../../utils/Hooks/useDb'
+import useDb from '../../utils/hooks/useDb'
 import { AppContext } from "../../utils/ContextProvider";
 import Loading from '../Loading';
-import ICard from '../../utils/Interfaces/ICard'
+import ICard from '../../utils/interfaces/ICard'
+import { ObjectId } from 'mongodb';
 
-const DeleteCard = (_id: ICard["_id"]) => {
+const DeleteCard = ({ _id }) => {
 
 	const AppCtx = useContext(AppContext);
 	const { loading, error, data, dbComm } = useDb("", "", {}, "/init");

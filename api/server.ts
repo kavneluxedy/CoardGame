@@ -14,8 +14,10 @@ type TRes = {
 	send: any;
 }
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/", express.static("public"));
+
+app.use(bodyParser.json({ limit: "4mb" }));
+app.use(bodyParser.urlencoded({ limit: "4mb", extended: true, parameterLimit: 2000 }));
 
 app.post("/api/addUser", async (req: TReq, res: TRes) => {
 	let param = req.body;
@@ -37,7 +39,12 @@ app.post("/api/tokenAuth", async (req: TReq, res: TRes) => {
 
 app.post("/api/cards/create", async (req: TReq, res: TRes) => {
 	let param = req.body;
+	// console.table(param.query.card);
+	// console.trace(typeof param.query, "server.ts: L-41");
+	
 	let result = await create(param.dbName, param.collName, param.query.card);
+	// console.log("is ok undefined ==>");
+	// console.trace(result);
 	res.send(result);
 });
 
