@@ -8,6 +8,7 @@ import IAppContext from "./interfaces/IAppContext";
 import IFormError from "./interfaces/IFormError";
 import IUser from "./interfaces/IUser";
 import useDb from "./hooks/useDb";
+import useTranslate from "./hooks/useTranslate";
 
 const AppContext = createContext<IAppContext | null>(null);
 
@@ -50,7 +51,7 @@ const ContexProvider = ({ children }: IContextProvider) => {
   const [modalVisible, setModalVisibility] = useState<boolean>(false);
   const [formError, setFormError] = useState<IFormError>();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
+  const {setLang, translate} = useTranslate();
   useEffect(() => {
     user.isConnected
       ? localStorage.setItem("user", JSON.stringify(user))
@@ -68,6 +69,8 @@ const ContexProvider = ({ children }: IContextProvider) => {
     setModalVisibility,
     formError,
     setFormError,
+    setLang,
+    translate,
   };
 
   return (

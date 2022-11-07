@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import IUser from "./IUser";
 import IFormError from "./IFormError";
+import keyLangType from "../types/TkeyLangType";
 
 export default interface IAppContext {
   user: IUser;
@@ -13,4 +14,6 @@ export default interface IAppContext {
   setModalVisibility: Dispatch<SetStateAction<boolean>>;
   formError?: IFormError;
   setFormError: Dispatch<SetStateAction<IFormError | undefined>>;
+  setLang: Dispatch<SetStateAction<keyLangType>>;
+  translate: (text: string) => string;
 }
