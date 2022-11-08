@@ -39,12 +39,7 @@ app.post("/api/tokenAuth", async (req: TReq, res: TRes) => {
 
 app.post("/api/cards/create", async (req: TReq, res: TRes) => {
 	let param = req.body;
-	// console.table(param.query.card);
-	// console.trace(typeof param.query, "server.ts: L-41");
-	
 	let result = await create(param.dbName, param.collName, param.query.card);
-	// console.log("is ok undefined ==>");
-	// console.trace(result);
 	res.send(result);
 });
 

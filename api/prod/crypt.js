@@ -11,7 +11,6 @@ const crypt = {
         return hash;
     },
     compare: (str, hash) => {
-        console.log(typeof str, typeof hash, "crypt");
         return bcryptjs_1.default.compareSync(str, hash);
     }
 };

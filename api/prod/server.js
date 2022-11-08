@@ -38,11 +38,7 @@ app.post("/api/tokenAuth", (req, res) => __awaiter(void 0, void 0, void 0, funct
 }));
 app.post("/api/cards/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let param = req.body;
-    // console.table(param.query.card);
-    // console.trace(typeof param.query, "server.ts: L-41");
     let result = yield create(param.dbName, param.collName, param.query.card);
-    // console.log("is ok undefined ==>");
-    // console.trace(result);
     res.send(result);
 }));
 app.post("/api/cards/find", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

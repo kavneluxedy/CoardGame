@@ -45,10 +45,6 @@ const CreateCard = () => {
 		dbComm("COARD", "cards", { card: card }, "/api/cards/create");
 	};
 
-	// useEffect(() => {
-	// 	console.log(handImgData, typeof handImgData);
-	// }, [handImgData]);
-
 	return (
 		<form
 			onSubmit={(e) => {

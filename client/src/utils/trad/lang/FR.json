@@ -1,9 +1,11 @@
 {
-  "TriggerTheme": "Changer le theme",
-  "Home": "Acceuil",
-  "LogIn": "Connection",
-  "SignUp": "Inscription",
-  "Profile": "Profil",
-  "Disconnect": "Déconnection",
-  "NotFound404": "Erreur 404"
+  "TriggerTheme": "MODE CLAIR | MODE SOMBRE",
+  "Play": "JOUER",
+  "Home": "ACCUEIL",
+  "LogIn": "SE CONNECTER",
+  "SignUp": "CREER UN COMPTE",
+  "Profile": "MON PROFIL",
+  "Disconnect": "SE DECONNECTER",
+  "Administrator": "*ADMINISTRATEUR*",
+  "NotFound404": "EL FAMOSO 404 NOT FOUND"
 }

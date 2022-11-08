@@ -4,13 +4,11 @@ import ContexProvider from "./utils/ContextProvider";
 
 
 const App = (): JSX.Element => {
-  return (
-    <div id="container">
-      <ContexProvider>
-        <Router />
-      </ContexProvider>
-    </div>
-  );
+	return (
+		<ContexProvider>
+			<Router />
+		</ContexProvider>
+	);
 };
 
 export { App };

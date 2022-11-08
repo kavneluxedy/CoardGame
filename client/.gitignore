@@ -2,6 +2,8 @@
 
 # production
 /dist
+.env.development
+.env
 
 #misc
 .vscode

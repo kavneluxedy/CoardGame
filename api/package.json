@@ -4,7 +4,7 @@
   "description": "backend service for coardgame client",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently -k -n \"Server\" -c \"#55CC55\" -p \"[{name}]\" \"npx tsc && node prod/server.js\""
+    "start": "concurrently -k -n \"API\" -c \"#55CC55\" -p \"[{name}]\" \"npx tsc && node prod/server.js\""
   },
   "keywords": [],
   "author": "",

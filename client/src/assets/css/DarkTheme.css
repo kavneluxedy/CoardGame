@@ -1,6 +1,6 @@
-[data-theme="dark"] {
-  --background: black;
-  --text-primary: white;
-  --text-secondary: grey;
-  --accent: darkred;
+[data-theme="Dark"] {
+  --color-background: rgb(95, 95, 95);
+  --text-primary: #E6FF00;
+  --text-secondary: #33FF34;
+  --accent: #5c299b;
 }

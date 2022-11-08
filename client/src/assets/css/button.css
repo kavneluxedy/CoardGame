@@ -4,17 +4,21 @@
 
 .button {
   width: max-content;
-  min-width: 150px;
+  min-width: 125px;
   min-height: min-content;
   height: max-content;
-  margin: 5px 0;
+  margin: 0.18em;
   padding: 15px;
   font-size: medium;
-  border: 2px solid royalblue;
-  border-radius: 20px;
-  background-color: #fff9d286;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background-color: #572792;
+  color: #fff;
 }
 
 .button:hover {
   transform: scale(1.05);
+  background-color: #9a6dd1b7;
+  color: #000000b0;
+  border-radius: 15px;
 }

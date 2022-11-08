@@ -20,10 +20,21 @@ const remove = async (dbName: string, collName: string, query: any) => {
         effects: Array<string>;
     }
 
+    interface IUser {
+        // _id: ObjectId; //TODO User Interface
+        // name: string;
+        // cost: number;
+        // atk: number;
+        // def: number;
+        // hp: number;
+        // mp: number;
+        // effects: Array<string>;
+    }
+
     const uri = data.uri;
     const client = new MongoClient(uri);
     const database = client.db(dbName);
-    const cards = database.collection<ICard>(collName);
+    const cards = database.collection<ICard | IUser>(collName);
 
     try {
         const filter: Filter<ICard> = {
