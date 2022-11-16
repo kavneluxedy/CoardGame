@@ -1,13 +1,12 @@
-import React, { ComponentType, useContext } from "react";
+import React, { ComponentType } from "react";
 import { Client, Lobby as ReactLobby } from "boardgame.io/react";
-import { CardGame } from "../components/Game/Game";
+import { CardGame } from "../components/game/Game";
 import { Game, LobbyAPI, Server } from "boardgame.io";
 import RunningMatchView from "./RunningMatchView";
 import { EnterLobbyView } from "./EnterLobbyView";
 import ListGamesView from "./ListGamesView";
 import Modal from "./Modal";
-import { AppContext, IAppContext } from "../App";
-import CoardGameBoard from "./Game/Board";
+import CoardGameBoard from "./game/Board";
 
 enum LobbyPhases {
   ENTER = "enter",
@@ -57,8 +56,6 @@ export interface LobbyRendererProps {
 }
 
 const CardGameLobby: React.FC = () => {
-  const { modalVisible, setModalVisibility } =
-    useContext<IAppContext>(AppContext);
   let serverAddr = `${window.location.protocol}//${
     window.location.hostname + ":8000"
   }`;
@@ -79,8 +76,6 @@ const CardGameLobby: React.FC = () => {
             {L.phase === LobbyPhases.ENTER && (
               <Modal
                 title={"Personnaliser votre partie"}
-                modalVisible={modalVisible}
-                setModalVisibility={setModalVisibility}
               >
                 <EnterLobbyView L={L} />
               </Modal>
@@ -88,8 +83,6 @@ const CardGameLobby: React.FC = () => {
             {L.phase === LobbyPhases.LIST && (
               <Modal
                 title={"Personnaliser votre partie"}
-                modalVisible={modalVisible}
-                setModalVisibility={setModalVisibility}
               >
                 <ListGamesView L={L} />
               </Modal>

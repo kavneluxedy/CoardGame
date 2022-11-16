@@ -28,7 +28,7 @@ input:focus-visible {
 .form-error {
   font-size: smaller;
   font-family: "Fira Code Retina", sans-serif;
-  color: rgb(129, 0, 0);  
+  color: rgb(129, 0, 0);
   background-color: orange;
   box-shadow: 0px 0px 0.5rem 0.01em orangered;
   border: 1px solid red;

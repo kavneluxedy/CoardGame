@@ -1,10 +1,11 @@
-module.exports = {
+const check =  {
   isValidUser: (user: {
     nickname: string;
     password: string;
     email?: string;
     birthday?: string;
     phone?: string;
+    token: string;
   }) => {
     const regexNickname = /^\w[^\d]{2}[\w\d&_@#~\\\\-]{0,14}$/u;
     const regexPassword = /^\S*(?=\S{8,})(?=\S*\w)(?=\S*[\d])(?=\S*[&'\-_$\\%!@?])\S*$/u;
@@ -53,3 +54,5 @@ module.exports = {
     return isValid;
   },
 };
+
+export default check

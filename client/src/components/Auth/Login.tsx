@@ -1,44 +1,49 @@
 import React, { FormEvent, useContext, useEffect } from "react";
-import { IAppContext, AppContext } from "../../App";
-import { Comm } from "../Comm/comm";
+import { AppContext } from "../../utils/ContextProvider";
+import Loading from "../Loading";
+import useDb from "../../utils/hooks/useDb";
 
 const Login = ({ closeModal }: any) => {
-	const {
-		user,
-		setUser,
-		modalVisible,
-		setModalVisibility,
-		modalName,
-		setModalName,
-		formError,
-		setFormError,
-	} = useContext<IAppContext>(AppContext);
+	const { loading, data, dbComm } = useDb("", "", {}, "/init");
+	const AppCtx = useContext(AppContext);
+	useEffect(() => {
+		if (!loading) {
+			handleDBResponse(data)
+		}
+	}, [data, loading])
+	if (AppCtx === null) { return <></>; }
+	const { user, setUser, formError, setFormError } = { ...AppCtx! };
+
+	if (loading) { return <Loading /> }
+
+	const handleDBResponse = (data) => {
+		console.log(data);
+		if (data.error) {
+			setFormError({ ...data });
+		} else {
+			setFormError(undefined);
+			if (data.result) {
+				let { nickname, token, role } = data.result;
+				setUser({ isConnected: true, nickname: nickname, role: role, token: token });
+				closeModal();
+			}
+		}
+	}
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		let user: Object = {
+		let userAuth: Object = {
 			nickname: e.target[0].value,
 			password: e.target[1].value,
 		};
 
-		let result = await Comm("COARD", "User", { user: user }, "/api/auth");
-
-		if (result.error) {
-			setFormError({ ...result });
-		} else {
-			let user = result.result;
-			console.log(user);
-			closeModal();
-			setFormError(undefined);
-			setUser({ isConnected: true, nickname: user.nickname, role: user.role });
-		}
-	};
+		dbComm("COARD", "User", { user: userAuth }, "/api/auth");
+	}
 
 	const printError = (flag: string) => {
 		if (!formError) return;
 		if (formError.error) {
-			var error: { errorMessage: string; errorFlag?: string; result?: string } =
-				{ errorMessage: "" };
+			var error: { errorMessage: string; errorFlag?: string; result?: string; } = { errorMessage: "" };
 
 			formError.result.map((err) => {
 				if (err.errorFlag === flag) {
@@ -46,16 +51,16 @@ const Login = ({ closeModal }: any) => {
 				}
 			});
 			if (error.errorMessage === "") {
-				return;
+				return
 			}
 
 			return (
 				<>
 					<div className="form-error">{error.errorMessage}</div>
 				</>
-			);
+			)
 		}
-	};
+	}
 
 	return (
 		<>
@@ -67,7 +72,7 @@ const Login = ({ closeModal }: any) => {
 						id="nickname"
 						required
 					/>
-					{printError("Pwd")}
+					{printError("Name")}
 				</label>
 				<br />
 				<label htmlFor="pwd">

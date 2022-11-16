@@ -1,15 +1,13 @@
 import React from 'react';
-import Header from '../components/Main/Header'
-import Footer from '../components/Main/Footer'
 import { Outlet } from 'react-router-dom'
+import Menu from './menu/Menu';
 
 const Layout = (): JSX.Element => {
 
 	return (
 		<>
-			<Header />
+			<Menu />
 			<Outlet />
-			<Footer />
 		</>
 	)
 }

@@ -1,23 +1,42 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import CardGameLobby from "../Lobby";
-import { AppContext, IAppContext } from "../../App";
+import { AppContext } from "../../utils/ContextProvider";
 import Button from "../Button";
 import Modal from "../Modal";
-import Register from "../Auth/Register";
-import Login from "../Auth/Login";
-import { Logout } from "../Auth/Logout";
-import Svg from "../Svg";
+import Register from "../auth/Register";
+import Login from "../auth/Login";
+import Admin from "../admin/Admin";
+import menu_toggler from "../../assets/images/svg/menu-toggler.min.svg";
 
 const Home = () => {
-	const { user, setUser, modalVisible, setModalVisibility, modalName, setModalName } = useContext<IAppContext>(AppContext);
 
-	const HandleLogout = () => {
-		Logout(setUser);
+	const AppCtx = useContext(AppContext);
+	if (AppCtx === null) { return <></>; }
+	const { user, setUser, modalName, setModalName, setModalVisibility, translate, menuToggler, setMenuToggler } = { ...AppCtx }
+
+	const handleMenuToggler = () => {
+		(menuToggler === "none")
+			? setMenuToggler("visible")
+			: setMenuToggler("none")
 	}
 
 	return (
 		<>
-			<Svg width={64} height={64} />
+			<div className="menu-toggler-wrapper">
+				<img data-nav-menu-toggler={menuToggler} id="menu-toggler" src={menu_toggler} width="32" alt="card-menu-toggler" onClick={handleMenuToggler} />
+			</div>
+			{/* {user.isConnected && user.role === "admin" &&
+				<Button
+					className="open"
+					onClick={() => {
+						setModalVisibility(true);
+						setModalName("admin");
+					}}
+				>
+					{translate("Administrator").toLocaleUpperCase()}
+
+				</Button>
+			}
 
 			<Button
 				className="open"
@@ -29,8 +48,8 @@ const Home = () => {
 				PARTIE PUBLIC
 			</Button>
 
-
-			{!user.isConnected &&
+			{
+				!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -42,8 +61,8 @@ const Home = () => {
 				</Button>
 			}
 
-
-			{!user.isConnected &&
+			{
+				!user.isConnected &&
 				<Button
 					className="open"
 					onClick={() => {
@@ -54,44 +73,37 @@ const Home = () => {
 					SE CONNECTER
 				</Button>
 			}
+ */}
+			{
+				(() => {
 
+					switch (modalName) {
 
-			{user.isConnected &&
-				<Button className="open" onClick={HandleLogout}>
-					SE DÉCONNECTER
-				</Button>
+						case "admin":
+							return <Admin />
+
+						case "lobby":
+							return <CardGameLobby />;
+
+						case "register":
+							return (<Modal
+								title={"Créer un compte"}
+							>
+								<Register />
+							</Modal>);
+
+						case "login":
+							return <Modal
+								title={"Authentification"}
+							>
+								<Login />
+							</Modal>;
+
+						default:
+							break;
+					}
+				})()
 			}
-
-
-			{(() => {
-
-				switch (modalName) {
-
-					case "lobby":
-						return <CardGameLobby />;
-
-					case "register":
-						return <Modal
-							title={"Créer un compte"}
-							modalVisible={modalVisible}
-							setModalVisibility={setModalVisibility}
-						>
-							<Register />
-						</Modal>;
-
-					case "login":
-						return <Modal
-							title={"Authentification"}
-							modalVisible={modalVisible}
-							setModalVisibility={setModalVisibility}
-						>
-							<Login />
-						</Modal>;
-
-					default:
-						return null;
-				}
-			})()}
 		</>
 	);
 };

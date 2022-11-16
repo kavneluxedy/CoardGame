@@ -1,16 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  highlight?: boolean;
+  className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, disabled, onClick }) => {
+const Button: FC<ButtonProps> = ({ children, onClick, className }) => {
   return (
     <button
       type="button"
-      className={`${disabled ? "d-none" : "button"}`}
+      className={(className) ? className : "button"}
       onClick={onClick}
-      disabled={disabled}
     >
       {children}
     </button>

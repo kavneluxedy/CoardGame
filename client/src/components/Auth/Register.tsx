@@ -1,13 +1,41 @@
 import React, { FormEvent, useContext, useEffect, useState } from "react";
-import { IAppContext, AppContext } from "../../App";
-import { Comm } from "../Comm/comm";
+import { CoardToken } from "../../utils/CoardToken";
+import { AppContext } from "../../utils/ContextProvider";
+import useDb from "../../utils/hooks/useDb";
+import Loading from "../Loading";
 
-const Register = ({ closeModal }: any) => {
+const Register = ({ closeModal }: any): JSX.Element => {
+	const { loading, data, error, dbComm } = useDb("", "", {}, "/init");
+	const AppCtx = useContext(AppContext);
 
-	const { user, setUser, modalVisible, setModalVisibility, modalName, setModalName, formError, setFormError } =
-		useContext<IAppContext>(AppContext);
+	useEffect(() => {
+		if (!loading) {
+			handleDBResponse(data);
+			console.log(data);
+		}
+	}, [data, loading])
 
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+	if (AppCtx === null) { return <></>; }
+
+	const { formError, setFormError, setUser } = { ...AppCtx }
+
+	if (loading) { return <Loading /> }
+
+	const handleDBResponse = (data) => {
+		console.log(data);
+		if (data.error) {
+			setFormError({ ...data });
+			console.error(error);
+		} else {
+			setFormError(undefined);
+			if (data.result) {
+				let { nickname, token, role } = data.result;
+				setUser({ isConnected: true, nickname: nickname, role: role, token: token });
+				closeModal();
+			}
+		}
+	}
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		let user = {
 			nickname: e.target[0].value,
@@ -16,17 +44,11 @@ const Register = ({ closeModal }: any) => {
 			birthday: e?.target[3].value,
 			phone: e?.target[4].value,
 			role: "user",
+			token: CoardToken.gen(32),
+			createdAt: Date.now(),
 		};
+		dbComm("COARD", "User", { user: user }, "/api/addUser");
 
-		let result = await Comm("COARD", "User", { user: user }, "/api/addUser");
-
-		if (result.error) {
-			setFormError({ ...result })
-		} else {
-			closeModal();
-			setFormError(undefined);
-			setUser({ isConnected: true, nickname: user.nickname, role: user.role });
-		}
 	};
 
 	const printError = (flag: string) => {

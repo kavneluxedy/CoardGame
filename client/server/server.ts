@@ -1,4 +1,4 @@
-import { CardGame } from "../src/components/Game/Game";
+import { CardGame } from "../src/components/game/Game";
 import { Server, Origins } from "boardgame.io/server";
 
 const server = Server({
