@@ -22,7 +22,7 @@ const find = (dbName, collName, query) => __awaiter(void 0, void 0, void 0, func
     const database = client.db(dbName);
     const coll = database.collection(collName);
     try {
-        let cursor = yield coll.find(query);
+        let cursor = yield coll.find(query.query).sort(query.options.sort);
         if (cursor !== null) {
             yield cursor.forEach(element => {
                 allCards.push(element);

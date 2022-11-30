@@ -5,6 +5,7 @@ type Props = {
 	id: string;
 	defaultValue?: string | string[] | number;
 	className?: string;
+	required?: boolean;
 };
 
 const Input = ({
@@ -12,8 +13,8 @@ const Input = ({
 	id,
 	defaultValue,
 	className,
+	required = true
 }: Props): JSX.Element => {
-
 	const [value, setValue] = useState<Props["defaultValue"]>(defaultValue)
 
 	return (
@@ -26,8 +27,7 @@ const Input = ({
 				value={value}
 				className={className}
 				onChange={(e) => setValue(e.target.value)}
-				accept="image/*"
-				required
+				required={required}
 			/>
 		</>
 	);

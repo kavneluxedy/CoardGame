@@ -48,7 +48,6 @@ app.post("/api/cards/find", (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 app.post("/api/cards/update", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let param = req.body;
-    console.log(param.query.card);
     let result = yield update(param.dbName, param.collName, param.query.card);
     res.send(result);
 }));

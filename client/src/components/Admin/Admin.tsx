@@ -11,14 +11,11 @@ const Admin = () => {
     const { loading, error, data, dbComm } = useDb("COARD", "cards", {}, "/init");
 
     const refresh = () => {
-        console.timeEnd('ok');
-        dbComm("COARD", "cards", {}, "/api/cards/find");
+        dbComm("COARD", "cards", { query: {}, options: { sort: { "name": 1 } } }, "/api/cards/find");
         // setTimeout(refresh, 5000); // AUTOMATION
-        console.time('ok');
     }
 
     useEffect(() => {
-        console.time('ok');
         refresh();
     }, [])
 
@@ -38,17 +35,18 @@ const Admin = () => {
         }
     }
 
-    if (loading) { return <Loading /> }
+    // if (loading) { return <Loading /> }
 
     return (
         <>
+            <CreateCard refresh={refresh} />
 
             <button className='button' onClick={refresh}>REFRESH</button>
 
             {cards && <div className="admin-panel-container">
                 {cards.map((card: any, key) => {
                     return (
-                        <Card name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} effects={card.effects} handImg={card.handImg} boardImg={card.boardImg} _id={card._id} key={key} >
+                        <Card name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} range={card.range} effects={card.effects} handImg={card.handImg} boardImg={card.boardImg} _id={card._id} key={key} >
                             <DeleteCard _id={card._id} refresh={refresh} />
                             <UpdateCard card={card} refresh={refresh} />
                         </Card>
@@ -56,8 +54,6 @@ const Admin = () => {
                 })}
             </div>
             }
-            <CreateCard refresh={refresh} />
-
         </>
     )
 }

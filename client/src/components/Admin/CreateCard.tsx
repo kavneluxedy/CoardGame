@@ -29,14 +29,15 @@ const CreateCard = ({ refresh }: { refresh: () => void }) => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		let effects = String(e.target[6].value).split("//");
+		let effects = String(e.target["EFFECTS"].value).split("//");
 		let card: ICard = {
-			name: String(e.target[0].value),
-			cost: Number(e.target[1].value),
-			atk: Number(e.target[2].value),
-			def: Number(e.target[3].value),
-			hp: Number(e.target[4].value),
-			mp: Number(e.target[5].value),
+			name: String(e.target["NAME"].value),
+			cost: Number(e.target["COST"].value),
+			atk: Number(e.target["ATK"].value),
+			def: Number(e.target["DEF"].value),
+			hp: Number(e.target["HP"].value),
+			mp: Number(e.target["MP"].value),
+			range: Number(e.target["RANGE"].value),
 			effects: effects,
 			handImg: handImgData,
 			boardImg: boardImgData,
@@ -57,19 +58,23 @@ const CreateCard = ({ refresh }: { refresh: () => void }) => {
 			className="panel-container"
 		>
 			<h2>CREATE CARD</h2>
-			<Input type="text" id="NAME" />
-			<Input type="number" id="COST" />
-			<Input type="number" id="ATK" />
-			<Input type="number" id="DEF" />
-			<Input type="number" id="HP" />
-			<Input type="number" id="MP" />
-			<Input type="text" id="EFFECTS" />
+			<Input type="text" id="NAME" defaultValue="" />
+			<Input type="number" id="COST" defaultValue="" />
+			<Input type="number" id="ATK" defaultValue="" />
+			<Input type="number" id="DEF" defaultValue="" />
+			<Input type="number" id="HP" defaultValue="" />
+			<Input type="number" id="MP" defaultValue="" />
+			<Input type="number" id="RANGE" defaultValue="" />
+			<Input type="text" id="EFFECTS" defaultValue="" required={false} />
 			<InputFile
 				type="file"
 				id="BOARD_IMG"
 				onChange={(e) => handleImg(e, "board")}
 			/>
-			<InputFile type="file" id="HAND_IMG" onChange={(e) => handleImg(e, "hand")} />
+			<InputFile
+				type="file"
+				id="HAND_IMG"
+				onChange={(e) => handleImg(e, "hand")} />
 			<Input
 				type="submit"
 				id="submit"

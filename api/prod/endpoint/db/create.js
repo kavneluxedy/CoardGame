@@ -37,7 +37,6 @@ const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, v
                 error: true,
                 result: error
             };
-            console.log(wantedCard.handImg);
             return response;
         }
         else {
@@ -50,6 +49,7 @@ const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, v
                 hp: wantedCard.hp,
                 mp: wantedCard.mp,
                 effects: wantedCard.effects,
+                range: wantedCard.range,
                 handImg: yield (0, toSave_1.default)(wantedCard.handImg, "hand", wantedCard.name),
                 boardImg: yield (0, toSave_1.default)(wantedCard.boardImg, "board", wantedCard.name),
             };

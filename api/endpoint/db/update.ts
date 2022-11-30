@@ -17,6 +17,7 @@ const update = async (dbName: string, collName: string, card: any) => {
         def: number;
         hp: number;
         mp: number;
+        range: number;
         effects: Array<string>;
     }
 
@@ -40,6 +41,7 @@ const update = async (dbName: string, collName: string, card: any) => {
                 hp: Number(card.hp),
                 mp: Number(card.mp),
                 effects: String(card.effects).split('//'),
+                range: Number(card.range),
             },
         };
 

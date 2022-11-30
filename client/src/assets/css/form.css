@@ -1,7 +1,8 @@
 input {
+  width: max-content;
   margin-bottom: 10px;
   transition: 0.5s;
-  border-radius: 5%/50%;
+  border-radius: 10px;
   text-align: center;
 }
 

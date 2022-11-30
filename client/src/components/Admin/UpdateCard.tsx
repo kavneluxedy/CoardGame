@@ -18,17 +18,18 @@ const CardEditor = ({ card, refresh }: { card: ICard, refresh: () => void }): JS
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		let effects = String(e.target[6].value).split("//");
+		let effects = String(e.target["EFFECTS"].value).split("//");
 		let newCard: ICard = {
 			_id: card._id,
-			name: String(e.target[0].value),
-			cost: Number(e.target[1].value),
-			atk: Number(e.target[2].value),
-			def: Number(e.target[3].value),
-			hp: Number(e.target[4].value),
-			mp: Number(e.target[5].value),
+			name: String(e.target["NAME"].value),
+			cost: Number(e.target["COST"].value),
+			atk: Number(e.target["ATK"].value),
+			def: Number(e.target["DEF"].value),
+			hp: Number(e.target["HP"].value),
+			mp: Number(e.target["MP"].value),
+			range: Number(e.target["RANGE"].value),
 			effects: effects,
-			// ! todo,
+			//TODO,
 			handImg: "",
 			boardImg: "",
 		};

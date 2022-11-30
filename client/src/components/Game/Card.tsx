@@ -7,7 +7,7 @@ interface Props extends ICard {
 
 const Card = (props: Props) => {
 
-    const { name, cost, atk, def, hp, mp, effects, handImg, boardImg, _id, children } = { ...props };
+    const { name, cost, atk, def, hp, mp, effects, range, handImg, boardImg, _id, children } = { ...props };
 
 
     useEffect(() => {
@@ -32,6 +32,8 @@ const Card = (props: Props) => {
                     <span>HP: {hp} &nbsp;<strong>|</strong>&nbsp;</span>
                     <br />
                     <span>MP: {mp} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <br />
+                    <span>RANGE: {range} &nbsp;<strong>|</strong>&nbsp;</span>
                     <br />
                     <span>EFFECTS: {effects}</span>
                     <br />

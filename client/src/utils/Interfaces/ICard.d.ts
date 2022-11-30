@@ -8,6 +8,7 @@ export default interface ICard {
 	def: number;
 	hp: number;
 	mp: number;
+	range: number;
 	effects: Array<string>;
 	handImg: string | Blob | File | ArrayBuffer | null;
 	boardImg: string | Blob | File | ArrayBuffer | null;

@@ -5,9 +5,6 @@
 /.pnp
 .pnp.js
 
-# assets
-/api/images/*
-
 # testing
 /coverage
 

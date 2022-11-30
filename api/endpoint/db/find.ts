@@ -11,7 +11,7 @@ const find = async (dbName: string, collName: string, query: Filter<Document>) =
     const coll = database.collection(collName);
 
     try {
-        let cursor = await coll.find(query);
+        let cursor = await coll.find(query.query).sort(query.options.sort);
 
         if (cursor !== null) {
             await cursor.forEach(element => {

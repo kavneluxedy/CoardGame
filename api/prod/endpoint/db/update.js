@@ -35,6 +35,7 @@ const update = (dbName, collName, card) => __awaiter(void 0, void 0, void 0, fun
                 hp: Number(card.hp),
                 mp: Number(card.mp),
                 effects: String(card.effects).split('//'),
+                range: Number(card.range),
             },
         };
         let isCardExists = yield cards.updateOne(filter, update);

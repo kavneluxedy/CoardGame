@@ -40,6 +40,7 @@ const createCard = async (dbName: string, collName: string, wantedCard: any) => 
 				hp: wantedCard.hp,
 				mp: wantedCard.mp,
 				effects: wantedCard.effects,
+				range: wantedCard.range,
 				handImg: await toSave(wantedCard.handImg, "hand", wantedCard.name),
 				boardImg: await toSave(wantedCard.boardImg, "board", wantedCard.name),
 			}

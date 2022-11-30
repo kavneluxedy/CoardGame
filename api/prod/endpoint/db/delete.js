@@ -22,16 +22,13 @@ const remove = (dbName, collName, query) => __awaiter(void 0, void 0, void 0, fu
     const database = client.db(dbName);
     const cards = database.collection(collName);
     try {
-        const filter = {
-            _id: new mongodb_2.ObjectId(query._id),
+        let filter = {
+            _id: new mongodb_2.ObjectId(query._id)
         };
-        console.log(filter, "L32");
         let isCardExists = yield cards.deleteOne(filter);
         console.log(isCardExists);
         if (isCardExists !== null) {
             if (isCardExists.acknowledged !== false) {
-            }
-            else {
                 console.log("1 ou plusieurs matchs trouvés !! Mise à jour en cours ...");
                 return {
                     error: false,

@@ -1,9 +1,6 @@
 # dependencies
 /node_modules
 
-#assets
-images/*
-
 # production
 /prod/**
 
