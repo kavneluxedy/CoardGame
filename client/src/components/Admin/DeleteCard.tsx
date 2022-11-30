@@ -2,10 +2,10 @@ import React, { useContext, useEffect } from 'react'
 import useDb from '../../utils/hooks/useDb'
 import { AppContext } from "../../utils/ContextProvider";
 import Loading from '../Loading';
-import ICard from '../../utils/interfaces/ICard'
 import { ObjectId } from 'mongodb';
+import ICard from '../../utils/interfaces/ICard';
 
-const DeleteCard = ({ _id }) => {
+const DeleteCard = ({ _id, refresh }: { _id: ICard["_id"], refresh: () => void }) => {
 
 	const AppCtx = useContext(AppContext);
 	const { loading, error, data, dbComm } = useDb("", "", {}, "/init");
@@ -31,14 +31,15 @@ const DeleteCard = ({ _id }) => {
 		} else {
 			setFormError(undefined);
 			if (data.result) {
-				console.log('res')
+				console.log('res');
+				refresh();
 			}
 		}
 	}
 
 	const handleDelete = () => {
 		console.log(_id);
-		dbComm("COARD", "cards", _id!, "api/cards/delete");
+		dbComm("COARD", "cards", { _id: _id }, "api/cards/delete");
 	}
 
 	return (

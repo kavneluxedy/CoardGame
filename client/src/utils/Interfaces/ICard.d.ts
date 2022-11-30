@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 
 export default interface ICard {
-	_id?: ObjectId;
+	_id?: ObjectId | string;
 	name: string;
 	cost: number;
 	atk: number;

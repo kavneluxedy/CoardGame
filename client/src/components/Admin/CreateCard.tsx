@@ -1,9 +1,10 @@
-import React, { FormEvent, useState, useEffect, MouseEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import useDb from "../../utils/hooks/useDb";
 import Input from "../Input";
-import ICard from "../../utils/Interfaces/ICard";
+import InputFile from "../InputFile";
+import ICard from "../../utils/interfaces/ICard";
 
-const CreateCard = () => {
+const CreateCard = ({ refresh }: { refresh: () => void }) => {
 	const { loading, error, data, dbComm } = useDb("COARD", "cards", {}, "/init");
 	const [handImgData, setHandImgData] = useState<ArrayBuffer | string | null>(null);
 	const [boardImgData, setBoardImgData] = useState<ArrayBuffer | string | null>(null);
@@ -43,6 +44,7 @@ const CreateCard = () => {
 		console.log(card);
 
 		dbComm("COARD", "cards", { card: card }, "/api/cards/create");
+		refresh();
 	};
 
 	return (
@@ -62,12 +64,12 @@ const CreateCard = () => {
 			<Input type="number" id="HP" />
 			<Input type="number" id="MP" />
 			<Input type="text" id="EFFECTS" />
-			<Input
+			<InputFile
 				type="file"
 				id="BOARD_IMG"
 				onChange={(e) => handleImg(e, "board")}
 			/>
-			<Input type="file" id="HAND_IMG" onChange={(e) => handleImg(e, "")} />
+			<InputFile type="file" id="HAND_IMG" onChange={(e) => handleImg(e, "hand")} />
 			<Input
 				type="submit"
 				id="submit"

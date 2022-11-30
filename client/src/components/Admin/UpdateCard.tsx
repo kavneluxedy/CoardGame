@@ -1,12 +1,11 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../utils/ContextProvider'
 import useDb from '../../utils/hooks/useDb'
-import ICard from '../../utils/Interfaces/ICard' // ! TODO
+import ICard from '../../utils/interfaces/ICard' // ! TODO
 import Input from '../Input'
 import Loading from '../Loading'
 
-const CardEditor = ({ card }: any): JSX.Element => {
-	console.log(card._id);
+const CardEditor = ({ card, refresh }: { card: ICard, refresh: () => void }): JSX.Element => {
 	const { loading, error, data, dbComm } = useDb("", "", {}, "/init");
 	const AppCtx = useContext(AppContext);
 
@@ -28,7 +27,10 @@ const CardEditor = ({ card }: any): JSX.Element => {
 			def: Number(e.target[3].value),
 			hp: Number(e.target[4].value),
 			mp: Number(e.target[5].value),
-			effects: effects
+			effects: effects,
+			// ! todo,
+			handImg: "",
+			boardImg: "",
 		};
 		dbComm("COARD", "cards", { card: newCard }, "/api/cards/update")
 	}
@@ -44,11 +46,9 @@ const CardEditor = ({ card }: any): JSX.Element => {
 		if (data.error) {
 			setFormError({ ...data });
 			console.error(error);
-		} else {
+		} else if (data.error === false) {
 			setFormError(undefined);
-			if (data.result) {
-				console.log('res')
-			}
+			refresh();
 		}
 	}
 
@@ -75,9 +75,7 @@ const CardEditor = ({ card }: any): JSX.Element => {
 	)
 }
 
-
-
-const UpdateCard = ({ card }): JSX.Element => {
+const UpdateCard = ({ card, refresh }: { card: ICard, refresh: () => void }): JSX.Element => {
 
 	const [isCardEditing, setIsCardEditing] = useState<boolean>(false);
 
@@ -92,7 +90,7 @@ const UpdateCard = ({ card }): JSX.Element => {
 			<button onClick={() => handleCardEditing()} className="panel-btn edit-card-btn">✏️</button>
 			{isCardEditing &&
 				<>
-					<CardEditor card={card} />
+					<CardEditor card={card} refresh={refresh} />
 				</>
 			}
 		</>

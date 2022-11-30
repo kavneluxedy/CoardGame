@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
 type Props = {
 	type: string;
 	id: string;
 	defaultValue?: string | string[] | number;
 	className?: string;
+	onChange: any;
 };
 
-const Input = ({
+const InputFile = ({
 	type,
 	id,
 	defaultValue,
 	className,
+	onChange,
 }: Props): JSX.Element => {
-
-	const [value, setValue] = useState<Props["defaultValue"]>(defaultValue)
-
 	return (
 		<>
 			{type === "submit" ? "" : <label htmlFor={id}>{id}</label>}
@@ -23,9 +22,9 @@ const Input = ({
 				type={type}
 				id={id}
 				name={id}
-				value={value}
+				value={defaultValue}
 				className={className}
-				onChange={(e) => setValue(e.target.value)}
+				onChange={onChange}
 				accept="image/*"
 				required
 			/>
@@ -33,4 +32,4 @@ const Input = ({
 	);
 };
 
-export default Input;
+export default InputFile;
