@@ -7,10 +7,12 @@
 - **Conditions de victoire =>** Détruire le château ennemi
 - **Conditions de défaite =>** Se faire détruire son château
 - **Pioches, Mains, Défausses & Decks =>** Une carte jouée finit dans la défausse. Au début de chacun de vos tours de jeu, vous perdez votre main, pour en repiocher une (**_9_** cartes).
-  Quand votre pioche est vide, la défausse est mélangée pour devenir votre pioche, et ceux indéfiniment.  
+  Quand votre pioche est vide, la défausse est mélangée pour devenir votre pioche, et ceux indéfiniment.
 
 #
-### **Rareté des cartes**  
+
+### **Rareté des cartes**
+
 commun[gris],  
 peu commune[vert],  
 rare[bleu],  
@@ -27,33 +29,33 @@ divine[argent],
 
 _Condition :_ Un terrain peut-être invoqué s'il est connecté au château via un ou des terrains  
 _Coût :_ [Entre 0 & 100] Généralement peu coûteux (20)  
-_Effets :_ []  
+_Effets :_ []
 
 ### **2. Unités**
 
 _Condition :_ Une unité peut-être invoqué seulement sur un terrain ou dans une ville alliée  
 _Coût :_ Formule à élaborer  
 _Effets :_ Selon unité  
-_implication :_ Mal d'invocation  
+_implication :_ Mal d'invocation
 
 ### **3. Magiques**
 
 _Condition :_ Un sort peut-être casté si vous avez les ressources nécessaires  
 _Coût :_ [Entre 0 & 100]  
 _Effets :_ Bannissement  
-_Cible :_ Unité, Terrain, Consommables, Sorts & sorts customisables  
+_Cible :_ Unité, Terrain, Consommables, Sorts & sorts customisables
 
 ### **4. Consommables**
 
 _Types :_ [Kits, Potions, Equipements]  
 _Condition :_ Peut-être consommé si vous avez les ressources nécessaires  
-_Target :_ Unité  
+_Target :_ Unité
 
 ### **5. Constructions**
 
 _Type :_ [Création, Amélioration] || [Création/Amélioration 2en1]  
 _Coût :_ Création coût fixe, Amélioration coût évolutif  
-_Condition :_ Doit être escorté/porté par une unité invoquée jusqu'à son déploiement  
+_Condition :_ Doit être escorté/porté par une unité invoquée jusqu'à son déploiement
 
 ---
 
@@ -80,7 +82,7 @@ A chaque fin de tour, la main se vide (sauf effet contraire).
 
 **Début de tour :**
 Au début du tour, piocher autant de cartes que nécessaire pour remplir la main.  
-**_implication :_** peu de temps de réflexion, pioche en début de tour,  renforce la mécanique de conservation de carte
+**_implication :_** peu de temps de réflexion, pioche en début de tour, renforce la mécanique de conservation de carte
 
 **Rotation de la défausse/pioche :** _SI_ la pioche est vide lors d'un tirage, alors la défausse devient la nouvelle pioche (mélangée).  
 **_implication :_** accentue les erreurs d'équilibrage

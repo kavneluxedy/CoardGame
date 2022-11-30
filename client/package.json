@@ -1,59 +1,60 @@
 {
-  "name": "coardgame",
-  "version": "0.1.0",
-  "private": true,
-  "main": "dist/server/server.js",
-  "proxy": "http://localhost:5000/",
-  "types": "src/utils/Types/index.d.ts",
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^12.1.5",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/react": "^18.0.20",
-    "@types/react-dom": "^18.0.6",
-    "boardgame.io": "^0.49.12",
-    "compressorjs": "^1.1.1",
-    "concurrently": "^7.4.0",
-    "dotenv": "^16.0.3",
-    "image-js": "^0.35.2",
-    "koa-static": "^5.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^6.4.0",
-    "react-scripts": "^5.0.1",
-    "typescript": "^4.8.3"
-  },
-  "scripts": {
-    "react": "cross-env REACT_APP_PORT=3006 && react-scripts start",
-    "server-prod": "npx tsc && node ./dist/server/server",
-    "dev": "concurrently -k -n \"TypeScript,Node,React\" -p \"[{name}]\" -c \"yellow,green,blue\" \"tsc --watch\" \"node ./dist/server/server.js\" \"npm run react\"",
-    "start": "npm run server-prod && npm run react",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/koa-static": "^4.0.2",
-    "@types/node": "^18.7.18",
-    "cross-env": "^7.0.3"
-  }
+	"name": "coardgame",
+	"version": "0.1.0",
+	"private": true,
+	"proxy": "http://localhost:5000/",
+	"types": "src/utils/Types/index.d.ts",
+	"dependencies": {
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^12.1.5",
+		"@testing-library/user-event": "^13.5.0",
+		"@types/jest": "^27.5.2",
+		"@types/react": "^18.0.20",
+		"@types/react-dom": "^18.0.6",
+		"boardgame.io": "^0.49.12",
+		"compressorjs": "^1.1.1",
+		"concurrently": "^7.4.0",
+		"dotenv": "^16.0.3",
+		"image-js": "^0.35.2",
+		"koa-static": "^5.0.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-router-dom": "^6.4.0",
+		"react-scripts": "^5.0.1",
+		"typescript": "^4.8.3"
+	},
+	"scripts": {
+		"react": "cross-env REACT_APP_PORT=3006 && react-scripts start",
+		"server-prod": "npx tsc && node ./dist/server/server",
+		"dev": "concurrently -k -n \"TypeScript,Node,React\" -p \"[{name}]\" -c \"yellow,green,blue\" \"npm:tsc\" \"npm run react\"",
+		"tsc": "tsc-watch --noClear --onSuccess \"node ./dist/server/server.js\"",
+		"start": "npm run server-prod && npm run react",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@types/koa-static": "^4.0.2",
+		"@types/node": "^18.7.18",
+		"cross-env": "^7.0.3",
+		"tsc-watch": "^5.0.3"
+	}
 }

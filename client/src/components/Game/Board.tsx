@@ -6,22 +6,22 @@ import Data from "../../utils/BoardInit";
 import Canvas from "../Canvas";
 
 interface CoardGameProps extends BoardProps<CoardGameState> {
-  playerID: PlayerID;
+	playerID: PlayerID;
 }
 
-const CoardGameBoard: FC<CoardGameProps> = ({ G, ctx, moves }) => {
-  return (
-    <main>
-      <div id="board-wrapper">
-        <Canvas
-          id={"board"}
-          width={Data.WIDTH}
-          height={Data.HEIGHT}
-          cells={G.cells}
-        />
-      </div>
-    </main>
-  );
+const CoardsGameBoard: FC<CoardGameProps> = ({ G, ctx, moves }) => {
+	return (
+		<main>
+			<div id="board-wrapper">
+				<Canvas
+					id={"board"}
+					width={Data.WIDTH}
+					height={Data.HEIGHT}
+					cells={G.cells}
+				/>
+			</div>
+		</main>
+	);
 };
 
-export default CoardGameBoard;
+export default CoardsGameBoard;

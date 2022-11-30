@@ -1,8 +1,8 @@
-import { CardGame } from "../src/components/game/Game";
+import { CoardsGame } from "../src/components/game/Game";
 import { Server, Origins } from "boardgame.io/server";
 
 const server = Server({
-  games: [CardGame],
+  games: [CoardsGame],
   origins: [Origins.LOCALHOST_IN_DEVELOPMENT, "http://176.176.113.3", "http://coard.ddns.net"]
 });
 
