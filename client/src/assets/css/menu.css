@@ -66,10 +66,14 @@
 	display: flex;
 }
 
+.menu-toggler-wrapper {
+	width: max-content;
+}
+
 [data-nav-menu-toggler] {
 	transition: 1s;
 	z-index: 2;
-	position: relative;
+	/* position: relative; */
 }
 
 [data-nav-menu-toggler="none"] {

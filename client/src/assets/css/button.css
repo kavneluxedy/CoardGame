@@ -3,22 +3,35 @@
 }
 
 .button {
-  width: max-content;
-  min-width: 125px;
-  min-height: min-content;
-  height: max-content;
+  min-width: 230px;
+  width: auto;
+  height: 70px;
   margin: 0.18em;
   padding: 15px;
   font-size: medium;
   border: 2px solid #000;
   border-radius: 10px;
-  background-color: #572792;
-  color: #fff;
+  background-color: #9a6dd193;
+  color: rgb(36, 36, 36);
+
+  font-size: larger;
 }
 
 .button:hover {
   transform: scale(1.05);
-  background-color: #9a6dd1b7;
+  background-color: rgba(255, 255, 255, .75);
   color: #000000b0;
-  border-radius: 15px;
+  border-radius: 5px;
+  transition: .1s;
+}
+
+.close {
+  border: #bdbdbd00;
+  background: #c1b4d293;
+  font-size: larger;
+  color: black;
+}
+
+.close:hover {
+  background: #ff0000b6;
 }

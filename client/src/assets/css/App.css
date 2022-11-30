@@ -1,21 +1,15 @@
-@import "./LightTheme.css";
-@import "./DarkTheme.css";
-@import "./menu.css";
-@import "./colorTheme";
-@import "./button.css";
-@import "./homepage.css";
-@import "./modal.css";
-@import "./footer.css";
-@import "./board.css";
-@import "./form.css";
 @import "./admin-panel.css";
-
-:root {
-	--color-background: #fff;
-	--text-primary: rgb(51, 51, 51);
-	--text-secondary: #32967d;
-	--accent: #5c299b;
-}
+@import "./board.css";
+@import "./button.css";
+@import "./colorTheme";
+@import "./DarkTheme.css";
+@import "./footer.css";
+@import "./form.css";
+@import "./choice-game-type.css";
+@import "./homepage.css";
+@import "./LightTheme.css";
+@import "./menu.css";
+@import "./modal.css";
 
 body {
 	width: 100%;
@@ -28,9 +22,4 @@ body {
 	width: 100%;
 	height: 100vh;
 	color: var(--text-primary);
-}
-
-.underline {
-	border-bottom: 1px solid #000;
-	margin-bottom: 5px;
 }

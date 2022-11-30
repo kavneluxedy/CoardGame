@@ -2,7 +2,12 @@ main {
   width: 100%;
 }
 
-div#board-wrapper {
+#board-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
   min-height: 100%;
   min-width: 100%;
   width: 100%;
