@@ -60,14 +60,11 @@ const ContexProvider = ({ children }: IContextProvider) => {
 	const [user, setUser] = useState<IUser>({ isConnected: false });
 	const [modalName, setModalName] = useState("lobby");
 	const [modalVisible, setModalVisibility] = useState<boolean>(false);
+	const [isLobbyVisible, setIsLobbyVisible] = useState<boolean>(true);
 	const [formError, setFormError] = useState<IFormError>();
 	const [theme, setTheme] = useState<TColorTheme>(getTheme(localStorage.getItem("theme")));
 	const [menuToggler, setMenuToggler] = useState<string>("none")
 	const { setLang, translate } = useTranslate();
-
-	useEffect(() => {
-		console.log(menuToggler);
-	}, [menuToggler])
 
 	useEffect(() => {
 		user.isConnected
@@ -90,6 +87,8 @@ const ContexProvider = ({ children }: IContextProvider) => {
 		translate,
 		menuToggler,
 		setMenuToggler,
+		isLobbyVisible,
+		setIsLobbyVisible
 	};
 
 	return (

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { FC, useContext } from "react";
 import Button from "./Button";
-import { LobbyRendererProps } from "./Lobby";
+import { LobbyRendererProps } from "../components/CoardsGameLobby";
+import { AppContext } from "../utils/ContextProvider";
 
-const RunningMatchView: React.FC<{ L: LobbyRendererProps }> = ({ L }) => {
+const RunningMatchView: FC<{ L: LobbyRendererProps }> = ({ L }) => {
+
+    const AppCtx = useContext(AppContext);
+
+    const { setIsLobbyVisible } = { ...AppCtx! };
+
     return (
         <div>
             {L.runningMatch && (
@@ -14,11 +20,13 @@ const RunningMatchView: React.FC<{ L: LobbyRendererProps }> = ({ L }) => {
             )}
             <div className="">
                 <Button
+                    className="close"
                     onClick={() => {
                         L.handleExitMatch();
+                        setIsLobbyVisible(false);
                     }}
                 >
-                    Exit
+                    &times;
                 </Button>
             </div>
         </div>

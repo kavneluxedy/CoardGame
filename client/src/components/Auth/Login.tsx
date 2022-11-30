@@ -3,7 +3,7 @@ import { AppContext } from "../../utils/ContextProvider";
 import Loading from "../Loading";
 import useDb from "../../utils/hooks/useDb";
 
-const Login = ({ closeModal }: any) => {
+const Login = ({ handleVisibility }: any) => {
 	const { loading, data, dbComm } = useDb("", "", {}, "/init");
 	const AppCtx = useContext(AppContext);
 	useEffect(() => {
@@ -25,7 +25,7 @@ const Login = ({ closeModal }: any) => {
 			if (data.result) {
 				let { nickname, token, role } = data.result;
 				setUser({ isConnected: true, nickname: nickname, role: role, token: token });
-				closeModal();
+				handleVisibility();
 			}
 		}
 	}

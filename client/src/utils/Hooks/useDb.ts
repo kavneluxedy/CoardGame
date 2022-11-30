@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-export default function useDb(dbName: string, collName: string, query: object, uri: string) {
+function useDb(dbName: string, collName: string, query: object, uri: string) {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<any>(null);
 	const [data, setData] = useState<object>({});
 
-	useEffect(() => { console.log("loading : ", loading) }, [loading]);
-	useEffect(() => { console.log("data : ", data) }, [data]);
-	useEffect(() => { console.log("error : ", error) }, [error]);
-	useEffect(() => { console.log("-----------------") }, [loading, data, error]);
+	// useEffect(() => { console.log("loading : ", loading) }, [loading]);
+	// useEffect(() => { console.log("data : ", data) }, [data]);
+	// useEffect(() => { console.log("error : ", error) }, [error]);
+	// useEffect(() => { console.log("-----------------") }, [loading, data, error]);
 
 	const dbComm = (dbName: string, collName: string, query: object, uri: string) => {
 
@@ -26,7 +26,6 @@ export default function useDb(dbName: string, collName: string, query: object, u
 		if (uri !== "/init") {
 			let Url = uri;
 			setLoading(true);
-			console.log(Params.body);
 			fetch(Url, Params)
 				.then((res) => res.json())
 				.then((res: object) => setData(res))
@@ -41,3 +40,5 @@ export default function useDb(dbName: string, collName: string, query: object, u
 
 	return { loading, data, error, dbComm };
 };
+
+export default useDb

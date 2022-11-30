@@ -13,6 +13,8 @@ export default interface IAppContext {
   setModalName: Dispatch<SetStateAction<string>>;
   modalVisible: boolean;
   setModalVisibility: Dispatch<SetStateAction<boolean>>;
+  isLobbyVisible: boolean;
+  setIsLobbyVisible: Dispatch<SetStateAction<boolean>>;
   formError?: IFormError;
   setFormError: Dispatch<SetStateAction<IFormError | undefined>>;
   setLang: Dispatch<SetStateAction<TKeyLangType>>;

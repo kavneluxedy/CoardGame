@@ -6,6 +6,8 @@ import Home from "../components/home/Home";
 import Admin from "../components/admin/Admin";
 import Embed from "../pages/Embed";
 import { AppContext } from "./ContextProvider";
+import PublicMatch from "../components/game/PublicMatch";
+import PrivateMatch from "../components/game/PrivateMatch";
 
 const Router = (): JSX.Element => {
 
@@ -18,6 +20,8 @@ const Router = (): JSX.Element => {
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Home />} />
+						<Route path="game" element={<PublicMatch Modal={undefined} handleVisibility={undefined} />} />
+						<Route path="game" element={<PrivateMatch />} />
 						<Route path="admin" element={<Admin />} />
 						<Route path="embed" element={<Embed />} />
 						<Route path="*" element={<NotFound404 />} />

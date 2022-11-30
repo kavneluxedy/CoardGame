@@ -4,7 +4,7 @@ import { AppContext } from "../../utils/ContextProvider";
 import useDb from "../../utils/hooks/useDb";
 import Loading from "../Loading";
 
-const Register = ({ closeModal }: any): JSX.Element => {
+const Register = ({ handleVisibility }: any): JSX.Element => {
 	const { loading, data, error, dbComm } = useDb("", "", {}, "/init");
 	const AppCtx = useContext(AppContext);
 
@@ -31,7 +31,7 @@ const Register = ({ closeModal }: any): JSX.Element => {
 			if (data.result) {
 				let { nickname, token, role } = data.result;
 				setUser({ isConnected: true, nickname: nickname, role: role, token: token });
-				closeModal();
+				handleVisibility();
 			}
 		}
 	}

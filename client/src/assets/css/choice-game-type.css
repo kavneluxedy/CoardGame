@@ -1,0 +1,46 @@
+.lobby-buttons-wrapper {
+  color: var(--text-secondary);
+  font-size: larger;
+}
+
+.room-seat {
+  background-color: #00000016;
+}
+
+.room-seat:hover {
+  background-color: var(--text-primary);
+}
+
+#go-playerName {
+  margin: auto;
+  box-shadow: gold 0px 2px 75px;
+  text-align: center;
+}
+
+#go-playerImage {
+  max-width: 20%;
+  width: max-content;
+  height: max-content;
+  box-shadow: 2px 2px 15px black;
+  margin: auto;
+}
+
+#go-deck {
+  padding: 3%;
+  background-color: gray;
+}
+
+#go-deckChoice {
+  margin: 0 5%;
+  display: inline-flex;
+  background-color: pink;
+}
+
+#go-deckChoice:hover {
+  background-color: plum;
+}
+
+#go-deckDetails {
+  margin: 0 5%;
+  background-color: orange;
+}
