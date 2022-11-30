@@ -51,7 +51,6 @@ app.post("/api/cards/find", async (req: TReq, res: TRes) => {
 
 app.post("/api/cards/update", async (req: TReq, res: TRes) => {
 	let param = req.body;
-	console.log(param.query.card);
 	let result = await update(param.dbName, param.collName, param.query.card);
 	res.send(result);
 });

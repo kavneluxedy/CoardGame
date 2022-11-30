@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# assets
+/api/images/*
+
 # testing
 /coverage
 
@@ -13,6 +16,8 @@
 /api/dist
 /client/build
 /client/dist
+**.js
+*.js
 
 # misc
 .DS_Store
@@ -25,3 +30,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vscode
+
+# credentials
+/api/data.ts
+/api/prod/data.js

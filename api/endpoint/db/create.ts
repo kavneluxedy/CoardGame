@@ -27,7 +27,6 @@ const createCard = async (dbName: string, collName: string, wantedCard: any) => 
 				error: true,
 				result: error
 			}
-			console.log(wantedCard.handImg);
 			return response;
 
 		} else {

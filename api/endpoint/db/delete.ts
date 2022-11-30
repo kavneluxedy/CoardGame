@@ -10,7 +10,7 @@ const remove = async (dbName: string, collName: string, query: any) => {
     }[] = [];
 
     interface ICard {
-        _id: ObjectId;
+        _id: ObjectId | string;
         name: string;
         cost: number;
         atk: number;
@@ -37,18 +37,16 @@ const remove = async (dbName: string, collName: string, query: any) => {
     const cards = database.collection<ICard | IUser>(collName);
 
     try {
-        const filter: Filter<ICard> = {
-            _id: new ObjectId(query._id),
+        let filter: Filter<ICard> = {
+            _id: new ObjectId(query._id)
         };
-        console.log(filter, "L32");
 
         let isCardExists = await cards.deleteOne(filter);
 
         console.log(isCardExists);
         if (isCardExists !== null) {
-            if (isCardExists.acknowledged !== false) {
 
-            } else {
+            if (isCardExists.acknowledged !== false) {
                 console.log(
                     "1 ou plusieurs matchs trouvés !! Mise à jour en cours ..."
                 );
@@ -57,8 +55,8 @@ const remove = async (dbName: string, collName: string, query: any) => {
                     result: isCardExists,
                 };
             }
-        }
-        else {
+
+        } else {
             console.log("Card doesn't exist");
             error.push({
                 errorFlag: "card",
