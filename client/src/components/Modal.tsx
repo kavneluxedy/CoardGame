@@ -6,7 +6,7 @@ import React, {
   isValidElement,
   useContext,
 } from "react";
-import { AppContext } from "../utils/ContextProvider";
+import AppContext from "../utils/ContextProvider";
 
 interface IModal {
   title?: string;

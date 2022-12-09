@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import data from "../../data";
-import toSave from "../other/toSave";
+import { toSave } from "../other/toSave";
 
 const createCard = async (dbName: string, collName: string, wantedCard: any) => {
 	let error: Array<any> = [];
@@ -27,7 +27,7 @@ const createCard = async (dbName: string, collName: string, wantedCard: any) => 
 				error: true,
 				result: error
 			}
-			console.log(wantedCard.handImg);
+
 			return response;
 
 		} else {
@@ -41,6 +41,7 @@ const createCard = async (dbName: string, collName: string, wantedCard: any) => 
 				hp: wantedCard.hp,
 				mp: wantedCard.mp,
 				effects: wantedCard.effects,
+				range: wantedCard.range,
 				handImg: await toSave(wantedCard.handImg, "hand", wantedCard.name),
 				boardImg: await toSave(wantedCard.boardImg, "board", wantedCard.name),
 			}

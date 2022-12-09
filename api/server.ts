@@ -16,8 +16,9 @@ type TRes = {
 
 app.use("/", express.static("public"));
 
-app.use(bodyParser.json({ limit: "4mb" }));
-app.use(bodyParser.urlencoded({ limit: "4mb", extended: true, parameterLimit: 2000 }));
+app.use(bodyParser.json({ limit: "16mb" }));
+app.use(bodyParser.urlencoded({ limit: "16mb", extended: true, parameterLimit: 100000 }));
+
 
 app.post("/api/addUser", async (req: TReq, res: TRes) => {
 	let param = req.body;
@@ -51,7 +52,6 @@ app.post("/api/cards/find", async (req: TReq, res: TRes) => {
 
 app.post("/api/cards/update", async (req: TReq, res: TRes) => {
 	let param = req.body;
-	console.log(param.query.card);
 	let result = await update(param.dbName, param.collName, param.query.card);
 	res.send(result);
 });

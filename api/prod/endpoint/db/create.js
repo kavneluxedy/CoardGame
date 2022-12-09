@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
 const data_1 = __importDefault(require("../../data"));
-const toSave_1 = __importDefault(require("../other/toSave"));
+const toSave_1 = require("../other/toSave");
 const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, void 0, function* () {
     let error = [];
     const uri = data_1.default.uri;
@@ -37,7 +37,6 @@ const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, v
                 error: true,
                 result: error
             };
-            console.log(wantedCard.handImg);
             return response;
         }
         else {
@@ -50,8 +49,9 @@ const createCard = (dbName, collName, wantedCard) => __awaiter(void 0, void 0, v
                 hp: wantedCard.hp,
                 mp: wantedCard.mp,
                 effects: wantedCard.effects,
-                handImg: yield (0, toSave_1.default)(wantedCard.handImg, "hand", wantedCard.name),
-                boardImg: yield (0, toSave_1.default)(wantedCard.boardImg, "board", wantedCard.name),
+                range: wantedCard.range,
+                handImg: yield (0, toSave_1.toSave)(wantedCard.handImg, "hand", wantedCard.name),
+                boardImg: yield (0, toSave_1.toSave)(wantedCard.boardImg, "board", wantedCard.name),
             };
             const response = {
                 error: false,

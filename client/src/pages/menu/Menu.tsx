@@ -1,6 +1,6 @@
 import React, { useRef, useState, MouseEvent, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import CoardsLogo from "../../assets/images/svg/logoFullBlanc.min.svg";
+import CoardsLogo from "../../assets/images/svg/logo.full.blanc.min.svg";
 import ProfileLogo from "../../assets/images/svg/profil.lumineux.min.svg";
 import LogoutLogo from "../../assets/images/svg/deconnexion.lumineux.min.svg";
 import SettingsLogo from "../../assets/images/svg/parametres.lumineux.min.svg";

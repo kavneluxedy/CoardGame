@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
-import DeckButton from '../../pages/menu/buttons/DeckButton';
-import { AppContext } from "../../utils/ContextProvider";
+import DeckButton from '../DeckButton';
+import AppContext from "../../utils/ContextProvider";
 import ProfileLogo from "../../assets/images/svg/profil.lumineux.min.svg";
 import LogoutLogo from "../../assets/images/svg/deconnexion.lumineux.min.svg";
 import SettingsLogo from "../../assets/images/svg/parametres.lumineux.min.svg";

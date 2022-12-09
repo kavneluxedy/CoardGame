@@ -1,13 +1,13 @@
 input {
-  margin-bottom: 10px;
+  width: max-content;
   transition: 0.5s;
-  border-radius: 5%/50%;
+  border-radius: 10px;
   text-align: center;
 }
 
 input:focus-visible {
   outline: none;
-  scale: 1.2;
+  scale: 1.05;
 }
 
 .register-form input:invalid {

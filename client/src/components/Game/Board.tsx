@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { BoardProps } from "boardgame.io/react";
-import { CoardGameState } from "./Game.js";
+import { CoardsGameState } from "./Game.js";
 import { PlayerID } from "boardgame.io";
 import Data from "../../utils/BoardInit";
 import Canvas from "../Canvas";
 
-interface CoardGameProps extends BoardProps<CoardGameState> {
+interface CoardGameProps extends BoardProps<CoardsGameState> {
   playerID: PlayerID;
 }
 

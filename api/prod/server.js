@@ -19,8 +19,8 @@ const { addUser, auth, create, find, update, remove, tokenAuth } = Object.assign
 const app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
 app.use("/", express_1.default.static("public"));
-app.use(body_parser_1.default.json({ limit: "4mb" }));
-app.use(body_parser_1.default.urlencoded({ limit: "4mb", extended: true, parameterLimit: 2000 }));
+app.use(body_parser_1.default.json({ limit: "16mb" }));
+app.use(body_parser_1.default.urlencoded({ limit: "16mb", extended: true, parameterLimit: 100000 }));
 app.post("/api/addUser", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let param = req.body;
     let result = yield addUser(param.dbName, param.collName, param.query.user);
@@ -48,7 +48,6 @@ app.post("/api/cards/find", (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 app.post("/api/cards/update", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let param = req.body;
-    console.log(param.query.card);
     let result = yield update(param.dbName, param.collName, param.query.card);
     res.send(result);
 }));

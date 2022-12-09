@@ -1,19 +1,17 @@
 import React, { useContext, useEffect } from 'react'
 import useDb from '../../utils/hooks/useDb'
-import { AppContext } from "../../utils/ContextProvider";
+import AppContext from "../../utils/ContextProvider";
 import Loading from '../Loading';
-import ICard from '../../utils/interfaces/ICard'
-import { ObjectId } from 'mongodb';
+import ICard from '../../utils/interfaces/ICard';
 
-const DeleteCard = ({ _id }) => {
-
+const DeleteCard = ({ _id, refresh }: { _id: ICard["_id"], refresh: () => void }) => {
 	const AppCtx = useContext(AppContext);
 	const { loading, error, data, dbComm } = useDb("", "", {}, "/init");
 
 	useEffect(() => {
 		if (!loading) {
 			handleDBResponse(data);
-			console.log(data);
+
 		}
 	}, [data, loading])
 
@@ -24,21 +22,21 @@ const DeleteCard = ({ _id }) => {
 	if (loading) { return <Loading /> }
 
 	const handleDBResponse = (data) => {
-		console.log(data);
 		if (data.error) {
 			setFormError({ ...data });
 			console.error(error);
 		} else {
 			setFormError(undefined);
 			if (data.result) {
-				console.log('res')
+				refresh();
 			}
 		}
 	}
 
 	const handleDelete = () => {
-		console.log(_id);
-		dbComm("COARD", "cards", _id!, "api/cards/delete");
+		if (window.confirm("Effacer cette carte ?")) {
+			dbComm("COARD", "cards", { _id: _id }, "api/cards/delete");
+		}
 	}
 
 	return (

@@ -1,13 +1,12 @@
 import React from "react";
+import { ContextProvider } from "./utils/ContextProvider";
 import Router from "./utils/Router";
-import ContexProvider from "./utils/ContextProvider";
-
 
 const App = (): JSX.Element => {
 	return (
-		<ContexProvider>
+		<ContextProvider>
 			<Router />
-		</ContexProvider>
+		</ContextProvider>
 	);
 };
 

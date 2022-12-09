@@ -1,22 +1,30 @@
 .admin-panel-container {
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	margin: auto;
-	width: 80%;
+	padding: 0;
 }
 
-#card {
-	background-color: #f0ffff77;
-	margin-bottom: 1%;
-	padding: 1% 0;
+#admin-card {
+	width: 400px;
+	min-width: max-content;
+	min-height: 600px;
+	height: auto;
+	background-color: #cfdbff;
+	text-align: center;
+	margin: .2%;
 }
 
-#card-title {
+#admin-card-title {
+
 	text-align: center;
 	margin: 0;
 }
 
-#card-content {
+#admin-card-content {
 	font-size: larger;
-	text-align: left;
 }
 
 /****************************************************************
@@ -52,7 +60,9 @@
 *********
 ****************************************************************/
 #create-card-form {
-	width: 80%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	height: auto;
 }
 
@@ -74,8 +84,10 @@
 #edit-card-form {
 	width: 100%;
 	display: flex;
-	justify-content: space-around;
+	flex-direction: column;
+	align-items: center;
 	flex-wrap: wrap;
+	text-align: center;
 }
 
 .edit-card-btn {

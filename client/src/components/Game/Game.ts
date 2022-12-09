@@ -3,20 +3,20 @@ import { INVALID_MOVE } from "boardgame.io/core"
 import { Ctx, Game, Move } from "boardgame.io"
 import { cells, ICell } from "../../utils/CellsInit"
 
-interface CoardGameState { 
+interface CoardsGameState {
   cells: ICell[][];
 }
 
-const move: Move<CoardGameState> = (G, ctx) => { };
+const move: Move<CoardsGameState> = (G, ctx) => { };
 
-const CardGame: Game<CoardGameState> = {
-  name: "cardgame",
+const CoardsGame: Game<CoardsGameState> = {
+  name: "coardsgame",
   setup: () => ({ cells: cells }),
   moves: {},
   turn: { minMoves: 1, maxMoves: 1, },
-  endIf: (G: CoardGameState, ctx: Ctx) => { },
+  endIf: (G: CoardsGameState, ctx: Ctx) => { },
   minPlayers: 2,
   maxPlayers: 2,
 };
 
-export { CardGame, CoardGameState }
+export { CoardsGame, CoardsGameState }

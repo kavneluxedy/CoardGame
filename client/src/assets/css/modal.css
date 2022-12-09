@@ -1,126 +1,59 @@
 /* The Modal (background) */
 .modal {
-  display: block;
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
+	display: none;
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.3);
+	/* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  /* Could be more or less, depending on screen size */
-  overflow: hidden;
+	background-color: #def;
+	margin: 15% auto;
+	/* 15% from the top and centered */
+	padding: 10px;
+	border: 1px solid #888;
+	width: 80%;
+	/* Could be more or less, depending on screen size */
+	overflow: hidden;
+}
+
+.modal-wrapper {
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	/* align-items: center; */
+	height: max-content;
+	margin: auto;
+	text-align: center;
 }
 
 .modal-closer {
-  display: flex;
-  flex-direction: column;
+	width: auto;
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0;
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  z-index: 2;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.open {
-  min-width: max-content;
-  width: 20%;
-  height: 40px;
-  margin: auto;
-}
-
-.go-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  height: max-content;
-  margin: auto;
-  text-align: center;
-}
-
-.modal-title {
-  display: inline-block;
-}
-
-#go-playerName {
-  margin: auto;
-  box-shadow: gold 0px 2px 75px;
-  text-align: center;
-}
-
-#go-playerImage {
-  max-width: 20%;
-  width: max-content;
-  height: max-content;
-  box-shadow: 2px 2px 15px black;
-  margin: auto;
-}
-
-#go-deck {
-  padding: 3%;
-  background-color: gray;
-}
-
-#go-deckChoice {
-  margin: 0 5%;
-  display: inline-flex;
-  background-color: pink;
-}
-
-#go-deckChoice:hover {
-  background-color: plum;
-}
-
-#go-deckDetails {
-  margin: 0 5%;
-  background-color: orange;
-}
-
-/* ============== */
-/* LOBBY */
-/* ============== */
-
-.lobby-buttons-wrapper {
-  color: var(--text-secondary);
-  font-size: larger;
-}
-
-.room-seat {
-  background-color: #00000016;
-}
-
-.room-seat:hover {
-  background-color: var(--text-secondary);
-  color: var(--text-primary);
+.modal-children {
+	display: flex;
+	justify-content: center;
+	vertical-align: middle;
+	margin: auto;
 }

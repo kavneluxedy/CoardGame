@@ -17,7 +17,7 @@ interface IContextProvider {
 	children: ReactNode
 }
 
-const ContexProvider = ({ children }: IContextProvider) => {
+const ContextProvider = ({ children }: IContextProvider) => {
 	useEffect(() => {
 		var gotUser: string | null = localStorage.getItem("user");
 		if (gotUser !== null) {
@@ -58,16 +58,12 @@ const ContexProvider = ({ children }: IContextProvider) => {
 	}
 
 	const [user, setUser] = useState<IUser>({ isConnected: false });
-	const [modalName, setModalName] = useState("lobby");
 	const [modalVisible, setModalVisibility] = useState<boolean>(false);
+	const [isLobbyVisible, setIsLobbyVisible] = useState<boolean>(true);
 	const [formError, setFormError] = useState<IFormError>();
 	const [theme, setTheme] = useState<TColorTheme>(getTheme(localStorage.getItem("theme")));
-	const [menuToggler, setMenuToggler] = useState<string>("none")
+	const [dataMenuToggler, setDataMenuToggler] = useState<string>("none");
 	const { setLang, translate } = useTranslate();
-
-	useEffect(() => {
-		console.log(menuToggler);
-	}, [menuToggler])
 
 	useEffect(() => {
 		user.isConnected
@@ -80,16 +76,16 @@ const ContexProvider = ({ children }: IContextProvider) => {
 		setUser,
 		colorTheme: theme,
 		setColorTheme: setTheme,
-		modalName,
-		setModalName,
 		modalVisible,
 		setModalVisibility,
 		formError,
 		setFormError,
 		setLang,
 		translate,
-		menuToggler,
-		setMenuToggler,
+		dataMenuToggler,
+		setDataMenuToggler,
+		isLobbyVisible,
+		setIsLobbyVisible,
 	};
 
 	return (
@@ -99,5 +95,5 @@ const ContexProvider = ({ children }: IContextProvider) => {
 	);
 };
 
-export { AppContext };
-export default ContexProvider;
+export default AppContext;
+export { ContextProvider };

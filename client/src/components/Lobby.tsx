@@ -1,6 +1,6 @@
 import React, { ComponentType } from "react";
 import { Client, Lobby as ReactLobby } from "boardgame.io/react";
-import { CardGame } from "../components/game/Game";
+import { CoardsGame } from "./game/Game";
 import { Game, LobbyAPI, Server } from "boardgame.io";
 import RunningMatchView from "./RunningMatchView";
 import { EnterLobbyView } from "./EnterLobbyView";
@@ -32,7 +32,7 @@ interface IGameComponent {
   board: ComponentType<any>;
 }
 
-interface CardGameLobbyProps {}
+interface CoardsGameLobbyProps {}
 
 export interface LobbyRendererProps {
   errorMsg: string;
@@ -55,7 +55,7 @@ export interface LobbyRendererProps {
   handleStartMatch: (gameName: string, matchOpts: IMatchOpts) => void;
 }
 
-const CardGameLobby: React.FC = () => {
+const CoardsGameLobby: React.FC = () => {
   let serverAddr = `${window.location.protocol}//${
     window.location.hostname + ":8000"
   }`;
@@ -67,7 +67,7 @@ const CardGameLobby: React.FC = () => {
     <ReactLobby
       gameServer={serverAddr}
       lobbyServer={ApiAddr}
-      gameComponents={[{ game: CardGame, board: CoardGameBoard }]}
+      gameComponents={[{ game: CoardsGame, board: CoardGameBoard }]}
       refreshInterval={4000}
       // debug={true}
       renderer={(L) => {
@@ -100,4 +100,4 @@ export type Match = Omit<Server.MatchData, "players"> & {
   players: Omit<Server.PlayerMetadata, "credentials">[];
 };
 
-export default CardGameLobby;
+export default CoardsGameLobby;
