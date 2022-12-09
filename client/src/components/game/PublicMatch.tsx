@@ -1,6 +1,6 @@
 import React from 'react'
 import RunningMatchView from '../RunningMatchView'
-import { Client, Lobby } from "boardgame.io/react";
+import { Lobby } from "boardgame.io/react";
 import { CoardsGame } from './Game';
 import CoardsGameBoard from './Board';
 import { EnterLobbyView } from '../EnterLobbyView';
@@ -20,7 +20,7 @@ const PublicMatch = ({ Modal, handleVisibility }: { Modal: any, handleVisibility
             debug={true}
             renderer={(L) => {
                 return (
-                    <div className="lobby-buttons-wrapper">
+                    <div className="lobby-phases-wrapper">
                         {L.phase === "enter" && (
                             <EnterLobbyView L={L} />
                         )}

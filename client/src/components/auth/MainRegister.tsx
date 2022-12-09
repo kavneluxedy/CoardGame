@@ -1,5 +1,5 @@
 import React from "react";
-import Register from "../auth/Register";
+import Register from "./Register";
 import useModal from "../../utils/hooks/useModal";
 import Button from "../Button";
 
@@ -17,7 +17,7 @@ const MainRegister = () => {
 			>
 				CREER UN COMPTE
 			</Button>
-			<Modal>
+			<Modal title="Register">
 				<Register handleVisibility={handleVisibility} />
 			</Modal>
 		</>

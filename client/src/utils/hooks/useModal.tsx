@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode, useRef } from 'react'
+import React, { ReactNode, useRef } from 'react'
 
 const useModal = () => {
     const modal = useRef<HTMLDivElement>(null)
@@ -20,8 +20,8 @@ const useModal = () => {
         }
     }
 
-    window.onclick = function (event: MouseEvent) {
-        if (event.target === modal.current!) {
+    window.onclick = (event: MouseEvent) => { //TODO j'ai changé le React.MouseEvent par le natif
+        if (event.target === modal.current) {
             handleVisibility();
         }
     }
@@ -41,9 +41,9 @@ const useModal = () => {
                             </div>
 
                             <div className="closer close-button">
-                                <button className="closer close" onClick={() => handleVisibility()}>
+                                <span className="closer close" onClick={() => handleVisibility()}>
                                     &times;
-                                </button>
+                                </span>
                             </div>
 
                         </div>
