@@ -1,117 +1,83 @@
-import React, { MouseEvent, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
-import logoSource from "../../assets/images/svg/logo.min.svg";
-// import o_logo from "../../assets/images/svg/o_logo.min.svg";
-import Button from '../../components/Button';
-import ColorTheme from '../../components/ColorTheme';
+import React, { useRef, useState, MouseEvent, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import CoardsLogo from "../../assets/images/svg/logoFullBlanc.min.svg";
+import ProfileLogo from "../../assets/images/svg/profil.lumineux.min.svg";
+import LogoutLogo from "../../assets/images/svg/deconnexion.lumineux.min.svg";
+import SettingsLogo from "../../assets/images/svg/parametres.lumineux.min.svg";
+import AdminLogo from "../../assets/images/svg/admin.logo.min.svg";
 import { AppContext } from '../../utils/ContextProvider';
+import DeckButton from './buttons/DeckButton';
 
 const Menu = () => {
+
+    const currentLocation = useLocation();
+    const [menuVisibility, setMenuVisibility] = useState<boolean>(false);
+    const toggler = useRef<HTMLDivElement>(null);
+    const menu = useRef<HTMLDivElement>(null);
+
     const navigate = useNavigate();
-
-    const AppCtx = useContext(AppContext);
-    if (AppCtx === null) { return <></>; }
-    const { user, setUser, modalName, setModalName, setModalVisibility, translate, menuToggler } = { ...AppCtx }
-
-    const handleLogout = () => {
-        (window.confirm("SE DÉCONNECTER ?"))
-            ? setUser({ isConnected: false })
-            : console.log("Vous êtes rester connecté !")
-    }
-
-    const nav = (e: MouseEvent, into: string) => {
-        e.preventDefault();
+    const nav = (into: string) => {
+        setMenuVisibility(false);
         navigate(into);
     }
 
+    const handleMenuToggler = (e: MouseEvent) => {
+        if (e.target === toggler.current) {
+            setMenuVisibility(true);
+        }
+
+        if (e.target !== toggler.current && e.target !== menu.current) {
+            setMenuVisibility(false);
+        }
+    }
+
+    const logout = () => {
+        if (window.confirm("SE DECONNECTER ?")) {
+            setUser({ isConnected: false })
+        }
+    }
+
+    const AppCtx = useContext(AppContext);
+    if (AppCtx === null) {
+        return <></>;
+    }
+    const { user, setUser } = { ...AppCtx };
+
     return (
-        <nav id="nav-menu" data-nav-menu={menuToggler}>
+        <>
+            {currentLocation.pathname !== "/" && (
+                <div data-menu={menuVisibility} >
+                    {menuVisibility && <div id="closing-layer" onClick={e => handleMenuToggler(e)}></div>}
 
-            <div>
-                <a onClick={e => { nav(e, "/") }}>
-                    <img id="nav-menu-logo" src={logoSource} width="175" />
-                </a>
-            </div>
-
-            <menu>
-
-                <div id="menu-wrapper">
-
-                    <div id="play">
-                        <Button
-                            onClick={() => {
-                                setModalVisibility(true);
-                                setModalName("lobby");
-                            }}
-                        >
-                            {translate("Play")}
-                        </Button>
-                    </div>
-
-                    <div id="auth">
-
-                        {
-                            !user.isConnected &&
-                            <Button
-                                onClick={() => {
-                                    setModalVisibility(true);
-                                    setModalName("login");
-                                }}
-                            >
-                                {translate("LogIn")}
-                            </Button>
-                        }
-                        {
-                            !user.isConnected &&
-                            <Button
-                                onClick={() => {
-                                    setModalVisibility(true);
-                                    setModalName("register");
-                                }}
-                            >
-                                {translate("SignUp")}
-                            </Button>
-                        }
-                        {
-                            user.isConnected &&
-                            <Button
-                                onClick={() => handleLogout()}>
-                                SE DÉCONNECTER
-                            </Button>
-                        }
-                        {
-                            user.isConnected && user.role === "admin" &&
-                            <Button
-                                onClick={() => {
-                                    setModalVisibility(true);
-                                    setModalName("admin");
-                                }}
-                            >
-                                {translate("Administrator")}
-                            </Button>
-                        }
-
-                        <ColorTheme />
-
-                        {/* <a href="lore">
-                    <span>H</span>
-                    <span>I</span>
-                    <span>S</span>
-                    <span>T</span>
-                    <span><img src={o_logo} width="15" /></span>
-                    <span>I</span>
-                    <span>R</span>
-                    <span>E</span>
-                </a> */}
-                    </div>
+                    <div id="menu-toggler" ref={toggler} onClick={e => handleMenuToggler(e)}></div>
 
 
+                    <nav id="nav-menu" ref={menu}>
 
+                        <div className="logo-wrapper">
 
+                            <DeckButton nav={nav} />
+
+                            <img src={ProfileLogo} alt="" className="logo profile-logo" onClick={() => nav("game")} />
+
+                            <img src={SettingsLogo} alt="" className="logo settings-logo" onClick={() => nav("settings")} />
+
+                            {user.isConnected && user.role === "admin" && (
+                                <img src={AdminLogo} className="logo admin-logo" onClick={() => nav("admin")} />
+                            )}
+
+                            {user.isConnected && (
+                                <img src={LogoutLogo} className="logo logout-logo" onClick={() => logout()} />
+                            )}
+
+                            <img src={CoardsLogo} alt="Lien vers accueuil - Logo CoardsGame" className="logo coards-logo" onClick={() => nav("/")} />
+
+                        </div>
+                    </nav>
 
                 </div>
-            </menu>
-        </nav >
+            )}
+        </>
     )
 }
 

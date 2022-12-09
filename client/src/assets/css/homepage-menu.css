@@ -1,0 +1,21 @@
+#home-nav-menu {
+    width: 25%;
+    height: max-content;
+    display: inline-flex;
+}
+
+.home-logo-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-logo-wrapper img {
+    min-width: calc(2vw + 1vh);
+    width: calc(3vw + 3vh);
+    height: max-content;
+    margin: 1vw;
+    cursor: pointer;
+}
+
