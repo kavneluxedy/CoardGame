@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../../utils/ContextProvider";
+import AppContext from "../../utils/ContextProvider";
 
 const NeedAdmin = ({ children }) => {
 

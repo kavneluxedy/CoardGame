@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 type Props = {
 	type: string;
 	id: string;
 	defaultValue?: string | string[] | number;
 	className?: string;
+	onChange?: any;
 	required?: boolean;
 };
 
@@ -13,10 +14,9 @@ const Input = ({
 	id,
 	defaultValue,
 	className,
-	required = true
+	onChange,
+	required,
 }: Props): JSX.Element => {
-	const [value, setValue] = useState<Props["defaultValue"]>(defaultValue)
-
 	return (
 		<>
 			{type === "submit" ? "" : <label htmlFor={id}>{id}</label>}
@@ -24,9 +24,11 @@ const Input = ({
 				type={type}
 				id={id}
 				name={id}
-				value={value}
+				placeholder={id}
+				value={defaultValue}
 				className={className}
-				onChange={(e) => setValue(e.target.value)}
+				onChange={onChange}
+				accept="image/*"
 				required={required}
 			/>
 		</>

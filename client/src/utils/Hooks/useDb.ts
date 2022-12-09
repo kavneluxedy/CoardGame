@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 function useDb(dbName: string, collName: string, query: object, uri: string) {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<any>(null);
-	const [data, setData] = useState<object>({});
+	const [data, setData] = useState<Object>({});
 
 	// useEffect(() => { console.log("loading : ", loading) }, [loading]);
 	// useEffect(() => { console.log("data : ", data) }, [data]);
 	// useEffect(() => { console.log("error : ", error) }, [error]);
 	// useEffect(() => { console.log("-----------------") }, [loading, data, error]);
 
-	const dbComm = (dbName: string, collName: string, query: object, uri: string) => {
+	const dbComm = (dbName: string, collName: string, query: Object, uri: string) => {
 
 		var Params = {
 			method: "POST",
@@ -28,7 +28,7 @@ function useDb(dbName: string, collName: string, query: object, uri: string) {
 			setLoading(true);
 			fetch(Url, Params)
 				.then((res) => res.json())
-				.then((res: object) => setData(res))
+				.then((res: Object) => setData(res))
 				.catch((error) => { console.log(error); setError(error) })
 				.finally(() => { setLoading(false) })
 		}

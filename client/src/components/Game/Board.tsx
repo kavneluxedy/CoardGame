@@ -1,27 +1,27 @@
 import React, { FC } from "react";
 import { BoardProps } from "boardgame.io/react";
-import { CoardGameState } from "./Game.js";
+import { CoardsGameState } from "./Game.js";
 import { PlayerID } from "boardgame.io";
 import Data from "../../utils/BoardInit";
 import Canvas from "../Canvas";
 
-interface CoardGameProps extends BoardProps<CoardGameState> {
-	playerID: PlayerID;
+interface CoardGameProps extends BoardProps<CoardsGameState> {
+  playerID: PlayerID;
 }
 
-const CoardsGameBoard: FC<CoardGameProps> = ({ G, ctx, moves }) => {
-	return (
-		<main>
-			<div id="board-wrapper">
-				<Canvas
-					id={"board"}
-					width={Data.WIDTH}
-					height={Data.HEIGHT}
-					cells={G.cells}
-				/>
-			</div>
-		</main>
-	);
+const CoardGameBoard: FC<CoardGameProps> = ({ G, ctx, moves }) => {
+  return (
+    <main>
+      <div id="board-wrapper">
+        <Canvas
+          id={"board"}
+          width={Data.WIDTH}
+          height={Data.HEIGHT}
+          cells={G.cells}
+        />
+      </div>
+    </main>
+  );
 };
 
-export default CoardsGameBoard;
+export default CoardGameBoard;

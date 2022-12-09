@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import data from "../../data";
-import toSave from "../other/toSave";
+import { toSave } from "../other/toSave";
 
 const createCard = async (dbName: string, collName: string, wantedCard: any) => {
 	let error: Array<any> = [];
@@ -27,6 +27,7 @@ const createCard = async (dbName: string, collName: string, wantedCard: any) => 
 				error: true,
 				result: error
 			}
+
 			return response;
 
 		} else {

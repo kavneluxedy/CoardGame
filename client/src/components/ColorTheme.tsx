@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { AppContext } from "../utils/ContextProvider";
+import AppContext from "../utils/ContextProvider";
 
 //TODO FIX TS ISSUES
 

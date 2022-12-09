@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../utils/ContextProvider";
+import AppContext from "../../utils/ContextProvider";
 import Button from "../Button";
 import MainRegister from "../auth/MainRegister";
 import MainLogin from "../auth/MainLogin";
 import useModal from "../../utils/hooks/useModal";
-import ChoiceGameType from "../game/ChoiceGameType";
+import ChoiceGameType from "../home/ChoiceGameType";
 import HomepageMenu from "./HomepageMenu";
 
 const Home = () => {

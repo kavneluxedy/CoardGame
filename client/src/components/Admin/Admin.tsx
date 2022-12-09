@@ -4,9 +4,13 @@ import Card from '../game/Card';
 import Loading from "../Loading";
 import UpdateCard from "./UpdateCard";
 import DeleteCard from './DeleteCard';
-import CreateCard from './CreateCard';
+import Create from './Create';
+import useModal from "../../utils/hooks/useModal";
+import Button from "../Button";
 
 const Admin = () => {
+    const { Modal, handleVisibility } = useModal();
+
     const [cards, setCards] = useState<Array<Object> | null>(null)
     const { loading, error, data, dbComm } = useDb("COARD", "cards", {}, "/init");
 
@@ -35,18 +39,25 @@ const Admin = () => {
         }
     }
 
-    // if (loading) { return <Loading /> }
-
     return (
         <>
-            <CreateCard refresh={refresh} />
+            <Button
+                onClick={handleVisibility}>
+                CREATE CARD
+            </Button>
 
-            <button className='button' onClick={refresh}>REFRESH</button>
+            <Modal title="CREATE CARD">
+                <Create refresh={refresh} />
+            </Modal>
+
+            <button className="button" onClick={refresh}>REFRESH</button>
+
+            {loading && <Loading />}
 
             {cards && <div className="admin-panel-container">
                 {cards.map((card: any, key) => {
                     return (
-                        <Card name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} range={card.range} effects={card.effects} handImg={card.handImg} boardImg={card.boardImg} _id={card._id} key={key} >
+                        <Card name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} range={card.range} effects={card.effects} handImgData={card.handImg} boardImgData={card.boardImg} _id={card._id} key={key} >
                             <DeleteCard _id={card._id} refresh={refresh} />
                             <UpdateCard card={card} refresh={refresh} />
                         </Card>

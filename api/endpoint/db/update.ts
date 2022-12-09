@@ -1,6 +1,7 @@
 import { Filter, MongoClient, UpdateFilter } from "mongodb";
 import data from "../../data";
 import { ObjectId } from "mongodb";
+import { ICard } from "../../types/ICard";
 
 const update = async (dbName: string, collName: string, card: any) => {
     let error: {
@@ -8,18 +9,6 @@ const update = async (dbName: string, collName: string, card: any) => {
         errorMessage: unknown;
         errorResult: any;
     }[] = [];
-
-    interface ICard {
-        _id: ObjectId;
-        name: string;
-        cost: number;
-        atk: number;
-        def: number;
-        hp: number;
-        mp: number;
-        range: number;
-        effects: Array<string>;
-    }
 
     const uri = data.uri;
     const client = new MongoClient(uri);
@@ -64,15 +53,15 @@ const update = async (dbName: string, collName: string, card: any) => {
                     };
 
                 } else {
-                    console.log(
-                        "1 ou plusieurs matchs trouvés !! Mise à jour en cours ..."
-                    );
+                    console.log("1 ou plusieurs matchs trouvés !! Mise à jour en cours ...");
+
                     return {
                         error: false,
                         result: isCardExists,
                     };
                 }
             } else {
+                //TODO
             }
         }
         else {

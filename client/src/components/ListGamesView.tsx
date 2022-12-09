@@ -1,17 +1,14 @@
-import React, { Dispatch, FC, SetStateAction, useContext } from "react";
+import React, { FC } from "react";
 import { LobbyAPI } from "boardgame.io";
 import Button from "./Button";
-import { LobbyRendererProps } from "./CoardsGameLobby";
-import { AppContext } from "../utils/ContextProvider";
+import { LobbyRendererProps } from "./Lobby";
 
 function createMatchButtons(
 	L: LobbyRendererProps,
 	m: LobbyAPI.Match,
 	numPlayers: number,
-	handleVisibility: void,
-	setIsLobbyVisible: Dispatch<SetStateAction<boolean>>,
+	closeModal: void
 ): JSX.Element {
-
 	const playerSeat = m.players.find((p) => p.name === L.playerName);
 	const freeSeat = m.players.find((p) => !p.name);
 	if (playerSeat && freeSeat) {
@@ -45,8 +42,7 @@ function createMatchButtons(
 				<Button
 					onClick={() => {
 						// eslint-disable-next-line
-						handleVisibility;
-						setIsLobbyVisible(true);
+						closeModal;
 						L.handleStartMatch(m.gameName, {
 							numPlayers,
 							playerID: "" + playerSeat.id,
@@ -70,15 +66,10 @@ function createMatchButtons(
 	return <div>TODO add spectate button</div>;
 }
 
-const ListGamesView: FC<{
-	L: LobbyRendererProps;
-	handleVisibility: any;
-}> = ({ L, handleVisibility }): JSX.Element => {
-	const AppCtx = useContext(AppContext);
-	if (AppCtx === null) {
-		return <></>;
-	}
-	const { setIsLobbyVisible } = { ...AppCtx };
+const ListGamesView: FC<{ L: LobbyRendererProps, handleVisibility: any }> = ({
+	L,
+	handleVisibility
+}): JSX.Element => {
 	const matches: LobbyRendererProps["matches"] = [];
 	const seen = new Set<string>();
 	for (const m of L.matches) {
@@ -97,7 +88,7 @@ const ListGamesView: FC<{
 					onClick={() => {
 						L.handleCreateMatch(L.gameComponents[0].game.name!, 2);
 					}}
-					className="button-create"
+					className={"button-create"}
 				>
 					Créer une partie
 				</Button>
@@ -114,9 +105,9 @@ const ListGamesView: FC<{
 						<b>Jeu: {m.gameName}</b>
 					</div>
 					<div>
-						{m.players.map((p) => p.name ?? "[...empty slot...]").join(" VS ")}
+						{m.players.map((p) => p.name ?? "[Place Disponible]").join(", ")}
 					</div>
-					{createMatchButtons(L, m, 2, handleVisibility, setIsLobbyVisible)}
+					{createMatchButtons(L, m, 2)}
 				</div>
 			))}
 

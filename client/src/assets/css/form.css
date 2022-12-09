@@ -1,6 +1,5 @@
 input {
   width: max-content;
-  margin-bottom: 10px;
   transition: 0.5s;
   border-radius: 10px;
   text-align: center;
@@ -8,7 +7,7 @@ input {
 
 input:focus-visible {
   outline: none;
-  scale: 1.2;
+  scale: 1.05;
 }
 
 .register-form input:invalid {

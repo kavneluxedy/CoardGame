@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
 const data_1 = __importDefault(require("../../data"));
+const toSave_1 = require("../other/toSave");
 const find = (dbName, collName, query) => __awaiter(void 0, void 0, void 0, function* () {
     let error = [];
     let allCards = [];
@@ -24,28 +25,34 @@ const find = (dbName, collName, query) => __awaiter(void 0, void 0, void 0, func
     try {
         let cursor = yield coll.find(query.query).sort(query.options.sort);
         if (cursor !== null) {
-            yield cursor.forEach(element => {
-                allCards.push(element);
-            });
-            if (!allCards.length) { // ? if collection doesn't contain document(s)
+            yield cursor.forEach((document => {
+                allCards.push(document);
+            }));
+            for (const card of allCards) {
+                card.handImg = yield (0, toSave_1.getImageDataUrl)(card.handImg);
+                card.boardImg = yield (0, toSave_1.getImageDataUrl)(card.boardImg);
+            }
+            if (allCards.length === 0) { // ? if collection doesn't contain document(s)
                 error.push({
                     errorFlag: "cards",
                     errorMessage: "There are no cards",
-                    result: "There are no cards in the collection"
+                    result: allCards
                 });
                 return {
                     error: true,
                     result: error
                 };
             }
-            else if (!(!allCards.length)) { // ? if collection contains document(s)
-                return {
-                    error: false,
-                    result: allCards
-                };
-            }
             else {
-                console.error("L'avenir, c'est la vie !");
+                if (!(!allCards.length)) { // ? if collection contains document(s)
+                    return {
+                        error: false,
+                        result: allCards
+                    };
+                }
+                else {
+                    console.error("L'avenir, c'est la vie !");
+                }
             }
         }
     }

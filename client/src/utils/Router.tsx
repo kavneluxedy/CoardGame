@@ -5,9 +5,7 @@ import Layout from "../pages/Layout";
 import Home from "../components/home/Home";
 import Admin from "../components/admin/Admin";
 import Embed from "../pages/Embed";
-import { AppContext } from "./ContextProvider";
-import PublicMatch from "../components/game/PublicMatch";
-import PrivateMatch from "../components/game/PrivateMatch";
+import AppContext from "./ContextProvider";
 
 const Router = (): JSX.Element => {
 	const AppCtx = useContext(AppContext);
@@ -20,9 +18,8 @@ const Router = (): JSX.Element => {
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Home />} />
 						<Route path="admin" element={<Admin />} />
-						<Route path="game" element={<PublicMatch Modal={undefined} handleVisibility={undefined} />} />
-						<Route path="game" element={<PrivateMatch />} />
-						<Route path="embed" element={<Embed />} />
+						{/* <Route path="game" element={<PublicMatch Modal={undefined} handleVisibility={undefined} />} /> */}
+						{/* <Route path="game" element={<PrivateMatch />} /> */}
 						<Route path="*" element={<NotFound404 />} />
 					</Route>
 				</Routes>

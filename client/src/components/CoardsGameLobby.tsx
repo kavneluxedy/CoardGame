@@ -55,7 +55,7 @@ export interface LobbyRendererProps {
 }
 
 const CoardsGameLobby = ({ Modal, handleVisibility }: { Modal: any, handleVisibility: any }) => {
-	
+
 	let serverAddr = `${window.location.protocol}//${window.location.hostname + ":8000"}`;
 	let ApiAddr = `${window.location.protocol}//${window.location.hostname + ":8080"}`;
 
@@ -68,7 +68,7 @@ const CoardsGameLobby = ({ Modal, handleVisibility }: { Modal: any, handleVisibi
 			debug={false}
 			renderer={(L) => {
 				return (
-					<div className="lobby-buttons-wrapper">
+					<div className="lobby-phases-wrapper">
 						{L.phase === LobbyPhases.ENTER && (
 							<Modal>
 								<EnterLobbyView L={L} />

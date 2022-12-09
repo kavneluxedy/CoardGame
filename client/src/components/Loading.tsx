@@ -1,9 +1,8 @@
 import React from 'react';
-import Modal from "./Modal"
 
 const Loading = () => {
-  return(
-    <h1>Loading ...</h1>
+  return (
+    <h3>Loading ...</h3>
   );
 }
 

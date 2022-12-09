@@ -5,13 +5,12 @@ const toSave = async (data: string, path: string = "misc", filename: string = St
     // ? Image path in database
     const filePath = String("images/" + path + "/" + filename + ".png").toLowerCase();
 
-
-
     try {
         console.log("Enregistrement de l'image ... \n");
         console.log(filePath);
 
         var uint8 = Uint8Array.from(data.split('').map(data => data.charCodeAt(NaN)));
+
 
         let image = await Image.load(uint8);
         image.save(filePath);
@@ -24,4 +23,14 @@ const toSave = async (data: string, path: string = "misc", filename: string = St
     }
 }
 
-export default toSave;
+const getImageDataUrl = (path: string) => {
+    const src = Image.load(path).then(image => image.toDataURL());
+    return src;
+}
+
+const getBlobData = (path: string) => {
+    const image = Image.load(path).then(image => image.toBlob());
+    return image;
+}
+
+export { toSave, getImageDataUrl };
