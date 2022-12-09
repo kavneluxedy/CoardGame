@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound404 from "../pages/404";
 import Layout from "../pages/Layout";
 import Home from "../components/home/Home";
 import Admin from "../components/admin/Admin";
-import Embed from "../pages/Embed";
-import { AppContext } from "./ContextProvider";
+import { AppContext } from "../utils/ContextProvider";
 
 const Router = (): JSX.Element => {
-
 	const AppCtx = useContext(AppContext);
 	const { colorTheme } = { ...AppCtx! };
 
@@ -19,7 +17,8 @@ const Router = (): JSX.Element => {
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Home />} />
 						<Route path="admin" element={<Admin />} />
-						<Route path="embed" element={<Embed />} />
+						<Route path="game" element={<PublicMatch Modal={undefined} handleVisibility={undefined} />} />
+						<Route path="game" element={<PrivateMatch />} />
 						<Route path="*" element={<NotFound404 />} />
 					</Route>
 				</Routes>
@@ -28,4 +27,4 @@ const Router = (): JSX.Element => {
 	);
 };
 
-export { Router };
+export default Router;

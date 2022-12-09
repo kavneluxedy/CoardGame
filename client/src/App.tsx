@@ -1,5 +1,5 @@
 import React from "react";
-import { Router } from "./utils/Router";
+import Router from "./utils/Router";
 import ContexProvider from "./utils/ContextProvider";
 
 
@@ -11,4 +11,4 @@ const App = (): JSX.Element => {
 	);
 };
 
-export { App };
+export default App;
