@@ -1,6 +1,6 @@
 import React, { FC, useContext } from "react";
-import Button from "../../Button";
-import { LobbyRendererProps } from "../../CoardsGameLobby";
+import Button from "../../layout/misc/Button";
+import { LobbyRendererProps } from "../CoardsGameLobby";
 import AppContext from "../../../utils/ContextProvider";
 
 const RunningMatchView: FC<{ L: LobbyRendererProps }> = ({ L }) => {

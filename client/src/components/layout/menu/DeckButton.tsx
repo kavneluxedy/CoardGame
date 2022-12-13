@@ -1,5 +1,5 @@
 import React, { createRef, useContext } from "react";
-import DeckLogo from "../assets/images/svg/carte.lumineuse.min.svg";
+import DeckLogo from "../../../assets/images/svg/carte.lumineuse.min.svg";
 import AppContext from "../../../utils/ContextProvider";
 
 const DeckButton = ({ nav }) => {

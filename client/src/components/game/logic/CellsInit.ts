@@ -20,4 +20,4 @@ const cells = array.map((row: ICell[], y: number) => {
 	});
 });
 
-export { cells, ICell };
+export default cells;

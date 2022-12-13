@@ -2,7 +2,10 @@
 	"scripts": {
 		"start": "concurrently -k -c \"#0000FF\" -p \"[{time}]\" -t \"dd-MM|HH:mm:ss\" \"npm:api\" \"npm:client\"",
 		"api": "cd ./api && npm run start",
-		"client": "cd ./client && npm run dev"
+		"client": "cd ./client && npm run start",
+		"api-i": "cd ./api && npm i",
+		"client-i": "cd ./client && npm i",
+		"inst": "npm i && concurrently -k -c \"#66ff00,#00bbff\" -n \"API,CLIENT\" \"npm:api-i\" \"npm:client-i\""
 	},
 	"devDependencies": {
 		"concurrently": "^7.5.0"

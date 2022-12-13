@@ -1,10 +1,8 @@
 {
-	"name": "coardgame",
+	"name": "coardsgame",
 	"version": "0.1.0",
 	"private": true,
-	"main": "dist/server/server.js",
 	"proxy": "http://localhost:5000/",
-	"types": "src/utils/Types/index.d.ts",
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^12.1.5",
@@ -24,13 +22,11 @@
 		"typescript": "^4.8.3"
 	},
 	"scripts": {
-		"react": "cross-env REACT_APP_PORT=3006 && react-scripts start",
-		"server-prod": "npx tsc && node ./dist/server/server",
-		"dev": "concurrently -k -n \"TypeScript,Node,React\" -p \"[{name}]\" -c \"yellow,green,blue\" \"tsc --watch\" \"node ./dist/server/server.js\" \"npm run react\"",
-		"start": "npm run server-prod && npm run react",
+		"start": "concurrently -k -n \"Node,React\" -p \"[{name}]\" -c \"green,blue\" \"npm:tsc-watch\" \"npm:react\"",
+		"react": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"tsc-watch": "tsc-watch --noClear --onSuccess \" dist/server/server.js\" --onFailure \"echo E.R.R.O.R\""
 	},
 	"eslintConfig": {
 		"extends": [
@@ -54,6 +50,7 @@
 		"@types/koa-static": "^4.0.2",
 		"@types/node": "^18.7.18",
 		"concurrently": "^7.6.0",
-		"cross-env": "^7.0.3"
+		"cross-env": "^7.0.3",
+		"tsc-watch": "^5.0.3"
 	}
 }

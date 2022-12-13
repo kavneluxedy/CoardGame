@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { LobbyAPI } from "boardgame.io";
-import Button from "./Button";
-import { LobbyRendererProps } from "./Lobby";
+import Button from "../../layout/misc/Button";
+import { LobbyRendererProps } from "../CoardsGameLobby";
 
 function createMatchButtons(
 	L: LobbyRendererProps,

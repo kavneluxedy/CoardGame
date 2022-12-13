@@ -1,11 +1,11 @@
 {
-	"name": "api",
+	"name": "coardsgame-api",
 	"version": "0.1.0",
-	"description": "backend service for coardgame client",
+	"description": "backend services for coardsgame client",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "concurrently -k -n \"API\" -c \"#55CC55\" -p \"[{name}]\" \"npm:tsc-watch\"",
-		"tsc-watch": "tsc-watch --onSuccess \"node prod/server.js\" --onFailure \"echo E.R.R.O.R\""
+		"tsc-watch": "tsc-watch --noClear --onSuccess \"node prod/server.js\" --onFailure \"echo E.R.R.O.R\"" 
 	},
 	"keywords": [],
 	"author": "",

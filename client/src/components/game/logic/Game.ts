@@ -1,7 +1,8 @@
 import React from "react"
 import { INVALID_MOVE } from "boardgame.io/core"
 import { Ctx, Game, Move } from "boardgame.io"
-import { cells, ICell } from "./CellsInit"
+import cells from "./CellsInit"
+import ICell from "../../../utils/interfaces/ICell";
 
 interface CoardsGameState {
 	cells: ICell[][];

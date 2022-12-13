@@ -12,7 +12,7 @@
 **/prod
 **/dist
 **/build
-**/*.js
+**.js
 
 # misc
 .DS_Store

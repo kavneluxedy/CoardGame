@@ -2,9 +2,9 @@ import React, {
 	FC,
 	useState,
 } from "react";
-import { LobbyRendererProps } from "./Lobby";
-import { AllPictures } from "../assets/images/AllPictures";
-import Button from "./Button";
+import { LobbyRendererProps } from "../CoardsGameLobby";
+import { AllPictures } from "../../../assets/images/AllPictures";
+import Button from "../../layout/misc/Button";
 
 const EnterLobbyView: FC<{ L: LobbyRendererProps }> = ({ L }) => {
 	const [img, setImg] = useState(

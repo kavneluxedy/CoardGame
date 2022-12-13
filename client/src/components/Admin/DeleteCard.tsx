@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import useDb from '../../utils/hooks/useDb'
 import AppContext from "../../utils/ContextProvider";
-import Loading from '../Loading';
+import Loading from '../layout/Loading';
 import ICard from '../../utils/interfaces/ICard';
 
 const DeleteCard = ({ _id, refresh }: { _id: ICard["_id"], refresh: () => void }) => {
