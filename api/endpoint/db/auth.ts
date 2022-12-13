@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import crypt from "../../crypt";
+import crypt from "../other/crypt";
 import data from "../../data";
 
 const auth = async (dbName: string, collName: string, user: any) => {

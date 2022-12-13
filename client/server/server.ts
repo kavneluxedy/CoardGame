@@ -1,4 +1,4 @@
-import { CoardsGame } from "../src/components/game/Game";
+import { CoardsGame } from "../src/components/game/logic/Game";
 import { Server, Origins } from "boardgame.io/server";
 
 const server = Server({

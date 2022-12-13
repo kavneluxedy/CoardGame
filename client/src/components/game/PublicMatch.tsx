@@ -1,12 +1,12 @@
 import React from 'react'
-import RunningMatchView from '../RunningMatchView'
+import RunningMatchView from './phases/RunningMatchView'
 import { Lobby } from "boardgame.io/react";
-import { CoardsGame } from './Game';
+import { CoardsGame } from './logic/Game';
 import CoardsGameBoard from './Board';
-import { EnterLobbyView } from '../EnterLobbyView';
-import ListGamesView from '../ListGamesView';
+import { EnterLobbyView } from './phases/EnterLobbyView';
+import ListGamesView from './phases/ListGamesView';
 
-const PublicMatch = ({ Modal, handleVisibility }: { Modal: any, handleVisibility: any }) => {
+const PublicMatch = ({ handleVisibility }: { handleVisibility: any }) => {
 
     let serverAddr = `${window.location.protocol}//${window.location.hostname + ":8000"}`;
     let ApiAddr = `${window.location.protocol}//${window.location.hostname + ":8080"}`;

@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import useDb from "../../../utils/hooks/useDb";
-import Input from "../../Input";
-import InputFile from "../../InputFile";
+import Input from "../../layout/misc/Input";
+import InputFile from "../../layout/misc/InputFile";
 import ICard from "../../../utils/interfaces/ICard";
 
 const CreateLand = ({ refresh }: { refresh: () => void }) => {

@@ -4,8 +4,6 @@ const useModal = () => {
     const modal = useRef<HTMLDivElement>(null)
 
     const handleVisibility = () => {
-        // let modal = document.querySelector<HTMLDivElement>('#' + name);
-        // if (!modal) return
         if (!modal.current) return
 
         switch (modal.current.style.display) {

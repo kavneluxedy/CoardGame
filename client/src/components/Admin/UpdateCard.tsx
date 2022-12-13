@@ -1,10 +1,10 @@
-import React, { createRef, FormEvent, useContext, useEffect, useState } from 'react'
-import AppContext from '../../utils/ContextProvider'
-import useDb from '../../utils/hooks/useDb'
-import ICard from '../../utils/interfaces/ICard'
-import Input from '../Input'
-import Loading from '../Loading'
-import InputFile from '../InputFile'
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import AppContext from '../../utils/ContextProvider';
+import useDb from '../../utils/hooks/useDb';
+import ICard from '../../utils/interfaces/ICard';
+import Input from "../layout/misc/Input";
+import InputFile from "../layout/misc/InputFile";
+import Loading from '../layout/Loading';
 
 const CardEditor = ({ card, refresh }: { card: ICard, refresh: () => void }): JSX.Element => {
 

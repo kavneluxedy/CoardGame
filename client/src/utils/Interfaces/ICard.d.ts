@@ -10,6 +10,6 @@ export default interface ICard {
 	mp: number;
 	range: number;
 	effects: Array<string>;
-	handImgData: ArrayBuffer | string | readonly string[] | undefined | null;
-	boardImgData: ArrayBuffer | string | readonly string[] | undefined | null;
+	handImgData?: ArrayBuffer | string | readonly string[] | null;
+	boardImgData?: ArrayBuffer | string | readonly string[] | null;
 }

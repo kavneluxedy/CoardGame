@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import useDb from '../../utils/hooks/useDb'
 import Card from '../game/Card';
-import Loading from "../Loading";
+import Loading from "../layout/Loading";
 import UpdateCard from "./UpdateCard";
 import DeleteCard from './DeleteCard';
 import Create from './Create';
 import useModal from "../../utils/hooks/useModal";
-import Button from "../Button";
+import Button from "../layout/misc/Button";
 
 const Admin = () => {
     const { Modal, handleVisibility } = useModal();

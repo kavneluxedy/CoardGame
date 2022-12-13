@@ -1,11 +1,12 @@
 import React, { useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
-import DeckButton from '../DeckButton';
+import DeckButton from '../layout/menu/DeckButton';
 import AppContext from "../../utils/ContextProvider";
 import ProfileLogo from "../../assets/images/svg/profil.lumineux.min.svg";
 import LogoutLogo from "../../assets/images/svg/deconnexion.lumineux.min.svg";
 import SettingsLogo from "../../assets/images/svg/parametres.lumineux.min.svg";
 import AdminLogo from "../../assets/images/svg/admin.logo.min.svg";
+import NeedAdmin from "../../utils/auth/NeedAdmin";
 
 const HomepageMenu = () => {
 
@@ -34,9 +35,10 @@ const HomepageMenu = () => {
                         <DeckButton nav={nav} />
                         <img src={ProfileLogo} className="logo profile-logo" onClick={() => nav("game")} />
                         <img src={SettingsLogo} className="logo settings-logo" onClick={() => nav("settings")} />
-                        {user.isConnected && user.role === "admin" && (
+                        <NeedAdmin>
                             <img src={AdminLogo} className="logo admin-logo" onClick={() => nav("admin")} />
-                        )}
+                        </NeedAdmin>
+
                         <img src={LogoutLogo} className="logo logout-logo" onClick={() => logout()} />
                     </>
                 )}

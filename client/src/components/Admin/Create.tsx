@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CreateUnit from "./tab/CreateUnit";
 import CreateLand from "./tab/CreateLand";
-import Button from "../Button";
+import Button from "../layout/misc/Button";
 
 type TTab =
 	| "Unit"

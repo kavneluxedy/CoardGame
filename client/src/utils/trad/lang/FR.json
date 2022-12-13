@@ -1,5 +1,5 @@
 {
-  "TriggerTheme": "MODE CLAIR | MODE SOMBRE",
+  "TriggerTheme": "CHANGER LE THEME",
   "Play": "JOUER",
   "Home": "ACCUEIL",
   "LogIn": "SE CONNECTER",
@@ -7,5 +7,5 @@
   "Profile": "MON PROFIL",
   "Disconnect": "SE DECONNECTER",
   "Administrator": "*ADMINISTRATEUR*",
-  "NotFound404": "EL FAMOSO 404 NOT FOUND"
+  "NotFound404": "404 NOT FOUND"
 }

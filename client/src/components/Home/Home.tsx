@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import AppContext from "../../utils/ContextProvider";
-import Button from "../Button";
-import MainRegister from "../auth/MainRegister";
-import MainLogin from "../auth/MainLogin";
+import Button from "../layout/misc/Button";
+import SignUp from "../auth/SignUp";
+import SignIn from "../auth/SignIn";
 import useModal from "../../utils/hooks/useModal";
 import ChoiceGameType from "../home/ChoiceGameType";
 import HomepageMenu from "./HomepageMenu";
@@ -31,13 +31,12 @@ const Home = () => {
 						</Button>
 					</div>
 
-
 					{isLobbyVisible && (
 						<div id="auth">
 							{!user.isConnected && (
 								<>
-									<MainRegister />
-									<MainLogin />
+									<SignUp />
+									<SignIn />
 								</>
 							)}
 						</div>
