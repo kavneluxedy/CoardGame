@@ -1,8 +1,5 @@
-export default interface IInputProps {
-	type: string;
-	id: string;
-	defaultValue?: string | string[] | number;
-	className?: string;
-	onChange?: any;
-	required?: boolean;
+export default interface IInputFileProps {
+    id: string;
+    className?: string;
+    onChange: any;
 }

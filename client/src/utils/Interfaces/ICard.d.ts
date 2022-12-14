@@ -12,4 +12,5 @@ export default interface ICard {
 	effects: Array<string>;
 	handImgData?: ArrayBuffer | string | readonly string[] | null;
 	boardImgData?: ArrayBuffer | string | readonly string[] | null;
+	type: string;
 }

@@ -5,11 +5,11 @@ import InputFile from "../../layout/misc/InputFile";
 import ICard from "../../../utils/interfaces/ICard";
 
 const CreateUnit = ({ refresh }: { refresh: () => void }) => {
-    const { loading, error, data, dbComm } = useDb("COARD", "cards", {}, "/init");
+    const { dbComm } = useDb("COARD", "cards", {}, "/init");
     const [handImgData, setHandImgData] = useState<ICard["handImgData"] | ArrayBuffer | string | null>(null);
     const [boardImgData, setBoardImgData] = useState<ArrayBuffer | string | null>(null);
 
-    const handleImg = (e, flag: string) => {
+    const handleImg = (e: { preventDefault: () => void; target: { files: any[]; }; }, flag: string) => {
         e.preventDefault();
         let data = e.target.files[0];
         console.log(Math.floor(data.size / 1024), " ko");
@@ -30,7 +30,7 @@ const CreateUnit = ({ refresh }: { refresh: () => void }) => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let effects = String(e.target["EFFECTS"].value).split("//");
-        let card: ICard = {
+        let unit: ICard = {
             name: String(e.target["NAME"].value),
             cost: Number(e.target["COST"].value),
             atk: Number(e.target["ATK"].value),
@@ -39,12 +39,12 @@ const CreateUnit = ({ refresh }: { refresh: () => void }) => {
             mp: Number(e.target["MP"].value),
             range: Number(e.target["RANGE"].value),
             effects: effects,
-            handImg: handImgData,
-            boardImg: boardImgData,
+            handImgData: handImgData,
+            boardImgData: boardImgData,
+            type: "unit"
         };
-        console.log(card);
 
-        dbComm("COARD", "cards", { card: card }, "/api/cards/create");
+        dbComm("COARD", "cards", { card: unit }, "/api/cards/create");
         refresh();
     };
 
@@ -57,21 +57,22 @@ const CreateUnit = ({ refresh }: { refresh: () => void }) => {
             id="create-card-form"
             className="panel-container"
         >
-            <Input type="text" id="NAME" defaultValue="" />
-            <Input type="number" id="COST" defaultValue="" />
-            <Input type="number" id="ATK" defaultValue="" />
-            <Input type="number" id="DEF" defaultValue="" />
-            <Input type="number" id="HP" defaultValue="" />
-            <Input type="number" id="MP" defaultValue="" />
-            <Input type="number" id="RANGE" defaultValue="" />
-            <Input type="text" id="EFFECTS" defaultValue="" required={false} />
+            <Input type="text" id="NAME" />
+            <Input type="number" id="COST" />
+            <Input type="number" id="ATK" />
+            <Input type="number" id="DEF" />
+            <Input type="number" id="HP" />
+            <Input type="number" id="MP" />
+            <Input type="number" id="RANGE" />
+            <Input type="text" id="EFFECTS" required={false} />
             <InputFile
                 id="BOARD_IMG"
-                onChange={(e) => handleImg(e, "board")}
+                onChange={(e: any) => handleImg(e, "board")}
             />
             <InputFile
                 id="HAND_IMG"
-                onChange={(e) => handleImg(e, "hand")} />
+                onChange={(e: any) => handleImg(e, "hand")}
+            />
             <Input
                 type="submit"
                 id="submit"

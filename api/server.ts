@@ -40,6 +40,7 @@ app.post("/api/tokenAuth", async (req: TReq, res: TRes) => {
 
 app.post("/api/cards/create", async (req: TReq, res: TRes) => {
 	let param = req.body;
+	console.log(param.query.card, "routeur 43");
 	let result = await create(param.dbName, param.collName, param.query.card);
 	res.send(result);
 });

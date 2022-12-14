@@ -17,7 +17,6 @@ const FormSignIn = ({ handleVisibility }: any) => {
 	if (loading) { return <Loading /> }
 
 	const handleDBResponse = (data) => {
-		console.log(data);
 		if (data.error) {
 			setFormError({ ...data });
 		} else {
@@ -36,7 +35,6 @@ const FormSignIn = ({ handleVisibility }: any) => {
 			nickname: e.target[0].value,
 			password: e.target[1].value,
 		};
-
 		dbComm("COARD", "User", { user: userAuth }, "/api/auth");
 	}
 

@@ -6,7 +6,7 @@ interface Props extends ICard {
 }
 
 const Card = (props: Props) => {
-    const { name, cost, atk, def, hp, mp, effects, range, handImgData, boardImgData, _id, children } = { ...props };
+    const { name, cost, atk, def, hp, mp, effects, range, handImgData, boardImgData, type, _id, children } = { ...props };
 
     return (
         <>
@@ -15,19 +15,21 @@ const Card = (props: Props) => {
                 <div id='admin-card-content'>
                     {children}
                     <br />
-                    <span>COST: {cost} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>COST: {cost}</span>
                     <br />
-                    <span>ATK: {atk} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>ATK: {atk}</span>
                     <br />
-                    <span>DEF: {def} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>DEF: {def}</span>
                     <br />
-                    <span>HP: {hp} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>HP: {hp}</span>
                     <br />
-                    <span>MP: {mp} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>MP: {mp}</span>
                     <br />
-                    <span>RANGE: {range} &nbsp;<strong>|</strong>&nbsp;</span>
+                    <span>RANGE: {range}</span>
                     <br />
                     <span>EFFECTS: {effects}</span>
+                    <br />
+                    <span>TYPE: {type}</span>
                     <br />
                     <img src={handImgData} alt="Hand Image" />
                     <br />

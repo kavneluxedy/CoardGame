@@ -7,7 +7,7 @@ type TTab =
 	| "Unit"
 	| "Land"
 	| "Spell"
-	| "Build"
+	| "Building"
 	| "Consumable";
 
 const Create = ({ refresh }: { refresh: () => void }) => {
@@ -21,7 +21,10 @@ const Create = ({ refresh }: { refresh: () => void }) => {
 	return (
 		<div id="create-modal">
 			<Button onClick={() => handleVisibility("Unit")} >Unit</Button>
-			<Button onClick={() => handleVisibility("Land")} >Land</Button >
+			<Button onClick={() => handleVisibility("Land")} >Land</Button>
+			<Button onClick={() => handleVisibility("Spell")} >Spell</Button>
+			<Button onClick={() => handleVisibility("Building")} >Building</Button>
+			<Button onClick={() => handleVisibility("Consumable")} >Consumable</Button>
 			{currentTab === "Unit" && <CreateUnit refresh={refresh} />}
 			{currentTab === "Land" && <CreateLand refresh={refresh} />}
 		</div >

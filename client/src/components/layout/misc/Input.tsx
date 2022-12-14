@@ -1,5 +1,5 @@
 import React from "react";
-import IInputProps from "../../../utils/interfaces/IInputFileProps";
+import IInputProps from "../../../utils/interfaces/IInputProps";
 
 const Input = ({
 	type,

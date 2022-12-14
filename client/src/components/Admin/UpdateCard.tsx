@@ -53,6 +53,7 @@ const CardEditor = ({ card, refresh }: { card: ICard, refresh: () => void }): JS
 			effects: effects,
 			handImgData: handImgData,
 			boardImgData: boardImgData,
+			type: String(e.target["TYPE"].value)
 		};
 		dbComm("COARD", "cards", { card: newCard }, "/api/cards/update")
 	}
@@ -75,9 +76,9 @@ const CardEditor = ({ card, refresh }: { card: ICard, refresh: () => void }): JS
 	return (
 		<form id="edit-card-form" onSubmit={e => handleSubmit(e)}>
 
-			<Input type="string" id="NAME" defaultValue={card.name} className="" />
+			<Input type="text" id="NAME" defaultValue={card.name} className="" />
 
-			<Input type="string" id="COST" defaultValue={card.cost} className="" />
+			<Input type="number" id="COST" defaultValue={card.cost} className="" />
 
 			<Input type="number" id="ATK" defaultValue={card.atk} className="" />
 
@@ -87,11 +88,9 @@ const CardEditor = ({ card, refresh }: { card: ICard, refresh: () => void }): JS
 
 			<Input type="number" id="MP" defaultValue={card.mp} className="" />
 
-			<Input type="string" id="EFFECTS" defaultValue={card.effects} className="" />
-
 			<Input type="number" id="RANGE" defaultValue={card.range} className="" />
 
-			<Input type="string" id="EFFECTS" defaultValue={card.effects} className="" required={false} />
+			<Input type="text" id="EFFECTS" defaultValue={card.effects} className="" required={false} />
 
 			<InputFile
 				id="HAND_IMG"
@@ -108,6 +107,8 @@ const CardEditor = ({ card, refresh }: { card: ICard, refresh: () => void }): JS
 				}
 				defaultValue={boardImgData}
 			/>
+
+			<Input type="text" id="TYPE" defaultValue={card.type} />
 
 			<input type="submit" id="submit" defaultValue={"submit"} className="panel-btn edit-card-btn" />
 

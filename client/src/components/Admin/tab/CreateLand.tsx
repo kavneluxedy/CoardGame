@@ -3,6 +3,7 @@ import useDb from "../../../utils/hooks/useDb";
 import Input from "../../layout/misc/Input";
 import InputFile from "../../layout/misc/InputFile";
 import ICard from "../../../utils/interfaces/ICard";
+import Image from "image-js";
 
 const CreateLand = ({ refresh }: { refresh: () => void }) => {
 
@@ -10,8 +11,7 @@ const CreateLand = ({ refresh }: { refresh: () => void }) => {
 	const [handImgData, setHandImgData] = useState<ArrayBuffer | string | null>(null);
 	const [boardImgData, setBoardImgData] = useState<ArrayBuffer | string | null>(null);
 
-	const handleImg = (e, flag: string) => {
-		e.preventDefault();
+	const handleImg = async (e, flag: string) => {
 		let data = e.target.files[0];
 		// console.log(Math.floor(data.size / 1024), " ko");
 		var fileReader = new FileReader();
@@ -37,8 +37,8 @@ const CreateLand = ({ refresh }: { refresh: () => void }) => {
 			effects: effects,
 			handImgData: handImgData,
 			boardImgData: boardImgData,
+			type: "land"
 		};
-		console.log(land);
 
 		dbComm("COARD", "cards", { card: land }, "/api/cards/create");
 		refresh();
@@ -53,9 +53,9 @@ const CreateLand = ({ refresh }: { refresh: () => void }) => {
 			id="create-card-form"
 			className="panel-container"
 		>
-			<Input type="text" id="NAME" defaultValue="" />
-			<Input type="number" id="COST" defaultValue="" />
-			<Input type="text" id="EFFECTS" defaultValue="" required={false} />
+			<Input type="text" id="NAME" />
+			<Input type="number" id="COST" />
+			<Input type="text" id="EFFECTS" required={false} />
 			<InputFile
 				id="BOARD_IMG"
 				onChange={(e) => handleImg(e, "board")}
