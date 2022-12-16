@@ -1,0 +1,62 @@
+import React, { ReactNode, useRef } from 'react'
+
+const useModal = () => {
+    const modal = useRef<HTMLDivElement>(null)
+
+    const handleVisibility = () => {
+        if (!modal.current) return
+
+        switch (modal.current.style.display) {
+            case 'none':
+                modal.current.style.display = 'block';
+                break;
+            case 'block':
+                modal.current.style.display = 'none';
+                break;
+            default:
+                modal.current.style.display = 'none';
+        }
+    }
+
+    window.onclick = (event: MouseEvent) => { //TODO j'ai changé le React.MouseEvent par le natif
+        if (event.target === modal.current) {
+            handleVisibility();
+        }
+    }
+
+    const Modal = ({ children, title }: { children: ReactNode, title: string }) => {
+        return (
+            <div ref={modal} className="modal" style={{ display: 'none' }}>
+                <div className="modal-content">
+                    <div className="modal-wrapper">
+
+                        <div className="modal-closer">
+
+                            <div className="closer"></div>
+
+                            <div className="closer">
+                                <h1>{title}</h1>
+                            </div>
+
+                            <div className="closer close-button">
+                                <span className="closer close" onClick={() => handleVisibility()}>
+                                    &times;
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div className="modal-children">
+                            {children}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    return { Modal, handleVisibility }
+}
+
+export default useModal
