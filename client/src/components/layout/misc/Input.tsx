@@ -8,6 +8,8 @@ const Input = ({
 	className,
 	onChange,
 	required,
+	min,
+	max
 }: IInputProps): JSX.Element => {
 	return (
 		<>
@@ -22,6 +24,8 @@ const Input = ({
 				onChange={onChange}
 				accept="image/*"
 				required={required}
+				min={min}
+				max={max}
 			/>
 		</>
 	);

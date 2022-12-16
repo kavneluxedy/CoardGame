@@ -1,10 +1,15 @@
+.admin-panel-wrapper {
+	width: 100%;
+	display: flex;
+}
+
 .admin-panel-container {
 	width: 90%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	margin: auto;
-	padding: 0;
+	padding: 3% 0 0 0;
 }
 
 #admin-card {
@@ -96,4 +101,26 @@
 
 .edit-card-btn:hover {
 	background-color: #ffd23e;
+}
+
+/****************************************************************
+*********
+*********
+/* *** FILTER ***
+*********
+*********
+****************************************************************/
+
+.topbar-filter {
+	width: 100%;
+	position: fixed;
+	background-color: #1697c8;
+}
+
+.panel-management {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: inherit;
+	height: inherit;
 }

@@ -7,13 +7,14 @@ import DeleteCard from './DeleteCard';
 import Create from './Create';
 import useModal from "../../utils/hooks/useModal";
 import Button from "../layout/misc/Button";
+import CardsFilter from '../CardsFilter';
 
 const Admin = () => {
     const [filter, setFilter] = useState<Object>({});
 
     const { Modal, handleVisibility } = useModal();
 
-    const [cards, setCards] = useState<Array<Object> | null>(null)
+    const [cards, setCards] = useState<Array<Object> | null>(null);
     const { loading, data, dbComm } = useDb("COARD", "cards", {}, "/init");
 
     const refresh = () => {
@@ -27,6 +28,7 @@ const Admin = () => {
 
     useEffect(() => {
         refresh();
+        console.log(filter);
     }, [filter])
 
     useEffect(() => {
@@ -45,26 +47,25 @@ const Admin = () => {
     }
 
     return (
-        <>
-            <Button
-                onClick={handleVisibility}>
-                CREATE CARD
-            </Button>
+        <div className="admin-panel-wrapper">
+
+            <nav className="topbar-filter">
+                <div className="panel-management">
+
+                    <CardsFilter setFilter={setFilter} />
+                    <Button
+                        onClick={handleVisibility}>
+                        CREATE CARD
+                    </Button>
+                    <Button className="button" onClick={() => { setFilter({}); refresh(); }}>REFRESH</Button>
+
+                </div>
+            </nav>
 
             <Modal title="CREATE CARD">
                 <Create refresh={refresh} />
             </Modal>
 
-            <button className="button" onClick={() => { setFilter({}); refresh(); }}>REFRESH</button>
-
-            <select onChange={e => setFilter({ type: e.target.value })}>
-                <option value="" selected>NO FILTER</option>
-                <option value="unit">Unit</option>
-                <option value="land">Land</option>
-                <option value="spell">Spell</option>
-                <option value="building">Building</option>
-                <option value="consumable">Consumable</option>
-            </select>
 
             {loading && <Loading />}
 
@@ -79,7 +80,7 @@ const Admin = () => {
                 })}
             </div>
             }
-        </>
+        </div>
     )
 }
 

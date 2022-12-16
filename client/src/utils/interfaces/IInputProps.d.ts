@@ -5,4 +5,6 @@ export default interface IInputProps {
 	className?: string;
 	onChange?: any;
 	required?: boolean;
+	min?: number;
+	max?: number;
 }
