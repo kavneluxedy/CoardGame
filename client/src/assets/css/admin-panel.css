@@ -1,0 +1,99 @@
+.admin-panel-container {
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: auto;
+	padding: 0;
+}
+
+#admin-card {
+	width: 400px;
+	min-width: max-content;
+	min-height: 600px;
+	height: auto;
+	background-color: #cfdbff;
+	text-align: center;
+	margin: .2%;
+}
+
+#admin-card-title {
+
+	text-align: center;
+	margin: 0;
+}
+
+#admin-card-content {
+	font-size: larger;
+}
+
+/****************************************************************
+*********
+*********
+/* *** BUTTON ***
+*********
+*********
+****************************************************************/
+.panel-btn {
+	width: min-content;
+	margin: 5px 0;
+	padding: 15px;
+	font-size: medium;
+	border: 2px solid royalblue;
+	border-radius: 20px;
+	transition: 0.5s;
+}
+
+.del-card-btn {
+	background-color: #ff9e9e;
+}
+
+.del-card-btn:hover {
+	background-color: #ff6161;
+}
+
+/****************************************************************
+*********
+*********
+/* *** CREATE ***
+*********
+*********
+****************************************************************/
+#create-card-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: auto;
+}
+
+.create-card-btn {
+	background-color: #8ba8ff;
+}
+
+.create-card-btn:hover {
+	background-color: #4b71e1;
+}
+
+/****************************************************************
+*********
+*********
+/* *** EDIT ***
+*********
+*********
+****************************************************************/
+#edit-card-form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: wrap;
+	text-align: center;
+}
+
+.edit-card-btn {
+	background-color: #ffebaa;
+}
+
+.edit-card-btn:hover {
+	background-color: #ffd23e;
+}
