@@ -24,7 +24,6 @@ const CardsFilter = ({ setFilter }: { setFilter: Dispatch<SetStateAction<Object>
                 <option value="consumable">Consumable</option>
             </select>
 
-
             <select onChange={(e) => {
 
                 (e.target.value === "---")

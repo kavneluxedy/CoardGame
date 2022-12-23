@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import endpoints from "./endpoint/endpoints";
 
-const { addUser, auth, create, find, update, remove, tokenAuth } = { ...endpoints };
+const { addUser, auth, create, createDeck, find, update, remove, tokenAuth } = { ...endpoints };
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -60,6 +60,12 @@ app.post("/api/cards/update", async (req: TReq, res: TRes) => {
 app.post("/api/cards/delete", async (req: TReq, res: TRes) => {
 	let param = req.body;
 	let result = await remove(param.dbName, param.collName, param.query);
+	res.send(result);
+});
+
+app.post("/api/deck/create", async (req: TReq, res: TRes) => {
+	let param = req.body;
+	let result = await createDeck(param.dbName, param.collName, param.query);
 	res.send(result);
 });
 

@@ -6,6 +6,7 @@
 @import "./board.css";
 @import "./button.css";
 @import "./colorTheme";
+@import "./admin-deck-editor.css";
 @import "./footer.css";
 @import "./form.css";
 @import "./choice-game-type.css";

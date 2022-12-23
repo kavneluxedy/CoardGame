@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import useDb from '../../utils/hooks/useDb'
+import React, { useEffect, useState, MouseEvent } from "react";
+import useDb from '../../utils/hooks/useDb';
 import Card from '../game/Card';
 import Loading from "../layout/Loading";
 import UpdateCard from "./UpdateCard";
@@ -8,14 +8,15 @@ import Create from './Create';
 import useModal from "../../utils/hooks/useModal";
 import Button from "../layout/misc/Button";
 import CardsFilter from '../CardsFilter';
+import ICard from "../../utils/interfaces/ICard";
+import CreateDeck from "../CreateDeck";
 
 const Admin = () => {
-    const [filter, setFilter] = useState<Object>({});
-
-    const { Modal, handleVisibility } = useModal();
-
-    const [cards, setCards] = useState<Array<Object> | null>(null);
+    const [currentDeck, setCurrentDeck] = useState<Array<ICard>>([]);
     const { loading, data, dbComm } = useDb("COARD", "cards", {}, "/init");
+    const [filter, setFilter] = useState<Object>({});
+    const { Modal, handleVisibility } = useModal();
+    const [cards, setCards] = useState<Array<Object>>([]);
 
     const refresh = () => {
         dbComm("COARD", "cards", { query: filter, options: { sort: { "name": 1 } } }, "/api/cards/find");
@@ -27,11 +28,6 @@ const Admin = () => {
     }, [])
 
     useEffect(() => {
-        refresh();
-        console.log(filter);
-    }, [filter])
-
-    useEffect(() => {
         if (!loading) {
             handleDisplayCards(data);
         }
@@ -39,7 +35,7 @@ const Admin = () => {
 
     const handleDisplayCards = (data) => {
         if (data.error) {
-            setCards(null);
+            setCards([]);
             return data.result;
         } else {
             setCards(data.result);
@@ -49,23 +45,22 @@ const Admin = () => {
     return (
         <div className="admin-panel-wrapper">
 
+            <Modal title="CREATE CARD">
+                <Create refresh={refresh} />
+            </Modal>
+
             <nav className="topbar-filter">
                 <div className="panel-management">
-
                     <CardsFilter setFilter={setFilter} />
                     <Button
                         onClick={handleVisibility}>
                         CREATE CARD
                     </Button>
                     <Button className="button" onClick={() => { setFilter({}); refresh(); }}>REFRESH</Button>
-
                 </div>
             </nav>
 
-            <Modal title="CREATE CARD">
-                <Create refresh={refresh} />
-            </Modal>
-
+            <CreateDeck currentDeck={currentDeck} setCurrentDeck={setCurrentDeck} />
 
             {loading && <Loading />}
 
@@ -75,12 +70,13 @@ const Admin = () => {
                         <Card name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} range={card.range} effects={card.effects} handImgData={card.handImg} boardImgData={card.boardImg} type={card.type} _id={card._id} key={key} >
                             <DeleteCard _id={card._id} refresh={refresh} />
                             <UpdateCard card={card} refresh={refresh} />
+                            <Button className="panel-btn" onClick={e => setCurrentDeck(deck => [...deck, card])}> + </Button>
                         </Card>
                     )
                 })}
             </div>
             }
-        </div>
+        </div >
     )
 }
 

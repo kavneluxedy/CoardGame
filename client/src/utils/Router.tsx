@@ -19,7 +19,7 @@ const Router = (): JSX.Element => {
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Home />} />
 						<Route path="admin" element={<Admin />} />
-						<Route path="game" element={<PublicMatch Modal={undefined} handleVisibility={undefined} />} />
+						<Route path="game" element={<PublicMatch handleVisibility={undefined} />} />
 						<Route path="game" element={<PrivateMatch />} />
 						<Route path="*" element={<NotFound404 />} />
 					</Route>
