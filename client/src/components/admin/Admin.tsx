@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent } from "react";
+import React, { useEffect, useState } from "react";
 import useDb from '../../utils/hooks/useDb';
 import Card from '../game/Card';
 import Loading from "../layout/Loading";
@@ -8,11 +8,15 @@ import Create from './Create';
 import useModal from "../../utils/hooks/useModal";
 import Button from "../layout/misc/Button";
 import CardsFilter from '../CardsFilter';
-import ICard from "../../utils/interfaces/ICard";
 import CreateDeck from "../CreateDeck";
+import IDeck from "../../utils/interfaces/IDeck";
 
 const Admin = () => {
-    const [currentDeck, setCurrentDeck] = useState<Array<ICard>>([]);
+    const [currentDeck, setCurrentDeck] = useState<IDeck>({
+        name: "Default Deck", content: [], stats: {
+            nbCards: 0, manaAvg: NaN
+        }
+    });
     const { loading, data, dbComm } = useDb("COARD", "cards", {}, "/init");
     const [filter, setFilter] = useState<Object>({});
     const { Modal, handleVisibility } = useModal();
@@ -21,6 +25,15 @@ const Admin = () => {
     const refresh = () => {
         dbComm("COARD", "cards", { query: filter, options: { sort: { "name": 1 } } }, "/api/cards/find");
         // setTimeout(refresh, 5000); // AUTOMATION
+    }
+
+    const handleDisplayCards = (data) => {
+        if (data.error) {
+            setCards([]);
+            return data.result;
+        } else {
+            setCards(data.result);
+        }
     }
 
     useEffect(() => {
@@ -33,14 +46,15 @@ const Admin = () => {
         }
     }, [loading, data])
 
-    const handleDisplayCards = (data) => {
-        if (data.error) {
-            setCards([]);
-            return data.result;
-        } else {
-            setCards(data.result);
+    useEffect(() => {
+        if (currentDeck.content[0]?.name && currentDeck.content.length) {
+            let costSum = 0;
+            let nbCard = currentDeck.content.length;
+            currentDeck.content.forEach(card => { costSum += (card.cost) ? card.cost : 0 });
+            let stat = { nbCards: nbCard, manaAvg: costSum / nbCard }
+            setCurrentDeck({ ...currentDeck, stats: stat });
         }
-    }
+    }, [currentDeck.content])
 
     return (
         <div className="admin-panel-wrapper">
@@ -70,7 +84,7 @@ const Admin = () => {
                         <Card name={card.name} cost={card.cost} atk={card.atk} def={card.def} hp={card.hp} mp={card.mp} range={card.range} effects={card.effects} handImgData={card.handImg} boardImgData={card.boardImg} type={card.type} _id={card._id} key={key} >
                             <DeleteCard _id={card._id} refresh={refresh} />
                             <UpdateCard card={card} refresh={refresh} />
-                            <Button className="panel-btn" onClick={e => setCurrentDeck(deck => [...deck, card])}> + </Button>
+                            <Button className="panel-btn" onClick={e => setCurrentDeck({ ...currentDeck, content: [...currentDeck.content, card] })}> + </Button>
                         </Card>
                     )
                 })}

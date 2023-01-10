@@ -2,6 +2,7 @@ import React from "react";
 import IInputProps from "../../../utils/interfaces/IInputProps";
 
 const Input = ({
+	children,
 	type,
 	id,
 	defaultValue,
@@ -13,6 +14,7 @@ const Input = ({
 }: IInputProps): JSX.Element => {
 	return (
 		<>
+			{children}
 			{type === "submit" ? "" : <label htmlFor={id}>{id}</label>}
 			<input
 				type={type}
